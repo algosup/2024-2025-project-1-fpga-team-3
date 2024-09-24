@@ -10,7 +10,7 @@
 | Last Issue Date | / |
 | Document Name | Functional_Specifications|
 
-    ## 2)DOC APPROVAL
+    # 2)DOC APPROVAL
 
 | Role | Name | Checked | Date |
 |---|---|---|---|
