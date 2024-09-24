@@ -42,7 +42,7 @@
 
 ### 2)Features of the game (original) Including pics
 #### A) Objective in the game
- MAKE 5 FROGS CROSS THE ROAD WIHOUT GETTING RUNNED OVER, OR DROWN BY IN THE RIVER. 
+ Make five frogs crossing the road, and the river to their home whiout getting run over or drowned in the river. 
 
 # III) PROJECT REQUIREMENT 
 ## 1)PROJECT OVERVIEW
