@@ -3,8 +3,6 @@
 ## CONTENT TABLE 
 
 ## I) DOCUMENT INFORMATION:
-
-
 | Document ID | Document # 01 |
 |---|---|
 | Document Owner | / |
@@ -12,7 +10,7 @@
 | Last Issue Date | / |
 | Document Name | Functional_Specifications|
     2)DOC APPROVAL
-    | Role | Name | Signature | Date |
+| Role | Name | Signature | Date |
 |---|---|---|---|
 | Project Manager | Lucas AUBARD |  | //2024 |
 | Tech Lead | Vivien Bistrel TSANGUE |  | //2024 |
