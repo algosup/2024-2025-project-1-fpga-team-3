@@ -9,6 +9,9 @@
 | Issue date | / |
 | Last Issue Date | / |
 | Document Name | Functional_Specification|
+| Version n° | Edits completed by | Date | Description of edit |
+|---|---|---|---|
+|01|/| / |  |
     2)DOC APPROVAL
 
 II) INTRO OF THE PROJECT:
