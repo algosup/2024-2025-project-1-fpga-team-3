@@ -29,7 +29,7 @@
 | "Team" | ALGOSUP team 3 (2024-2025 - Project 1) |
 | "Player / Frog" | The person playing the game |
 | "Frog" the character | A little frog controlled by the player |
-| "Cars" | The cars are running on the road, and are the frog's enemy |
+| "Cars / Buses" | The cars are running on the road, and are the frog's enemy |
 | "Map" | The game environment  |
 | "User Interface" or "UI" | The visual and interactive elements through which users interact with the game |
 | "Go_Board" | The Chip used in the process of this project |
