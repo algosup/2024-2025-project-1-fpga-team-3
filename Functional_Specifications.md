@@ -37,11 +37,14 @@
 
 # II) INTRO OF THE PROJECT:
 ### 1) ORIGINAL FROGGER DEFINITION
-##### Frogger is a 1981 arcade action game developed by Konami and published by Sega. In North America, it was distributed by Sega/Gremlin. The object of the game is to direct five frogs to their homes by dodging traffic on a busy road, then crossing a river by jumping on floating logs and alligators.        
+
+##### Frogger is a 1981 arcade action game developed by Konami and published by Sega. In North America, it was distributed by Sega/Gremlin. The object of the game is to direct five frogs to their homes by dodging traffic on a busy road, then crossing a river by jumping on floating logs and alligators. 
+
 ### 2)Features of the game (original) Including pics
 #### a)Objective in the game
 ##### MAKE 5 FROGS CROSS THE ROAD WIHOUT GETTING RUNNED OVER, OR DROWN BY IN THE RIVER
-III) PROJECT REQUIREMENT 
+
+# III) PROJECT REQUIREMENT 
         1)PROJECT OVERVIEW
             "WE ARE CREATING A FROGGER, ACCURATE TO THE ONES THAT ALREADY EXIST WITH THE RESTRICTION OF THE GO_BOARD CHIP"
         2)PROJECT OBJECTIVES
