@@ -9,8 +9,10 @@
 | Issue date | / |
 | Last Issue Date | / |
 | Document Name | Functional_Specifications|
-    2)DOC APPROVAL
-| Role | Name | Signature | Date |
+
+    ## 2)DOC APPROVAL
+
+| Role | Name | Checked | Date |
 |---|---|---|---|
 | Project Manager | Lucas AUBARD |  | //2024 |
 | Tech Lead | Vivien Bistrel TSANGUE |  | //2024 |
