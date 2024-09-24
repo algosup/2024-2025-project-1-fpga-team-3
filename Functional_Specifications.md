@@ -22,6 +22,19 @@
 | Quality Assurance | Raphael Chiocchi ||//2024 |
 | Program Manager | Julian REINE ||//2024 |
 
+## 3) GLOSSARY
+
+| Term used | Definition |
+|---|---|
+| "Team" | ALGOSUP team 3 (2024-2025 - Project 1) |
+| "Player / Frog" | The person playing the game |
+| "Frog" the character | A little frog controlled by the player |
+| "Cars" | The cars are running on the road, and are the frog's enemy |
+| "Map" | The game environment  |
+| "User Interface" or "UI" | The visual and interactive elements through which users interact with the game |
+| "Go_Board" | The Chip used in the process of this project |
+| "FPGA" | Programming language used in the project |
+
 II) INTRO OF THE PROJECT:
     1) ORIGINAL FROGGER DEFINITION
         Frogger is a 1981 arcade action game developed by Konami and published by Sega. In North America, it was distributed by Sega/Gremlin. The object of the game is to direct five frogs to their homes by dodging traffic on a busy road, then crossing a river by jumping on floating logs and alligators.        
