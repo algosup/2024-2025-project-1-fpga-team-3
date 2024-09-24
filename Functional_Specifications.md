@@ -41,13 +41,16 @@
 ##### Frogger is a 1981 arcade action game developed by Konami and published by Sega. In North America, it was distributed by Sega/Gremlin. The object of the game is to direct five frogs to their homes by dodging traffic on a busy road, then crossing a river by jumping on floating logs and alligators. 
 
 ### 2)Features of the game (original) Including pics
-#### a)Objective in the game
-##### MAKE 5 FROGS CROSS THE ROAD WIHOUT GETTING RUNNED OVER, OR DROWN BY IN THE RIVER
+#### a) Objective in the game
+##### MAKE 5 FROGS CROSS THE ROAD WIHOUT GETTING RUNNED OVER, OR DROWN BY IN THE RIVER. 
 
 # III) PROJECT REQUIREMENT 
-        1)PROJECT OVERVIEW
-            "WE ARE CREATING A FROGGER, ACCURATE TO THE ONES THAT ALREADY EXIST WITH THE RESTRICTION OF THE GO_BOARD CHIP"
-        2)PROJECT OBJECTIVES
+## 1)PROJECT OVERVIEW
+* Making a Frogger Clone game
+* Using FPGA
+* Has to work on a Go_Board Chip
+* Creating a working game with 
+        ## 2)PROJECT OBJECTIVES
             "CREATING A WORKING FROGGER WITH THE GO_BOARD" "INCLUDING DIFFERENTS FEATURES THAT ARE ACCURATE TO THE ORIGINAL GAME, THAT CAN RUN ON A DISPLAY WITH VGA OUTPUT. THE PROJECT WILL HAVE ON THE GO_BOARD, THE LEVEL NUMBER DISPLAYED ON THE TWO DIGITS LEDS PANNEL AS WELL WITH A SCORE COUNT DISPLAYED ON THE TOP ON THE TWO DIGITS LED"
         3)FOCUS ON
             "WE WILL JUST FOCUS ON THE ORIGINAL FEATURES OF THE 1981 EDITION, INCLUDING SOME FEATURES THAT THE TEAM WANT TO ADD"
