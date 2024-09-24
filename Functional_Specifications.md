@@ -8,8 +8,17 @@
 | Document Owner | / |
 | Issue date | / |
 | Last Issue Date | / |
-| Document Name | Functional_Specification|
+| Document Name | Functional_Specifications|
     2)DOC APPROVAL
+    | Role | Name | Signature | Date |
+|---|---|---|---|
+| Project Manager | Lucas AUBARD |  | //2024 |
+| Tech Lead | Vivien Bistrel TSANGUE |  | //2024 |
+| Software Developer | Manech LAGUENS |  | //2024 |
+| Software Developer | Mariem ZAIANE | | //2024 |
+| Technical Writter | Abderrazaq MAKRAN |  | //2024 |
+| Quality Assurance | Raphael Chiocchi ||//2024 |
+| Program Manager | Julian REINE ||//2024 |
 
 II) INTRO OF THE PROJECT:
     1) ORIGINAL FROGGER DEFINITION
