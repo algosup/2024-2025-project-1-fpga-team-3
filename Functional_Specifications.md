@@ -1,6 +1,6 @@
 # PROJECT NAME: FROGGER
 
-## CONTENT TABLE 
+### CONTENT TABLE 
 
 ## I) DOCUMENT INFORMATION:
 | Document ID | Document # 01 |
@@ -10,7 +10,7 @@
 | Last Issue Date | / |
 | Document Name | Functional_Specifications|
 
-# 2)DOC APPROVAL
+## 2)DOC APPROVAL
 
 | Role | Name | Checked | Date |
 |---|---|---|---|
