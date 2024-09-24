@@ -1,9 +1,13 @@
-PROJECT NAME: FROGGER
+# PROJECT NAME: FROGGER
 
-CONTENT TABLE
+## CONTENT TABLE 
 
-I) DOCUMENT INFORMATION:
-    1)DOC HISTORY
+## I) DOCUMENT INFORMATION:
+| Document ID | Document # 01 |
+| Document Owner | / |
+| Issue date | / |
+| Last Issue Date | / |
+| Document Name | Functional_Specification|
     2)DOC APPROVAL
 
 II) INTRO OF THE PROJECT:
