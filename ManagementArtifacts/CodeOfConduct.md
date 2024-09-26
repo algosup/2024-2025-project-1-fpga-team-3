@@ -4,19 +4,20 @@
 
 |        Role         |    Date    | Approval |
 | :-----------------: | :--------: | :------: |
-|   Project Manager   | 09/24/2024 |          |
-|   Program Manager   | 09/24/2024 |          |
-|  Technical Leader   | 09/24/2024 |          |
-| Software Engineer 1 | 09/24/2024 |          |
-| Software Engineer 2 | 09/24/2024 |          |
-|  Technical Writer   | 09/24/2024 |          |
-|  Quality Assurance  | 09/24/2024 |          |
+|   Project Manager   | 09/24/2024 |    ✅    |
+|   Program Manager   | 09/24/2024 |    ✅    |
+|  Technical Leader   | 09/24/2024 |    ✅    |
+| Software Engineer 1 | 09/24/2024 |    ✅    |
+| Software Engineer 2 | 09/24/2024 |    ✅    |
+|  Technical Writer   | 09/24/2024 |    ✅    |
+|  Quality Assurance  | 09/24/2024 |    ✅    |
 
 ## Introduction
 
 This document is intended to provide guidelines for the behavior of all members of Team3. It is important that all members of the team adhere to these guidelines in order to maintain a positive and productive working environment.
 
 ## Required Behavior
+
 ### Respect
 
 All team members are expected to treat each other with respect. This includes being polite, considerate, and professional in all interactions.
@@ -43,7 +44,7 @@ Harassment of any kind will not be tolerated. This includes, but is not limited 
 
 Disrespectful behavior, such as name-calling, belittling, or insulting others, will not be tolerated. Team members are expected to treat each other with kindness and consideration at all times.
 
-### Absenteeism and Pontuality
+### Absenteism and Ponctuality
 
 Team members are expected to attend all team meetings and to arrive on time. If a team member is unable to attend a meeting, they are expected to notify the team in advance.
 
