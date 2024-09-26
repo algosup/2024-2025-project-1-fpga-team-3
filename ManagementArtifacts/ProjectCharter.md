@@ -102,7 +102,7 @@ Here are the risks of the project:
 
 ## Responsibilities
 
-You can find the responsibilities of each team member in the [RACI Matrix](!https://docs.google.com/spreadsheets/d/1DKpMLZC9oDSRmFd0FZSqa0wa1sUc6roZFwzoa_7gP6o/edit?usp=sharing).
+You can find the responsibilities of each team member in the [RACI Matrix](https://docs.google.com/spreadsheets/d/1DKpMLZC9oDSRmFd0FZSqa0wa1sUc6roZFwzoa_7gP6o/edit?usp=sharing).
 
 ## Conclusion
 
