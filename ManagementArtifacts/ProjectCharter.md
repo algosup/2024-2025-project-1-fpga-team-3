@@ -12,13 +12,13 @@
 
 | Picture                                             | Name                   | Role                |
 | --------------------------------------------------- | ---------------------- | ------------------- |
-| <img src="Images/LucasAUBARD.png" width="100">      | Lucas AUBARD           | Project Manager     |
-| <img src="Images/JulianREINE.png" width="100">      | Julian REINE           | Program Manager     |
+| <img src="Images/LucasAUBARD.jpeg" width="100">      | Lucas AUBARD           | Project Manager     |
+| <img src="Images/JulianREINE.jpeg" width="100">      | Julian REINE           | Program Manager     |
 | <img src="Images/VivienTSANGUE.jpeg" width="100">   | Vivien Bistrel TSANGUE | Technical Leader    |
 | <img src="Images/ManechLAGUENS.png" width="100">    | Manech LAGUENS         | Software Engineer 1 |
 | <img src="Images/MariemZAIANE.jpeg" width="100">    | Mariem ZAIANE          | Software Engineer 2 |
 | <img src="Images/AbderrazaqMAKRAN.png" width="100"> | Abderrazaq MAKRAN      | Technical Writer    |
-| <img src="Images/RaphaelCHIOCCHI.png" width="100">  | Raphaël CHIOCCHI       | Quality Assurance   |
+| <img src="Images/RaphaelCHIOCCHI.jpeg" width="100">  | Raphaël CHIOCCHI       | Quality Assurance   |
 
 ## Document Approval
 
