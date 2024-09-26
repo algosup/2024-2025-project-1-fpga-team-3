@@ -14,8 +14,32 @@ This document is the quality assurance plan for the frogger project, which aims 
 
 #### Here will be writed the list of all tested functionnalites, the results of the tests and the update to these tests.  
 
+### 1. Display
+
+Test : Checking if the colors display as intended.  
+results :
+
 Test : Checking if the main menu appear on the screen.  
 results :
+
+### 2. User Interface
+
+Test : Checking if the buttons in the main menu do serve their purpose.  
+results :
+
+### 3. First Look
+
+Test : Checking if the frog spawns at the bottom center of the screen everytime.  
+results : 
+
+Test : Checking if the cars are moving.
+results : 
+
+### 4. Movements
+
+Test : Checking if the frog can move.
+results : 
+
 
 Test : Checking if the colors display as intended.  
 results :
