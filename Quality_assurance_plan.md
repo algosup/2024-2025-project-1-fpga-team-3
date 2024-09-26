@@ -40,17 +40,3 @@ results :
 Test : Checking if the frog can move.
 results : 
 
-
-Test : Checking if the colors display as intended.  
-results :
-
-Test : Checking if the buttons in the main menu do serve their purpose.  
-results :
-
-Test : Checking if the frog spawns at the bottom center of the screen everytime.  
-results : 
-
-Test : Checking if the cars are moving.
-results :
-
-Test : Checking if   
