@@ -34,6 +34,22 @@
 
 <details> 
 <summary> Table Of Contents </summary>
+
+- [Project Charter Team 3 - Verilog Frogger](#project-charter-team-3---verilog-frogger)
+  - [Document Information](#document-information)
+  - [Team](#team)
+  - [Document Approval](#document-approval)
+  - [Project Overview](#project-overview)
+    - [Project Overview](#project-overview-1)
+    - [Project Objectives](#project-objectives)
+  - [Stakeholders](#stakeholders)
+  - [Milestones](#milestones)
+  - [Constraints](#constraints)
+  - [Risks](#risks)
+  - [Responsibilities](#responsibilities)
+  - [Conclusion](#conclusion)
+
+
 </details>
 
 ## Project Overview

@@ -20,7 +20,7 @@ You can find the Code of Conduct [here](ManagementArtifacts/CodeOfConduct.md).
 
 The Key Performance Indicators (KPIs) document defines the metrics and targets that Team 3 will use to measure the project's success. These KPIs help track progress, identify areas for improvement, and ensure alignment with project goals.
 
-You can find the KPIs document [here]().
+You can find the KPIs document [here](https://docs.google.com/spreadsheets/d/1XNFiCwtERIchsNE6PEbzN7p_-TYiSK5_ojdpHzJWYn4/edit?usp=sharing).
 
 
 ## Weekly Reports
