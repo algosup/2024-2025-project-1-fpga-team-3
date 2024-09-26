@@ -1,7 +1,5 @@
 # PROJECT NAME: FROGGER
 
-#### CONTENT TABLE
-
 <details>
 <summary>
 
@@ -85,12 +83,14 @@
 
  Frogger is a 1981 arcade action game developed by Konami and published by Sega. In North America, it was distributed by Sega/Gremlin. The object of the game is to direct five frogs to their homes by dodging traffic on a busy road, then crossing a river by jumping on floating logs and alligators. 
 
-### 2) Features of the game (original) Including pics
+### 2) Features of the game (original)
 #### A) Objective in the game
  Make five frogs crossing the road, and the river to their home whiout getting run over or drowned in the river.
+
+ PIC
 #### B) Original Map specifications
 
-PICS/
+PICS
 
 The original map is composed of two parts. The road, and the River.
 On the road, The Frog must dodge the cars going on the highway. The cars are coming from left and right; depends on segment of the road you are. If the frog get runned over, it loose a life and restart in the bottom of the map.
@@ -105,6 +105,8 @@ If the player doesn't have any lifes remaining, the game stop and a game over sc
 The player plays the Frog.
 It can move in four directions: Up, Down, Left and Right.
 The player must cross the map avoiding being killed.
+
+( WIP for the more specificities of the frog)
 
 PIC
 
@@ -157,7 +159,7 @@ The current score should be displayed as "I-UP", horizontally aligned with "Hi-s
 
 PIC
 
-The number should be displayed horizontally aligned with the numbers under "Hi-score".
+The numbers should be displayed horizontally aligned with the numbers under "Hi-score".
 
 PIC
 
@@ -183,7 +185,6 @@ Enter The player name: The player enter his name with the 3 digits counter assoc
 The leaderboard screen has also a "Start" buttom to restart from there.
 
 PIC
-
 
 
 
@@ -214,10 +215,6 @@ PIC
 ### 4) Restriction of the project
  The level is not randomised but based on differents spawn points to create the illusion of a randomised map. We wont include different landscape such as the river and its content. We wont include any decoration of the map in the game. The cars will be in 7 by 8 bits while the frog will be 8 by 8bits.
 
-
-
 ## V) FUNCTIONAL ANALYSIS:
+
 PICS
-
-
-## VI ) MATERIAL:
