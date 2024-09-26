@@ -82,15 +82,15 @@
 ### 1) Original Frogger Definition
 
  Frogger is a 1981 arcade action game developed by Konami and published by Sega. In North America, it was distributed by Sega/Gremlin. The object of the game is to direct five frogs to their homes by dodging traffic on a busy road, then crossing a river by jumping on floating logs and alligators. 
+<p align="center">
+ <img src="Images/Frogger_game_arcade.png" width= "250">
+ </p>
 
 ### 2) Features of the game (original)
 #### A) Objective in the game
  Make five frogs crossing the road, and the river to their home whiout getting run over or drowned in the river.
 
- PIC
 #### B) Original Map specifications
-
-PICS
 
 The original map is composed of two parts. The road, and the River.
 On the road, The Frog must dodge the cars going on the highway. The cars are coming from left and right; depends on segment of the road you are. If the frog get runned over, it loose a life and restart in the bottom of the map.
@@ -108,7 +108,8 @@ The player must cross the map avoiding being killed.
 
 ( WIP for the more specificities of the frog)
 
-PIC
+ <img src="Images/Frog1.png" width= "50">
+  
 
 ##### ➭ Score
 The player can score points by:
@@ -116,17 +117,24 @@ The player can score points by:
 * Eating fly that pass some time on screen
 * Finishing a level
 
+ <img src="Images/Score.png" width= "250">
+  
+
 ##### ➭ Cars 
 
 Cars are coming from the left and right. They never stop by, and the player must move forward dodging them to cross the road successfuly.
 If the player touch a car, he loose a life.
 
-PIC
+<img src="Images/Car1.png" width= "62">
+<img src="Images/Car2.png" width= "55">
+<img src="Images/Car3.png" width= "45">
+<img src="Images/Car4.png" width= "145">
 
 ##### ➭ Environement:
-The map is composed of the road and the river. The player cross the path into the other part of the map
-
-PIC
+The map is composed of the road and the river. The player cross the path into the other part of the map.
+<p align="center">
+ <img src="Images/Frogger_game_arcade.png" width= "200">
+ </p>
 
 ##### ➭ Objectives and loss condition
 The game objectives are twofold :
@@ -142,51 +150,58 @@ The player can lose 3 times before getting a game over.
 ##### ➭ Title Screen
 Title screen is mostly composed of an animation with frogs transforming into the "FROGGER" logo as you can see below
 
+<p align="center">
+ <img src="Images/TS.png" width= "200">
+ </p>
+
 PIC
 ##### ➭ Leaderboard (Title screen)
 
  The player High-Score is displayed on the title screen.
 
- PIC
+ <p align="center">
+ <img src="Images/LB.png" width= "200">
+ </p>
 
 ##### ➭ Font
 Text is displayed using Frankfurter font. 
 
 ##### ➭ Game Score Screen
 At the top of the screen. "Hi-score" is in the top center of the screen and refers to the Best score the player ever had.
-The number should be displayed below the text. 
+The number are displayed below the text. 
 The current score should be displayed as "I-UP", horizontally aligned with "Hi-score".
+The numbers are displayed horizontally aligned with the numbers under "Hi-score".
 
-PIC
-
-The numbers should be displayed horizontally aligned with the numbers under "Hi-score".
-
-PIC
+<p align="center">
+ <img src="Images/Score.png" width= "250">
+ </p>
 
 ##### ➭ Time
-Time is represented by a shrinking horizontal bar in the bottom middle of the game.
+Time is represented by a shrinking horizontal bar in the bottom right of the game.
 "Time" is displayed on bottom right.
 
-PIC
+<p align="center">
+ <img src="Images/Time.png" width= "250">
+ </p>
 
 ##### ➭ Lifes
 The frogs lives are displayed on bottom left of the game. They are lower case models of the frogs (Not moving) and are used to display the players lifes remaining.
 
-PIC
+<p align="center">
+ <img src="Images/FrogLives.png" width= "250">
+ </p>
 
 ##### ➭ Game Over
 When all the player's life are used, a game-over screen will appear. The words "GAME OVER" appear in the middle of the screen,
 
-PIC
+<p align="center">
+ <img src="Images/GO.png" width= "200">
+ </p>
 
 ##### ➭ Leaderboard (Death Screen)
 
 Enter The player name: The player enter his name with the 3 digits counter associated with the score he made. The player High-Score will be displayed on the title screen, as well with the best score displayed in game as "Hi-Score".
 The leaderboard screen has also a "Start" buttom to restart from there.
-
-PIC
-
-
 
 ## IV) Project Requirement 
 ### 1) Project Overview
