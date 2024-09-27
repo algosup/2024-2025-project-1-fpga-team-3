@@ -228,7 +228,7 @@ The leaderboard screen has also a "Start" buttom to restart from there.
 
 | Focusing on |
 |---|
-| Delivering a clone of Frogger that works on the Go_Board Chip, and displayed on VGA output |
+| Delivering a Frogger that works on the Go_Board Chip, and displayed on VGA output |
 | Must be programed with FPGA on the Go_Board |
 |Including features such as death animation and customs models for cars|
 
@@ -239,11 +239,22 @@ The leaderboard screen has also a "Start" buttom to restart from there.
 | Advanced decoration |
 
  *We are mostly focusing on the features that replicate the original gameplay. We might add some features that the team want to add to make the game original.*
+
 ### 4) Restriction of the project
  The level is not **randomised**. We wont include different landscape such as the river and its content. We wont include any decoration of the map in the game. The cars will be in 7 by 8 bits while the frog will be 8 by 8bits.
 
+### 5) Project Analysis: 
+* Our project will include a black background / grid where the frogs will cross.
+* Cars will pass in a random cycle making the game unpredictable.
+* The levels will **have their speed increased**.
+
+*As the Go_Board is limited the Project wont have the same features as the original game:*
+* To finish a level, only one Frog is required to cross the road.
+* No score will be displayed but **the level number will be displayed on the Go_Board**.
+* No death screen will be displayed.
+* No leaderboard will be included.
 ## V) FUNCTIONAL ANALYSIS:
 
 <p align="center">
- <img src="Images/Functional_Analysis.png" width= "10000">
+ <img src="Images/Functional_Analysis.png" width= "500">
  </p>
