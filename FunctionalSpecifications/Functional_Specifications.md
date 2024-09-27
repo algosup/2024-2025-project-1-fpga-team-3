@@ -3,7 +3,7 @@
 <details>
 <summary>
 
-## Table of content
+## *Table of content*
 
 </summary>
 
@@ -81,7 +81,7 @@
 ## II) Project Intro:
 ### 1) Original Frogger Definition
 
- Frogger is a 1981 arcade action game developed by Konami and published by Sega. In North America, it was distributed by Sega/Gremlin. The object of the game is to direct five frogs to their homes by dodging traffic on a busy road, then crossing a river by jumping on floating logs and alligators. 
+ Frogger is a 1981 arcade action game developed by Konami and published by Sega. In North America, it was distributed by Sega/Gremlin. __The object of the game is to direct five frogs to their homes by dodging traffic on a busy road__, then crossing a river by jumping on floating logs and alligators. 
 <p align="center">
  <img src="Images/Frogger_game_arcade.png" width= "250">
  </p>
@@ -93,9 +93,9 @@
 #### B) Original Map specifications
 
 The original map is composed of two parts. The road, and the River.
-On the road, The Frog must dodge the cars going on the highway. The cars are coming from left and right; depends on segment of the road you are. If the frog get runned over, it loose a life and restart in the bottom of the map.
-On the river Part, the Frog doesn't have a solid base the frog can walk on to. The Frog must walk on passing by logs, turtles and even the back of alligators. Logs and animal are randomised in the same way as the cars are. If you miss the logs or animal, the frog drown and you loose a life and restart in the bottom of the map. 
-If the player doesn't have any lifes remaining, the game stop and a game over screen appears.
+On the road, The Frog must __dodge__ the cars going on the highway. The cars are coming from left and right; depends on segment of the road you are. If the frog get runned over, it loose a life and restart in the bottom of the map.
+On the river Part, the Frog doesn't have a solid base the frog can walk on to. The Frog must __walk on passing by logs, turtles and even the back of alligators__. Logs and animal are randomised in the same way as the cars are. If you miss the logs or animal, the frog drown and you loose a life and restart in the bottom of the map. 
+If the player doesn't have any lifes remaining, the game stop and a __game over__ screen appears.
 
 ## III) Functional Requirements
 
@@ -103,8 +103,9 @@ If the player doesn't have any lifes remaining, the game stop and a game over sc
 
 ##### ➭ Player
 The player plays the Frog.
-It can move in four directions: Up, Down, Left and Right.
+It can move in four directions: __Up, Down, Left and Right__.
 The player must cross the map avoiding being killed.
+When the Frog dies, a little animation is played.
 
 ( WIP for the more specificities of the frog)
 
@@ -112,8 +113,8 @@ The player must cross the map avoiding being killed.
   
 
 ##### ➭ Score
-The player can score points by:
-* Bringing back frogs
+The player can __score points__ by:
+* Bringing back frogs home
 * Eating fly that pass some time on screen
 * Finishing a level
 
@@ -122,8 +123,8 @@ The player can score points by:
 
 ##### ➭ Cars 
 
-Cars are coming from the left and right. They never stop by, and the player must move forward dodging them to cross the road successfuly.
-If the player touch a car, he loose a life.
+Cars are coming from the __left and right__. They never stop by, and the player must __move forward__ dodging them to cross the road successfuly.
+If the player touch a car, __he loose a life__.
 
 <img src="Images/Car1.png" width= "62">
 <img src="Images/Car2.png" width= "55">
@@ -137,14 +138,17 @@ The map is composed of the road and the river. The player cross the path into th
  </p>
 
 ##### ➭ Objectives and loss condition
-The game objectives are twofold :
+*The game objectives are :*
 
-* Bring Home the five Frogs.
+* __Bringing Home__ the five Frogs.
 
-* Get the highest possible Score. Several actions will let the player increase their score. Bringing Frogs home will increase the player score but it also can increase by other ways.
+* Get the highest possible Score. Several actions will let the player increase their score. **Bringing Frogs home will increase the player score** but it also can increase by other ways.
 
-* There is two loss conditions : being touched by a car or an entity and running out of time.
-The player can lose 3 times before getting a game over.
+*But There is two loss conditions* : 
+* Being **touched** by a car or an entity.
+* Running **out of time.**
+  
+The player can lose **3 lifes** before getting a game over.
 
 ### 2) User Interface
 ##### ➭ Title Screen
@@ -154,7 +158,6 @@ Title screen is mostly composed of an animation with frogs transforming into the
  <img src="Images/TS.png" width= "200">
  </p>
 
-PIC
 ##### ➭ Leaderboard (Title screen)
 
  The player High-Score is displayed on the title screen.
@@ -164,35 +167,42 @@ PIC
  </p>
 
 ##### ➭ Font
-Text is displayed using Frankfurter font. 
+Text is displayed using **Frankfurter** font. 
 
 ##### ➭ Game Score Screen
-At the top of the screen. "Hi-score" is in the top center of the screen and refers to the Best score the player ever had.
-The number are displayed below the text. 
-The current score should be displayed as "I-UP", horizontally aligned with "Hi-score".
-The numbers are displayed horizontally aligned with the numbers under "Hi-score".
+At the top of the screen. **"Hi-score"** is in the top center of the screen and refers to the Best score the player ever had.
+The number are displayed **below the text**. 
+The current score should be displayed as **"I-UP"**, horizontally aligned with "Hi-score".
+The numbers are displayed horizontally aligned with the numbers under **"Hi-score"**.
 
 <p align="center">
  <img src="Images/Score.png" width= "250">
  </p>
 
 ##### ➭ Time
-Time is represented by a shrinking horizontal bar in the bottom right of the game.
+Time is represented by a **shrinking horizontal bar** in the bottom right of the game.
 "Time" is displayed on bottom right.
+Time is also displayed in the **middle of the screen** showing with Numbers the time remaining before the game stops.
 
 <p align="center">
  <img src="Images/Time.png" width= "250">
  </p>
 
 ##### ➭ Lifes
-The frogs lives are displayed on bottom left of the game. They are lower case models of the frogs (Not moving) and are used to display the players lifes remaining.
+The frogs lives are displayed on **bottom left of the game**. They are **lower case** models of the frogs (Not moving) and are used to display the players lifes remaining.
+If the player gets hit, **he loose a life**.
+If the player run out of time, **he loose a life**
 
 <p align="center">
  <img src="Images/FrogLives.png" width= "250">
  </p>
 
 ##### ➭ Game Over
-When all the player's life are used, a game-over screen will appear. The words "GAME OVER" appear in the middle of the screen,
+When all the player's life are used, a **game-over screen** will appear. The words **"GAME OVER"** appear in the middle of the screen.
+
+*The back ground model doesn't change*.
+
+The player is then asked to enter is **Initials** to **register his score** if it was **Higher than the scores he did before**.
 
 <p align="center">
  <img src="Images/GO.png" width= "200">
@@ -209,6 +219,7 @@ The leaderboard screen has also a "Start" buttom to restart from there.
 * Using FPGA / Visual Studio.
 * Has to work on a Go_Board Chip 
 ### 2) Project Objectives
+
 * Creating a working frogger and making it accurate to the 1981's version by using the Go_Board.
 * Including differents features that are accurate to the game with the restriction of the VGA display output and the Go_Board capacity
 * Most The Go_Board features such as the two digits LED pannel has be used. 
@@ -219,6 +230,7 @@ The leaderboard screen has also a "Start" buttom to restart from there.
 |---|
 | Delivering a clone of Frogger that works on the Go_Board Chip, and displayed on VGA output |
 | Must be programed with FPGA on the Go_Board |
+|Including features such as death animation and customs models for cars|
 
 | Out of focus |
 |---|
@@ -226,10 +238,12 @@ The leaderboard screen has also a "Start" buttom to restart from there.
 | Multiplayer (2 players as original) |
 | Advanced decoration |
 
- We are mostly focusing on the features that replicate the original gameplay. We might add some features that the team want to add.
+ *We are mostly focusing on the features that replicate the original gameplay. We might add some features that the team want to add to make the game original.*
 ### 4) Restriction of the project
- The level is not randomised but based on differents spawn points to create the illusion of a randomised map. We wont include different landscape such as the river and its content. We wont include any decoration of the map in the game. The cars will be in 7 by 8 bits while the frog will be 8 by 8bits.
+ The level is not **randomised**. We wont include different landscape such as the river and its content. We wont include any decoration of the map in the game. The cars will be in 7 by 8 bits while the frog will be 8 by 8bits.
 
 ## V) FUNCTIONAL ANALYSIS:
 
-PICS
+<p align="center">
+ <img src="Images/Functional_Analysis.png" width= "10000">
+ </p>
