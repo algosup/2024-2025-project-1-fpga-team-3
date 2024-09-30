@@ -27,7 +27,7 @@ You can find the KPIs document [here](https://docs.google.com/spreadsheets/d/1XN
 
 The Weekly Reports provide a summary of the team's progress, achievements, issues, and objectives for the upcoming week. These reports help track the project's status, identify challenges, and ensure continuous improvement in project management and execution.
 
-You can find the Weekly Reports [here](/Management/WeeklyReports/).
+You can find the Weekly Reports [here](/WeeklyReports/).
 
 ## Gantt Chart
 
