@@ -104,9 +104,6 @@ If the player doesn't have any lifes remaining, the game stop and a __game over_
 ##### ➭ Player
 The player plays the Frog.
 It can move in four directions: __Up, Down, Left and Right__ using the switches on the Go_Board.
-<p align="center">
-<img src="Images/Go_BoardPNG.png" width= "250">
-</p>
 The player must cross the map avoiding being killed. When the Frog dies, a little animation is played.
 <p align="center">
 <img src="Images/OriginalFrog.png" width= "80">
@@ -222,15 +219,23 @@ The leaderboard screen has also a "Start" buttom to restart from there.
 ### A) Main features Over view
 
 ##### ➭ Player
-The frog will act similarly like the frog in the original game. We just changed the sprite of the frog.
+The frog will act similarly like the frog in the original game. We just changed the sprite of the frog. 
+<p align="center">
+<img src="Images/frogbalckandwhite.png" width= "50">
+</p>
 
- <img src="Images/frogbalckandwhite.png" width= "50">
+*__The frog will move according to:__*
+
+<p align="center">
+<img src="Images/Go_BoardPNG.png" width= "250">
+</p>
+
+ 
   
 
 ##### ➭ Score
 In our version the player can __score points__ by:
-* Bringing back frogs home
-* Finishing a level
+* Finishing a level (He win 1 point per level)
 
  <img src="" width= "250">
   
