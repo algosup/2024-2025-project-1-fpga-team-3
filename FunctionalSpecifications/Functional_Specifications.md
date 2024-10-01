@@ -216,19 +216,85 @@ Enter The player name: The player enter his name with the 3 digits counter assoc
 The leaderboard screen has also a "Start" buttom to restart from there.
 
 ## IV) Project Requirement 
-### 1) Project Overview
 
-*Our frogger might be minimalist because we dont know the limits of the Go_Board but we will try to make it as accurate as possible*
-* Making a Frogger Clone game
+## 1) Analysis of our game
+
+### A) Main features Over view
+
+##### ➭ Player
+The frog will act similarly like the frog in the original game. We just changed the sprite of the frog.
+
+ <img src="Images/frogbalckandwhite.png" width= "50">
+  
+
+##### ➭ Score
+In our version the player can __score points__ by:
+* Bringing back frogs home
+* Finishing a level
+
+ <img src="" width= "250">
+  
+
+##### ➭ Cars 
+
+Similary to the original game, the cars are randomised.
+
+<img src="" width= "62">
+<img src="" width= "55">
+<img src="" width= "45">
+<img src="" width= "145">
+
+##### ➭ Environement:
+Our frogger map will be similar to the original game but limited by the Go_Board as it will be in lower resolution.
+<p align="center">
+ <img src="" width= "200">
+ </p>
+
+### B) User Interface
+##### ➭ Title Screen
+
+Our game will have a simple title screen where a "start" buttom will appear on screen. The Start menu will also have the game name displayed in the center of the screen.
+By pressing the top left switch, the game start.
+<p align="center">
+ <img src="" width= "200">
+ </p>
+
+##### ➭ Font
+Text is displayed using **Frankfurter**, same as the original game. 
+
+##### ➭ Game Score Screen
+In game, the score counter will be on top right of the screen, displaying with numbers the score. We wont include a Leaderboard system such as an Hi-Score module etc...
+
+<p align="center">
+ <img src="" width= "250">
+ </p>
+
+##### ➭ Time
+The time in our game will be displayed in numbers, in bottom right of the screen.
+
+<p align="center">
+ <img src="" width= "250">
+ </p>
+
+##### ➭ Game Over
+A black screen will appear showing "Game Over"
+
+<p align="center">
+ <img src="" width= "200">
+ </p>
+
+## V) Project Overview
+
+*As you saw, some features of the original game are not present. Our frogger might be minimalist because we dont know the limits of the Go_Board but we will try to make it as accurate as possible:*
 * Using FPGA / Visual Studio.
-* Has to work on a Go_Board Chip 
-### 2) Project Objectives
+* Has to work on a Go_Board Chip (The Go_Board chip as only 512 mo of RAM) 
+### A) Project Objectives
 
-* Creating a working frogger and making it accurate to the 1981's version by using the Go_Board.
+* Creating a working frogger and making it as accurate as possible to the 1981's version by using the Go_Board.
 * Including differents features that are accurate to the game with the restriction of the VGA display output and the Go_Board capacity
-* Most The Go_Board features such as the two digits LED pannel has be used. 
+* Using Most The Go_Board features such as the two digits LED pannel (for example to display the level number). 
 *  A score counter displayed on screen top right.
-### 3) Focus on
+### B) Focus on
 
 | Focusing on |
 |---|
@@ -245,10 +311,10 @@ The leaderboard screen has also a "Start" buttom to restart from there.
 
  *We are mostly focusing on the features that replicate the original gameplay. We might add some features that the team want to add to make the game original.*
 
-### 4) Restriction of the project
+### C) Restriction of the project
  The level is **randomised** but because the Go_Board limits us, We wont include different landscape such as the river and its content. We wont include any decoration of the map in the game. The cars will be in 7 by 8 bits while the frog will be 8 by 8bits.
 
-### 5) Project Analysis: 
+### D) Project Analysis: 
 * Our project will include a black background / grid where the frogs will cross.
 * Cars will pass in a random cycle making the game unpredictable.
 * The levels will **have their speed increased**.
