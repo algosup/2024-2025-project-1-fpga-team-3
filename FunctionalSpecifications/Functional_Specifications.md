@@ -117,6 +117,7 @@ The player can __score points__ by:
 * Bringing back frogs home
 * Eating fly that pass some time on screen
 * Finishing a level
+* Catching the Ping frog that randomly appears on the screen.
 
  <img src="Images/Score.png" width= "250">
   
@@ -152,7 +153,8 @@ The player can lose **3 lifes** before getting a game over.
 
 ### 2) User Interface
 ##### ➭ Title Screen
-Title screen is mostly composed of an animation with frogs transforming into the "FROGGER" logo as you can see below
+The 1981 Frogger Edition doesn't have a proper title screen. Its mostly composed of the score board and the high-Score display.
+So we used the frogger 1991 edition to show a proper title screen. It is mostly composed of an animation with frogs transforming into the "FROGGER" logo as you can see below.
 
 <p align="center">
  <img src="Images/TS.png" width= "200">
@@ -170,9 +172,9 @@ Title screen is mostly composed of an animation with frogs transforming into the
 Text is displayed using **Frankfurter** font. 
 
 ##### ➭ Game Score Screen
-At the top of the screen. **"Hi-score"** is in the top center of the screen and refers to the Best score the player ever had.
+At the top of the screen. **"Hi-score"** is in the top center of the screen and refers to the **Best score** the player ever had.
 The number are displayed **below the text**. 
-The current score should be displayed as **"I-UP"**, horizontally aligned with "Hi-score".
+The current score should be displayed as **"I-UP"**, horizontally aligned with **"Hi-score"**.
 The numbers are displayed horizontally aligned with the numbers under **"Hi-score"**.
 
 <p align="center">
@@ -215,6 +217,8 @@ The leaderboard screen has also a "Start" buttom to restart from there.
 
 ## IV) Project Requirement 
 ### 1) Project Overview
+
+*Our frogger might be minimalist because we dont know the limits of the Go_Board but we will try to make it as accurate as possible*
 * Making a Frogger Clone game
 * Using FPGA / Visual Studio.
 * Has to work on a Go_Board Chip 
@@ -234,6 +238,7 @@ The leaderboard screen has also a "Start" buttom to restart from there.
 
 | Out of focus |
 |---|
+| Recreating the First frog animation, with as well the title screen animation|
 | Re-Doing the frogger maps |
 | Multiplayer (2 players as original) |
 | Advanced decoration |
@@ -241,12 +246,13 @@ The leaderboard screen has also a "Start" buttom to restart from there.
  *We are mostly focusing on the features that replicate the original gameplay. We might add some features that the team want to add to make the game original.*
 
 ### 4) Restriction of the project
- The level is not **randomised**. We wont include different landscape such as the river and its content. We wont include any decoration of the map in the game. The cars will be in 7 by 8 bits while the frog will be 8 by 8bits.
+ The level is **randomised** but because the Go_Board limits us, We wont include different landscape such as the river and its content. We wont include any decoration of the map in the game. The cars will be in 7 by 8 bits while the frog will be 8 by 8bits.
 
 ### 5) Project Analysis: 
 * Our project will include a black background / grid where the frogs will cross.
 * Cars will pass in a random cycle making the game unpredictable.
 * The levels will **have their speed increased**.
+(Idea for speed increase: Lvl 1: Speed of 100. Every Two levels, the speed increase by 2%, reaching a maximum value of 150% otherwise the frog wont be able to cross the road and would be inta-killed.)
 
 *As the Go_Board is limited the Project wont have the same features as the original game:*
 * To finish a level, only one Frog is required to cross the road.
