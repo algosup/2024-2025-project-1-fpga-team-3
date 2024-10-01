@@ -103,14 +103,14 @@ If the player doesn't have any lifes remaining, the game stop and a __game over_
 
 ##### ➭ Player
 The player plays the Frog.
-It can move in four directions: __Up, Down, Left and Right__.
-The player must cross the map avoiding being killed.
-When the Frog dies, a little animation is played.
-
-( WIP for the more specificities of the frog)
-
- <img src="Images/Frog1.png" width= "50">
-  
+It can move in four directions: __Up, Down, Left and Right__ using the switches on the Go_Board.
+<p align="center">
+<img src="Images/Go_BoardPNG.png" width= "150">
+</p>
+The player must cross the map avoiding being killed. When the Frog dies, a little animation is played.
+<p align="center">
+<img src="Images/Frog1.png" width= "80">
+</p>
 
 ##### ➭ Score
 The player can __score points__ by:
@@ -119,7 +119,7 @@ The player can __score points__ by:
 * Finishing a level
 * Catching the Ping frog that randomly appears on the screen.
 
- <img src="Images/Score.png" width= "250">
+<img src="Images/Score.png" width= "250">
   
 
 ##### ➭ Cars 
