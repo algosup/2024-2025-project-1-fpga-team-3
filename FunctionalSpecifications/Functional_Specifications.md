@@ -328,5 +328,5 @@ A black screen will appear showing "Game Over"
 ## V) FUNCTIONAL ANALYSIS:
 
 <p align="center">
- <img src="Images/Functional_Analysis.png" width= "500">
+ <img src="Images/FunctionalAnalysisFrog1.png" width= "500">
  </p>
