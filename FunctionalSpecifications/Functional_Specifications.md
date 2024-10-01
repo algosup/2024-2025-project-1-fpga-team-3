@@ -50,7 +50,7 @@
 |---|---|
 | Document Owner | REINE Julian (Program manager) |
 | Creation date | 23/09/2024 |
-| Last modification | / |
+| Last modification | 01/10/2024 |
 | Document Name | Functional_Specifications|
 
 ### 2) Doc Approval
@@ -105,11 +105,11 @@ If the player doesn't have any lifes remaining, the game stop and a __game over_
 The player plays the Frog.
 It can move in four directions: __Up, Down, Left and Right__ using the switches on the Go_Board.
 <p align="center">
-<img src="Images/Go_BoardPNG.png" width= "150">
+<img src="Images/Go_BoardPNG.png" width= "250">
 </p>
 The player must cross the map avoiding being killed. When the Frog dies, a little animation is played.
 <p align="center">
-<img src="Images/Frog1.png" width= "80">
+<img src="Images/OriginalFrog.png" width= "80">
 </p>
 
 ##### ➭ Score
