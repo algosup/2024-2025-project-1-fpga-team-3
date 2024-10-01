@@ -17,6 +17,7 @@
 
 Thanks to a google form that I will send to the team at the end of every week, I will be able to gather all the issues and remarques that the team faced during the week. This will help me to improve the project management and the team's productivity.
 Here's the graphic representation of the satisfaction rate of the team:
+<p>
 <img src="Images/Week1_Satisfaction.png" width="300"> 
 
 ### Issues
