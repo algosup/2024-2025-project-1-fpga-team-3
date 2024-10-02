@@ -1,337 +1,357 @@
 # PROJECT NAME: FROGGER
+______
 
 <details>
 <summary>
 
-## *Table of content*
+## *Table of Contents*
 
 </summary>
 
 - [PROJECT NAME: FROGGER](#project-name-frogger)
-      - [CONTENT TABLE](#content-table)
-  - [Table of content](#table-of-content)
-  - [I) Document Informations:](#i-document-informations)
-    - [2) Doc Approval](#2-doc-approval)
+  - [*Table of Contents*](#table-of-contents)
+  - [I) Document Information](#i-document-information)
+    - [2) Document Approval](#2-document-approval)
     - [3) Glossary](#3-glossary)
-  - [II) Project Intro:](#ii-project-intro)
+  - [II) Project Introduction](#ii-project-introduction)
     - [1) Original Frogger Definition](#1-original-frogger-definition)
-    - [2) Features of the game (original) Including pics](#2-features-of-the-game-original-including-pics)
-      - [A) Objective in the game](#a-objective-in-the-game)
-      - [B) Original Map specifications](#b-original-map-specifications)
+    - [2) Features of the Original Game](#2-features-of-the-original-game)
   - [III) Functional Requirements](#iii-functional-requirements)
-    - [1) Main features Over view](#1-main-features-over-view)
+    - [1) Main Features Overview](#1-main-features-overview)
         - [➭ Player](#-player)
         - [➭ Score](#-score)
         - [➭ Cars](#-cars)
-        - [➭ Environement:](#-environement)
-        - [➭ Objectives and loss condition](#-objectives-and-loss-condition)
+        - [➭ Environment](#-environment)
+        - [➭ Objectives and Loss Conditions](#-objectives-and-loss-conditions)
     - [2) User Interface](#2-user-interface)
         - [➭ Title Screen](#-title-screen)
-        - [➭ Leaderboard (Title screen)](#-leaderboard-title-screen)
+        - [➭ Leaderboard (Title Screen)](#-leaderboard-title-screen)
         - [➭ Font](#-font)
-        - [➭ Game Score](#-game-score)
+        - [➭ Game Score Screen](#-game-score-screen)
         - [➭ Time](#-time)
-        - [➭ Lifes](#-lifes)
+        - [➭ Lives](#-lives)
         - [➭ Game Over](#-game-over)
+          - [*The background does not change*.](#the-background-does-not-change)
         - [➭ Leaderboard (Death Screen)](#-leaderboard-death-screen)
-  - [IV) Project Requirement](#iv-project-requirement)
-    - [1) Project Overview](#1-project-overview)
-    - [2) Project Objectives](#2-project-objectives)
-    - [3) Focus on](#3-focus-on)
-    - [4) Restriction of the project](#4-restriction-of-the-project)
-  - [V) FUNCTIONAL ANALYSIS:](#v-functional-analysis)
-  - [VI ) MATERIAL:](#vi--material)
+  - [IV) Project Requirements](#iv-project-requirements)
+          - [We are going to recreate a box (Equivalent of the frog's sprite) and making it move. If it colide to another sprite (that will be the cars) the sprite restart at its spawn point.](#we-are-going-to-recreate-a-box-equivalent-of-the-frogs-sprite-and-making-it-move-if-it-colide-to-another-sprite-that-will-be-the-cars-the-sprite-restart-at-its-spawn-point)
+    - [1) Analysis of Our Game](#1-analysis-of-our-game)
+          - [*Because one of our Team Member (who had to make the sprites) is sick, we wont be able to provide you all the potential sprites we will use in the game*](#because-one-of-our-team-member-who-had-to-make-the-sprites-is-sick-we-wont-be-able-to-provide-you-all-the-potential-sprites-we-will-use-in-the-game)
+        - [➭ Player](#-player-1)
+        - [➭ Score](#-score-1)
+        - [➭ Cars](#-cars-1)
+        - [➭ Environment](#-environment-1)
+        - [➭ Title Screen](#-title-screen-1)
+        - [➭ Font](#-font-1)
+        - [➭ Game Score Screen](#-game-score-screen-1)
+        - [➭ Time](#-time-1)
+        - [➭ Game Over](#-game-over-1)
+  - [V) Project Overview](#v-project-overview)
+    - [A) Project Objectives](#a-project-objectives)
+    - [B) Focus Areas](#b-focus-areas)
+          - [*We are primarily focusing on features that replicate the original gameplay. Additional features may be included to enhance the game's originality.*](#we-are-primarily-focusing-on-features-that-replicate-the-original-gameplay-additional-features-may-be-included-to-enhance-the-games-originality)
+          - [*Given the limitations of the Go\_Board, the project will not feature the same functionalities as the original game:*](#given-the-limitations-of-the-go_board-the-project-will-not-feature-the-same-functionalities-as-the-original-game)
+  - [V) Functional Analysis](#v-functional-analysis)
 
+</details>
 
-</details> 
+## I) Document Information
+| Document ID  | Document #01     |
+|--------------|------------------|
+| Document Owner | Julian Reine (Program Manager) |
+| Creation Date | 23/09/2024      |
+| Last Modification | 01/10/2024  |
+| Document Name | Functional_Specifications |
 
-## I) Document Informations:
-| Document ID | Document # 01 |
-|---|---|
-| Document Owner | REINE Julian (Program manager) |
-| Creation date | 23/09/2024 |
-| Last modification | 01/10/2024 |
-| Document Name | Functional_Specifications|
+### 2) Document Approval
 
-### 2) Doc Approval
-
-| Role | Name | Checked | Date |
-|---|---|---|---|
-| Project Manager | Lucas AUBARD |  | //2024 |
-| Tech Lead | Vivien Bistrel TSANGUE |  | //2024 |
-| Software Developer | Manech LAGUENS |  | //2024 |
-| Software Developer | Mariem ZAIANE | | //2024 |
-| Technical Writter | Abderrazaq MAKRAN |  | //2024 |
-| Quality Assurance | Raphael Chiocchi ||//2024 |
-| Program Manager | Julian REINE ||//2024 |
+| Role              | Name                       | Checked | Date     |
+|-------------------|----------------------------|---------|----------|
+| Project Manager    | Lucas Aubard               |         | //2024   |
+| Tech Lead          | Vivien Bistrel Tsangue     |         | //2024   |
+| Software Developer  | Manech Laguens             |         | //2024   |
+| Software Developer  | Mariem Zaiane              |         | //2024   |
+| Technical Writer    | Abderrazaq Makran         |         | //2024   |
+| Quality Assurance    | Raphael Chiocchi          |         | //2024   |
+| Program Manager      | Julian Reine              |         | //2024   |
 
 ### 3) Glossary
 
-| Term used | Definition |
-|---|---|
-| "Team" | ALGOSUP team 3 (2024-2025 - Project 1) |
-| "Player / Frog" | The person playing the game |
-| "Frog" the character | A little frog controlled by the player |
-| "Cars" | The cars are running on the road, and are the frog's enemy |
-| "Map" | The game environment  |
+| Term Used         | Definition                                       |
+|-------------------|--------------------------------------------------|
+| "Team"            | ALGOSUP Team 3 (2024-2025 - Project 1)        |
+| "Player / Frog"   | The person playing the game                     |
+| "Frog"            | A small frog controlled by the player           |
+| "Cars"            | The vehicles that move on the road and are the frog's enemies |
+| "Map"             | The game environment                             |
 | "User Interface" or "UI" | The visual and interactive elements through which users interact with the game |
-| "Go_Board" | The Chip used in the process of this project |
-| "FPGA" | (Field.Programable.Gate.array) Programming language used in the project |
+| "Go_Board"       | The chip used in this project                   |
+| "FPGA"           | (Field Programmable Gate Array) A programming language used in the project |
+___________________________
 
-## II) Project Intro:
+## II) Project Introduction
 ### 1) Original Frogger Definition
 
- Frogger is a 1981 arcade action game developed by Konami and published by Sega. In North America, it was distributed by Sega/Gremlin. __The object of the game is to direct five frogs to their homes by dodging traffic on a busy road__, then crossing a river by jumping on floating logs and alligators. 
+Frogger is a 1981 arcade action game developed by Konami and published by Sega. In North America, it was distributed by Sega/Gremlin. **The objective of the game is to direct five frogs to their homes by dodging traffic on a busy road**, then crossing a river by jumping on floating logs and alligators.
 <p align="center">
- <img src="Images/Frogger_game_arcade.png" width= "250">
- </p>
+ <img src="Images/Frogger_game_arcade.png" width="250">
+</p>
 
-### 2) Features of the game (original)
-#### A) Objective in the game
- Make five frogs crossing the road, and the river to their home whiout getting run over or drowned in the river.
+### 2) Features of the Original Game
 
-#### B) Original Map specifications
+* #### A) Objective of the Game
+  Guide five frogs across the road and the river to their homes without getting run over or drowned.
 
-The original map is composed of two parts. The road, and the River.
-On the road, The Frog must __dodge__ the cars going on the highway. The cars are coming from left and right; depends on segment of the road you are. If the frog get runned over, it loose a life and restart in the bottom of the map.
-On the river Part, the Frog doesn't have a solid base the frog can walk on to. The Frog must __walk on passing by logs, turtles and even the back of alligators__. Logs and animal are randomised in the same way as the cars are. If you miss the logs or animal, the frog drown and you loose a life and restart in the bottom of the map. 
-If the player doesn't have any lifes remaining, the game stop and a __game over__ screen appears.
+* #### B) Original Map Specifications
+
+  The original map consists of two parts: the road and the river.
+On the road, the frog must **dodge** the cars moving on the highway. The cars come from the left and right, depending on the segment of the road. If the frog gets run over, it loses a life and restarts at the bottom of the map.
+In the river section, the frog has no solid ground to walk on. It must **hop onto passing logs, turtles, and even the backs of alligators**. Logs and animals are randomized similarly to the cars. If the frog misses the logs or animals, it drowns, loses a life, and restarts at the bottom of the map. 
+If the player has no lives remaining, the game stops, and a **game over** screen appears.
+__________________
 
 ## III) Functional Requirements
 
-### 1) Main features Over view
+### 1) Main Features Overview
 
-##### ➭ Player
-The player plays the Frog.
-It can move in four directions: __Up, Down, Left and Right__ using the switches on the Go_Board.
-The player must cross the map avoiding being killed. When the Frog dies, a little animation is played.
+  ##### ➭ Player
+* The player controls the frog.
+* It can move in four directions: **Up, Down, Left, and Right** using the switches on the Go_Board.
+* The player must cross the map while avoiding being killed. When the frog dies, a short animation is played.
 <p align="center">
-<img src="Images/OriginalFrog.png" width= "80">
+<img src="Images/OriginalFrog.png" width="80">
 </p>
 
 ##### ➭ Score
-The player can __score points__ by:
-* Bringing back frogs home
-* Eating fly that pass some time on screen
-* Finishing a level
-* Catching the Ping frog that randomly appears on the screen.
+The player can **score points** by:
+- Bringing frogs home
+- Eating flies that appear on screen
+- Finishing a level
+- Catching the Ping frog that randomly appears on the screen.
 
-<img src="Images/Score.png" width= "250">
-  
+<img src="Images/Score.png" width="250">
 
 ##### ➭ Cars 
 
-Cars are coming from the __left and right__. They never stop by, and the player must __move forward__ dodging them to cross the road successfuly.
-If the player touch a car, __he loose a life__.
+* Cars come from the **left and right**. They never stop, and the player must **move forward** to dodge them and cross the road successfully.
+* If the player touches a car, **they lose a life**.
 
-<img src="Images/Car1.png" width= "62">
-<img src="Images/Car2.png" width= "55">
-<img src="Images/Car3.png" width= "45">
-<img src="Images/Car4.png" width= "145">
+<img src="Images/Car1.png" width="62">
+<img src="Images/Car2.png" width="55">
+<img src="Images/Car3.png" width="45">
+<img src="Images/Car4.png" width="145">
 
-##### ➭ Environement:
-The map is composed of the road and the river. The player cross the path into the other part of the map.
+##### ➭ Environment
+The map consists of the road and the river. The player crosses from one part of the map to the other.
 <p align="center">
- <img src="Images/Frogger_game_arcade.png" width= "200">
- </p>
+ <img src="Images/Frogger_game_arcade.png" width="200">
+</p>
 
-##### ➭ Objectives and loss condition
-*The game objectives are :*
+##### ➭ Objectives and Loss Conditions
+*The game objectives are:*
+- **Bringing home** the five frogs.
+- Achieving the highest possible score. Several actions can increase the player's score. **Bringing frogs home increases the score**, but there are other ways to gain points.
 
-* __Bringing Home__ the five Frogs.
+__*However, there are two loss conditions:*__
+- Being **touched** by a car or an enemy.
+- Running **out of time**.
 
-* Get the highest possible Score. Several actions will let the player increase their score. **Bringing Frogs home will increase the player score** but it also can increase by other ways.
-
-*But There is two loss conditions* : 
-* Being **touched** by a car or an entity.
-* Running **out of time.**
-  
-The player can lose **3 lifes** before getting a game over.
+The player can lose **three lives** before reaching a game over.
 
 ### 2) User Interface
 ##### ➭ Title Screen
-The 1981 Frogger Edition doesn't have a proper title screen. Its mostly composed of the score board and the high-Score display.
-So we used the frogger 1991 edition to show a proper title screen. It is mostly composed of an animation with frogs transforming into the "FROGGER" logo as you can see below.
+* The 1981 Frogger edition lacks a proper title screen. It mainly consists of the scoreboard and the high-score display.
+* Thus, we used the Frogger 1991 edition to showcase a proper title screen. It features an animation of frogs transforming into the "FROGGER" logo, as shown below.
 
 <p align="center">
- <img src="Images/TS.png" width= "200">
- </p>
+ <img src="Images/TS.png" width="200">
+</p>
 
-##### ➭ Leaderboard (Title screen)
+##### ➭ Leaderboard (Title Screen)
 
- The player High-Score is displayed on the title screen.
+* The player's high score is displayed on the title screen.
 
- <p align="center">
- <img src="Images/LB.png" width= "200">
- </p>
+<p align="center">
+<img src="Images/LB.png" width="200">
+</p>
 
 ##### ➭ Font
-Text is displayed using **Frankfurter** font. 
+* Text is displayed using the **Frankfurter** font.
 
 ##### ➭ Game Score Screen
-At the top of the screen. **"Hi-score"** is in the top center of the screen and refers to the **Best score** the player ever had.
-The number are displayed **below the text**. 
-The current score should be displayed as **"I-UP"**, horizontally aligned with **"Hi-score"**.
-The numbers are displayed horizontally aligned with the numbers under **"Hi-score"**.
+* At the top of the screen, **"Hi-score"** is located in the top center, referring to the **best score** the player has achieved.
+* The numbers are displayed **below the text**. 
+* The current score is displayed as **"I-UP,"** horizontally aligned with **"Hi-score."**
+* The numbers are aligned horizontally with the numbers under **"Hi-score."**
 
 <p align="center">
- <img src="Images/Score.png" width= "250">
- </p>
+ <img src="Images/Score.png" width="250">
+</p>
 
 ##### ➭ Time
-Time is represented by a **shrinking horizontal bar** in the bottom right of the game.
-"Time" is displayed on bottom right.
-Time is also displayed in the **middle of the screen** showing with Numbers the time remaining before the game stops.
+* Time is represented by a **shrinking horizontal bar** in the bottom right of the game.
+* "Time" is displayed at the bottom right.
+* Time is also displayed in the **middle of the screen** using numbers to indicate the remaining time before the game stops.
 
 <p align="center">
- <img src="Images/Time.png" width= "250">
- </p>
+ <img src="Images/Time.png" width="250">
+</p>
 
-##### ➭ Lifes
-The frogs lives are displayed on **bottom left of the game**. They are **lower case** models of the frogs (Not moving) and are used to display the players lifes remaining.
-If the player gets hit, **he loose a life**.
-If the player run out of time, **he loose a life**
+##### ➭ Lives
+* The frogs' lives are displayed at the **bottom left of the game**. They are **lowercase** representations of the frogs (not moving) used to indicate the player's remaining lives
+* If the player gets hit, **they lose a life**.
+* If the player runs out of time, **they lose a life**.
 
 <p align="center">
- <img src="Images/FrogLives.png" width= "250">
- </p>
+ <img src="Images/OriginalFrog.png" width="25">
+ <img src="Images/OriginalFrog.png" width="25">
+ <img src="Images/OriginalFrog.png" width="25">
+ <img src="Images/OriginalFrog.png" width="25">
+ <img src="Images/OriginalFrog.png" width="25">
+</p>
+
+* ###### *The amount of frog is the lifes remaining.*
 
 ##### ➭ Game Over
-When all the player's life are used, a **game-over screen** will appear. The words **"GAME OVER"** appear in the middle of the screen.
+* When all the player's lives are used, a **game-over screen** will appear, displaying **"GAME OVER"** in the center.
 
-*The back ground model doesn't change*.
+###### *The background does not change*.
 
-The player is then asked to enter is **Initials** to **register his score** if it was **Higher than the scores he did before**.
+* The player is then prompted to enter their **initials** to **register their score** if it was **higher than their previous scores**.
 
 <p align="center">
- <img src="Images/GO.png" width= "200">
- </p>
+ <img src="Images/GO.png" width="200">
+</p>
 
 ##### ➭ Leaderboard (Death Screen)
 
-Enter The player name: The player enter his name with the 3 digits counter associated with the score he made. The player High-Score will be displayed on the title screen, as well with the best score displayed in game as "Hi-Score".
-The leaderboard screen has also a "Start" buttom to restart from there.
+* Players enter their name along with a 3-digit counter associated with their score. The player's high score will be displayed on the title screen, alongside the best score displayed in-game as "Hi-Score." 
+* The leaderboard screen also feature a "Start" button to restart from there.
 
-## IV) Project Requirement 
+## IV) Project Requirements
+*Disclaimer: We will focus on the main features of the game, such as gameplay, and will add secondary features, like the sprites, later if possible.* *__This means that our Frogger may potentially be minimalist if we do not have enough time.__*
 
-## 1) Analysis of our game
+###### We are going to recreate a box (Equivalent of the frog's sprite) and making it move. If it colide to another sprite (that will be the cars) the sprite restart at its spawn point.
+### 1) Analysis of Our Game
+____________________________
+  ###### *Because one of our Team Member (who had to make the sprites) is sick, we wont be able to provide you all the potential sprites we will use in the game*
+  _____________________________
 
-### A) Main features Over view
+* #### A) Main Features Overview
 
 ##### ➭ Player
-The frog will act similarly like the frog in the original game. We just changed the sprite of the frog. 
+  * The frog will behave similarly to the original game's frog. We have only changed the sprite of the frog.
 <p align="center">
-<img src="Images/frogbalckandwhite.png" width= "50">
+<img src="Images/frogbalckandwhite.png" width="50">
 </p>
 
 *__The frog will move according to:__*
 
 <p align="center">
-<img src="Images/Go_BoardPNG.png" width= "250">
+<img src="Images/Go_BoardPNG.png" width="250">
 </p>
 
- 
-  
-
 ##### ➭ Score
-In our version the player can __score points__ by:
-* Finishing a level (He win 1 point per level)
+* In our version, the player can **score points** by:
+- Finishing a level (They earn 1 point per level).
 
- <img src="" width= "250">
-  
+<img src="" width="250">
 
 ##### ➭ Cars 
 
-Similary to the original game, the cars are randomised.
+* Similar to the original game, the cars are randomized.
 
-<img src="" width= "62">
-<img src="" width= "55">
-<img src="" width= "45">
-<img src="" width= "145">
+<img src="" width="62">
+<img src="" width="55">
+<img src="" width="45">
+<img src="" width="145">
 
-##### ➭ Environement:
-Our frogger map will be similar to the original game but limited by the Go_Board as it will be in lower resolution.
+##### ➭ Environment
+* Our Frogger map will resemble the original game but will be limited by the Go_Board's lower resolution.
 <p align="center">
- <img src="" width= "200">
- </p>
+ <img src="Images/BG_R.png" width="200">
+</p>
 
-### B) User Interface
+* ### B) User Interface
+
 ##### ➭ Title Screen
-
-Our game will have a simple title screen where a "start" buttom will appear on screen. The Start menu will also have the game name displayed in the center of the screen.
-By pressing the top left switch, the game start.
+* Our game will feature a simple title screen with a "Start" and "Exit" button. The game name will be displayed in the center.
+Pressing the top left switch will start the game.
 <p align="center">
- <img src="" width= "200">
- </p>
+ <img src="" width="200">
+</p>
 
 ##### ➭ Font
-Text is displayed using **Frankfurter**, same as the original game. 
+* Text is displayed using **Frankfurter**, just like in the original game.
 
 ##### ➭ Game Score Screen
-In game, the score counter will be on top right of the screen, displaying with numbers the score. We wont include a Leaderboard system such as an Hi-Score module etc...
+* In-game, the score counter will be displayed at the top right of the screen, showing the score in numbers. We will not include a leaderboard system, such as a Hi-Score module.
 
 <p align="center">
- <img src="" width= "250">
- </p>
+ <img src="" width="250">
+</p>
 
 ##### ➭ Time
-The time in our game will be displayed in numbers, in bottom right of the screen.
+* The time in our game will be displayed in numbers at the bottom right of the screen.
 
 <p align="center">
- <img src="" width= "250">
- </p>
+ <img src="" width="250">
+</p>
 
 ##### ➭ Game Over
-A black screen will appear showing "Game Over"
+* A black screen will appear showing "Game Over."
 
 <p align="center">
- <img src="" width= "200">
- </p>
+ <img src="" width="200">
+</p>
 
 ## V) Project Overview
 
-*As you saw, some features of the original game are not present. Our frogger might be minimalist because we dont know the limits of the Go_Board but we will try to make it as accurate as possible:*
-* Using FPGA / Visual Studio.
-* Has to work on a Go_Board Chip (The Go_Board chip as only 512 mo of RAM) 
+* *As you can see, some features of the original game are not present. Our Frogger may be minimalist because we are unsure of the limits of the Go_Board, but we will try to make it as accurate as possible:*
+- Using FPGA / Visual Studio.
+- Must work on a Go_Board chip (The Go_Board chip has only 512 MB of RAM).
+
 ### A) Project Objectives
 
-* Creating a working frogger and making it as accurate as possible to the 1981's version by using the Go_Board.
-* Including differents features that are accurate to the game with the restriction of the VGA display output and the Go_Board capacity
-* Using Most The Go_Board features such as the two digits LED pannel (for example to display the level number). 
-*  A score counter displayed on screen top right.
-### B) Focus on
+- Create a working Frogger that closely replicates the 1981 version using the Go_Board.
+- Include features that are true to the game while adhering to the VGA display output and the Go_Board's capacity.
+- Utilize most of the Go_Board's features, such as the two-digit LED panel (e.g., to display the level number).
+- Implement a score counter displayed at the top right of the screen.
 
-| Focusing on |
-|---|
-| Delivering a Frogger that works on the Go_Board Chip, and displayed on VGA output |
-| Must be programed with FPGA on the Go_Board |
-|Including features such as death animation and customs models for cars|
+### B) Focus Areas
 
-| Out of focus |
-|---|
-| Recreating the First frog animation, with as well the title screen animation|
-| Re-Doing the frogger maps |
-| Multiplayer (2 players as original) |
-| Advanced decoration |
+| Focusing On                                                                                  |
+|---------------------------------------------------------------------------------------------|
+| Delivering a Frogger that works on the Go_Board chip, displayed on VGA output              |
+| Must be programmed with FPGA on the Go_Board                                               |
+| Including features such as death animations and custom models for cars                      |
 
- *We are mostly focusing on the features that replicate the original gameplay. We might add some features that the team want to add to make the game original.*
+| Out of Focus                                                                                |
+|---------------------------------------------------------------------------------------------|
+| Recreating the first frog animation, including the title screen animation                  |
+| Redoing the Frogger maps                                                                    |
+| Multiplayer (2 players as in the original)                                                |
+| Advanced decoration                                                                         |
 
-### C) Restriction of the project
- The level is **randomised** but because the Go_Board limits us, We wont include different landscape such as the river and its content. We wont include any decoration of the map in the game. The cars will be in 7 by 8 bits while the frog will be 8 by 8bits.
+###### *We are primarily focusing on features that replicate the original gameplay. Additional features may be included to enhance the game's originality.*
 
-### D) Project Analysis: 
-* Our project will include a black background / grid where the frogs will cross.
-* Cars will pass in a random cycle making the game unpredictable.
-* The levels will **have their speed increased**.
-(Idea for speed increase: Lvl 1: Speed of 100. Every Two levels, the speed increase by 2%, reaching a maximum value of 150% otherwise the frog wont be able to cross the road and would be inta-killed.)
+* ### C) Project Restrictions
+* The level are **randomized**, but due to the limitations of the Go_Board, we will not include different landscapes such as the river and its contents. The cars will be represented in 7x8 pixels, while the frog will be 8x8 pixels.
 
-*As the Go_Board is limited the Project wont have the same features as the original game:*
-* To finish a level, only one Frog is required to cross the road.
-* No score will be displayed but **the level number will be displayed on the Go_Board**.
-* No death screen will be displayed.
-* No leaderboard will be included.
-## V) FUNCTIONAL ANALYSIS:
+* ### D) Project Analysis
+* Our project will include a black background/ grid (at first glance) where the frogs will cross.
+* Cars will pass in a random cycle, making the game unpredictable.
+* The levels will **increase in speed**.
+(Idea for speed increase: Level 1: Speed of 100. Every two levels, the speed increases by 2%, reaching a maximum value of 150%, otherwise, the frog won't be able to cross the road and will be instantly killed.)
+
+###### *Given the limitations of the Go_Board, the project will not feature the same functionalities as the original game:*
+- To finish a level, only one frog is required to cross the road.
+- No death screen will be displayed (at first glance).
+- No leaderboard will be included.
+_____________________
+
+## V) Functional Analysis
 
 <p align="center">
- <img src="Images/FunctionalAnalysisFrog1.png" width= "500">
- </p>
+ <img src="Images/FunctionalAnalysisFrog1.png" width="500">
+</p>
