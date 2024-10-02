@@ -50,7 +50,8 @@ ______
     - [B) Focus Areas](#b-focus-areas)
           - [*We are primarily focusing on features that replicate the original gameplay. Additional features may be included to enhance the game's originality.*](#we-are-primarily-focusing-on-features-that-replicate-the-original-gameplay-additional-features-may-be-included-to-enhance-the-games-originality)
           - [*Given the limitations of the Go\_Board, the project will not feature the same functionalities as the original game:*](#given-the-limitations-of-the-go_board-the-project-will-not-feature-the-same-functionalities-as-the-original-game)
-  - [V) Functional Analysis](#v-functional-analysis)
+  - [V) Personas](#v-personas)
+  - [VI) Functional Analysis](#vi-functional-analysis)
 
 </details>
 
@@ -348,7 +349,19 @@ Pressing the top left switch will start the game.
 - No leaderboard will be included.
 _____________________
 
-## V) Functional Analysis
+## V) Personas
+|Name : | Nostalgic Nick 
+-------------------|--------------------------------------------------|
+Full Name: | Nick Thompson
+Age: |35
+Location:| Portland, Oregon
+Occupation:| Graphic Designer
+Background:| Nick grew up in a small town during the 1980s, where he spent countless hours at the local arcade, reveling in the glow of pixelated screens. "Frogger" was one of his all-time favorites, and he has fond memories of racing against friends to see who could get the highest score.
+<p align="center">
+ <img src="Images/NostalgicNick.png" width="100">
+</p>
+
+## VI) Functional Analysis
 
 <p align="center">
  <img src="Images/FunctionalAnalysisFrog1.png" width="500">
