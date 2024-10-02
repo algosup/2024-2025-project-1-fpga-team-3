@@ -33,9 +33,9 @@ ______
           - [*The background does not change*.](#the-background-does-not-change)
         - [➭ Leaderboard (Death Screen)](#-leaderboard-death-screen)
   - [IV) Project Requirements](#iv-project-requirements)
-          - [We are going to recreate a box (Equivalent of the frog's sprite) and making it move. If it colide to another sprite (that will be the cars) the sprite restart at its spawn point.](#we-are-going-to-recreate-a-box-equivalent-of-the-frogs-sprite-and-making-it-move-if-it-colide-to-another-sprite-that-will-be-the-cars-the-sprite-restart-at-its-spawn-point)
+          - [We are going to recreate a box (Equivalent of the frog's sprite) and making it move. If it colides to another sprite the frog sprite restart at its spawn point.](#we-are-going-to-recreate-a-box-equivalent-of-the-frogs-sprite-and-making-it-move-if-it-colides-to-another-sprite-the-frog-sprite-restart-at-its-spawn-point)
     - [1) Analysis of Our Game](#1-analysis-of-our-game)
-          - [*Because one of our Team Member (who had to make the sprites) is sick, we wont be able to provide you all the potential sprites we will use in the game*](#because-one-of-our-team-member-who-had-to-make-the-sprites-is-sick-we-wont-be-able-to-provide-you-all-the-potential-sprites-we-will-use-in-the-game)
+          - [*Because one of our Team Member (who had to make the sprites) is sick, we wont be able to provide you all the potentials sprites we will use in the game*](#because-one-of-our-team-member-who-had-to-make-the-sprites-is-sick-we-wont-be-able-to-provide-you-all-the-potentials-sprites-we-will-use-in-the-game)
         - [➭ Player](#-player-1)
         - [➭ Score](#-score-1)
         - [➭ Cars](#-cars-1)
@@ -99,11 +99,11 @@ ___________________________
 ### 2) Features of the Original Game
 
 * #### A) Objective of the Game
-  * Guide five frogs across the road and the river to their homes without getting run over or drowned.
+*  Guide five frogs across the road and the river to their homes without getting run over or drowned.
 
 * #### B) Original Map Specifications
 
-  * The original map consists of two parts: the road and the river.
+ * The original map consists of two parts: the road and the river.
 On the road, the frog must **dodge** the cars moving on the highway. The cars come from the left and right, depending on the segment of the road. If the frog gets run over, it loses a life and restarts at the bottom of the map.
 In the river section, the frog has no solid ground to walk on. It must **hop onto passing logs, turtles, and even the backs of alligators**. Logs and animals are randomized similarly to the cars. If the frog misses the logs or animals, it drowns, loses a life, and restarts at the bottom of the map. 
 If the player has no lives remaining, the game stops, and a **game over** screen appears.
@@ -126,7 +126,7 @@ The player can **score points** by:
   * Bringing frogs home
   * Eating flies that appear on screen
   * Finishing a level 
-  * Catching the Ping frogthat randomly appears  on the screen.
+  * Catching the Ping frog that randomly appears  on the screen.
 
 <img src="Images/Score.png" width="250">
 
@@ -230,10 +230,10 @@ The player can lose **three lives** before reaching a game over.
 ## IV) Project Requirements
 *Disclaimer: We will focus on the main features of the game, such as gameplay, and will add secondary features, like the sprites, later if possible.* *__This means that our Frogger may potentially be minimalist if we do not have enough time.__*
 
-###### We are going to recreate a box (Equivalent of the frog's sprite) and making it move. If it colide to another sprite (that will be the cars) the sprite restart at its spawn point.
+###### We are going to recreate a box (Equivalent of the frog's sprite) and making it move. If it colides to another sprite the frog sprite restart at its spawn point.
 ### 1) Analysis of Our Game
 ____________________________
-  ###### *Because one of our Team Member (who had to make the sprites) is sick, we wont be able to provide you all the potential sprites we will use in the game*
+  ###### *Because one of our Team Member (who had to make the sprites) is sick, we wont be able to provide you all the potentials sprites we will use in the game*
   _____________________________
 
 * #### A) Main Features Overview
@@ -241,20 +241,19 @@ ____________________________
 ##### ➭ Player
   * The frog will behave similarly to the original game's frog. We have only changed the sprite of the frog.
 <p align="center">
-<img src="Images/frogbalckandwhite.png" width="50">
+<img src="Images/FrogBlackAndWhite.png" width="50">
 </p>
 
 *__The frog will move according to:__*
 
 <p align="center">
-<img src="Images/Go_BoardPNG.png" width="250">
+<img src="Images/GoBoardPNG.png" width="250">
 </p>
 
 ##### ➭ Score
 * In our version, the player can **score points** by:
 - Finishing a level (They earn 1 point per level).
 
-<img src="" width="250">
 
 ##### ➭ Cars 
 
@@ -266,9 +265,9 @@ ____________________________
 <img src="" width="145">
 
 ##### ➭ Environment
-* Our Frogger map will resemble the original game but will be limited by the Go_Board's lower resolution.
+* Our Frogger map will resemble the original game but will be limited by the Go_Board's lower resolution so we remade only the road part.
 <p align="center">
- <img src="Images/BG_R.png" width="200">
+ <img src="Images/BGR.png" width="200">
 </p>
 
 * ### B) User Interface
@@ -281,10 +280,10 @@ Pressing the top left switch will start the game.
 </p>
 
 ##### ➭ Font
-* Text is displayed using **Frankfurter**, just like in the original game.
+* Text will displayed using **Frankfurter**, just like in the original game.
 
 ##### ➭ Game Score Screen
-* In-game, the score counter will be displayed at the top right of the screen, showing the score in numbers. We will not include a leaderboard system, such as a Hi-Score module.
+* In-game, the score counter will be displayed at the top right of the screen, showing the score in numbers. We wont include a leaderboard system, such as a Hi-Score module.
 
 <p align="center">
  <img src="" width="250">
