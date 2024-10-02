@@ -17,7 +17,6 @@ ______
     - [1) Original Frogger Definition](#1-original-frogger-definition)
     - [2) Features of the Original Game](#2-features-of-the-original-game)
   - [III) Functional Requirements](#iii-functional-requirements)
-    - [1) Main Features Overview](#1-main-features-overview)
         - [➭ Player](#-player)
         - [➭ Score](#-score)
         - [➭ Cars](#-cars)
@@ -60,7 +59,7 @@ ______
 |--------------|------------------|
 | Document Owner | Julian Reine (Program Manager) |
 | Creation Date | 23/09/2024      |
-| Last Modification | 01/10/2024  |
+| Last Modification | 02/10/2024  |
 | Document Name | Functional_Specifications |
 
 ### 2) Document Approval
@@ -92,7 +91,7 @@ ___________________________
 ## II) Project Introduction
 ### 1) Original Frogger Definition
 
-Frogger is a 1981 arcade action game developed by Konami and published by Sega. In North America, it was distributed by Sega/Gremlin. **The objective of the game is to direct five frogs to their homes by dodging traffic on a busy road**, then crossing a river by jumping on floating logs and alligators.
+* Frogger is a 1981 arcade action game developed by Konami and published by Sega. In North America, it was distributed by Sega/Gremlin. **The objective of the game is to direct five frogs to their homes by dodging traffic on a busy road**, then crossing a river by jumping on floating logs and alligators.
 <p align="center">
  <img src="Images/Frogger_game_arcade.png" width="250">
 </p>
@@ -100,11 +99,11 @@ Frogger is a 1981 arcade action game developed by Konami and published by Sega. 
 ### 2) Features of the Original Game
 
 * #### A) Objective of the Game
-  Guide five frogs across the road and the river to their homes without getting run over or drowned.
+  * Guide five frogs across the road and the river to their homes without getting run over or drowned.
 
 * #### B) Original Map Specifications
 
-  The original map consists of two parts: the road and the river.
+  * The original map consists of two parts: the road and the river.
 On the road, the frog must **dodge** the cars moving on the highway. The cars come from the left and right, depending on the segment of the road. If the frog gets run over, it loses a life and restarts at the bottom of the map.
 In the river section, the frog has no solid ground to walk on. It must **hop onto passing logs, turtles, and even the backs of alligators**. Logs and animals are randomized similarly to the cars. If the frog misses the logs or animals, it drowns, loses a life, and restarts at the bottom of the map. 
 If the player has no lives remaining, the game stops, and a **game over** screen appears.
@@ -112,22 +111,22 @@ __________________
 
 ## III) Functional Requirements
 
-### 1) Main Features Overview
+* ### 1) Main Features Overview
 
-  ##### ➭ Player
-* The player controls the frog.
-* It can move in four directions: **Up, Down, Left, and Right** using the switches on the Go_Board.
-* The player must cross the map while avoiding being killed. When the frog dies, a short animation is played.
+##### ➭ Player
+  * The player controls the frog.
+  * It can move in four directions: **Up, Down, Left, and Right** using the switches on the Go_Board.
+  * The player must cross the map while avoiding being killed. When the frog dies, a short animation is played.
 <p align="center">
 <img src="Images/OriginalFrog.png" width="80">
 </p>
 
-##### ➭ Score
+  ##### ➭ Score
 The player can **score points** by:
-- Bringing frogs home
-- Eating flies that appear on screen
-- Finishing a level
-- Catching the Ping frog that randomly appears on the screen.
+  * Bringing frogs home
+  * Eating flies that appear on screen
+  * Finishing a level 
+  * Catching the Ping frogthat randomly appears  on the screen.
 
 <img src="Images/Score.png" width="250">
 
@@ -142,7 +141,7 @@ The player can **score points** by:
 <img src="Images/Car4.png" width="145">
 
 ##### ➭ Environment
-The map consists of the road and the river. The player crosses from one part of the map to the other.
+* The map consists of the road and the river. The player crosses from one part of the map to the other.
 <p align="center">
  <img src="Images/Frogger_game_arcade.png" width="200">
 </p>
