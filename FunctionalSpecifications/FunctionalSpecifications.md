@@ -35,7 +35,7 @@ ______
   - [IV) Project Requirements](#iv-project-requirements)
           - [We are going to recreate a box (Equivalent of the frog's sprite) and making it move. If it colides to another sprite the frog sprite restart at its spawn point.](#we-are-going-to-recreate-a-box-equivalent-of-the-frogs-sprite-and-making-it-move-if-it-colides-to-another-sprite-the-frog-sprite-restart-at-its-spawn-point)
     - [1) Analysis of Our Game](#1-analysis-of-our-game)
-          - [*Because one of our Team Member (who had to make the sprites) is sick, we wont be able to provide you all the potentials sprites we will use in the game*](#because-one-of-our-team-member-who-had-to-make-the-sprites-is-sick-we-wont-be-able-to-provide-you-all-the-potentials-sprites-we-will-use-in-the-game)
+          - [*Because one of our Team Member (who had to make the sprites) is sick, we wont be able to provide you all the potentials sprites we will use in the game.*](#because-one-of-our-team-member-who-had-to-make-the-sprites-is-sick-we-wont-be-able-to-provide-you-all-the-potentials-sprites-we-will-use-in-the-game)
         - [➭ Player](#-player-1)
         - [➭ Score](#-score-1)
         - [➭ Cars](#-cars-1)
@@ -61,19 +61,19 @@ ______
 | Document Owner | Julian Reine (Program Manager) |
 | Creation Date | 23/09/2024      |
 | Last Modification | 03/10/2024  |
-| Document Name | Functional_Specifications |
+| Document Name | FunctionalSpecifications |
 
 ### 2) Document Approval
 
 | Role              | Name                       | Checked | Date     |
 |-------------------|----------------------------|---------|----------|
-| Project Manager    | Lucas Aubard               |         | /10/2024   |
-| Tech Lead          | Vivien Bistrel Tsangue     |         | /10/2024   |
-| Software Developer  | Manech Laguens             |         | /10/2024   |
-| Software Developer  | Mariem Zaiane              |         | /10/2024   |
-| Technical Writer    | Abderrazaq Makran         |         | /10/2024   |
-| Quality Assurance    | Raphael Chiocchi          |         | /10/2024   |
-| Program Manager      | Julian Reine              |         | /10/2024   |
+| Project Manager    | Lucas Aubard               |      ☑️  | 04/10/2024   |
+| Tech Lead          | Vivien Bistrel Tsangue     | ☑️        | 04/10/2024   |
+| Software Developer  | Manech Laguens             |  ☑️       | 04/10/2024   |
+| Software Developer  | Mariem Zaiane              |  ☑️       | 04/10/2024   |
+| Technical Writer    | Abderrazaq Makran         |  ☑️       | 04/10/2024   |
+| Quality Assurance    | Raphael Chiocchi          |  ☑️       | 04/10/2024   |
+| Program Manager      | Julian Reine              |   ☑️      | 04/10/2024   |
 
 ### 3) Glossary
 
@@ -234,7 +234,7 @@ The player can lose **three lives** before reaching a game over.
 ###### We are going to recreate a box (Equivalent of the frog's sprite) and making it move. If it colides to another sprite the frog sprite restart at its spawn point.
 ### 1) Analysis of Our Game
 ____________________________
-  ###### *Because one of our Team Member (who had to make the sprites) is sick, we wont be able to provide you all the potentials sprites we will use in the game*
+  ###### *Because one of our Team Member (who had to make the sprites) is sick, we wont be able to provide you all the potentials sprites we will use in the game.*
   _____________________________
 
 * #### A) Main Features Overview
