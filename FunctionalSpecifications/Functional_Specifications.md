@@ -60,20 +60,20 @@ ______
 |--------------|------------------|
 | Document Owner | Julian Reine (Program Manager) |
 | Creation Date | 23/09/2024      |
-| Last Modification | 02/10/2024  |
+| Last Modification | 03/10/2024  |
 | Document Name | Functional_Specifications |
 
 ### 2) Document Approval
 
 | Role              | Name                       | Checked | Date     |
 |-------------------|----------------------------|---------|----------|
-| Project Manager    | Lucas Aubard               |         | //2024   |
-| Tech Lead          | Vivien Bistrel Tsangue     |         | //2024   |
-| Software Developer  | Manech Laguens             |         | //2024   |
-| Software Developer  | Mariem Zaiane              |         | //2024   |
-| Technical Writer    | Abderrazaq Makran         |         | //2024   |
-| Quality Assurance    | Raphael Chiocchi          |         | //2024   |
-| Program Manager      | Julian Reine              |         | //2024   |
+| Project Manager    | Lucas Aubard               |         | /10/2024   |
+| Tech Lead          | Vivien Bistrel Tsangue     |         | /10/2024   |
+| Software Developer  | Manech Laguens             |         | /10/2024   |
+| Software Developer  | Mariem Zaiane              |         | /10/2024   |
+| Technical Writer    | Abderrazaq Makran         |         | /10/2024   |
+| Quality Assurance    | Raphael Chiocchi          |         | /10/2024   |
+| Program Manager      | Julian Reine              |         | /10/2024   |
 
 ### 3) Glossary
 
@@ -94,7 +94,7 @@ ___________________________
 
 * Frogger is a 1981 arcade action game developed by Konami and published by Sega. In North America, it was distributed by Sega/Gremlin. **The objective of the game is to direct five frogs to their homes by dodging traffic on a busy road**, then crossing a river by jumping on floating logs and alligators.
 <p align="center">
- <img src="Images/Frogger_game_arcade.png" width="250">
+ <img src="Images/FroggerGameArcade.png" width="250">
 </p>
 
 ### 2) Features of the Original Game
@@ -144,7 +144,7 @@ The player can **score points** by:
 ##### ➭ Environment
 * The map consists of the road and the river. The player crosses from one part of the map to the other.
 <p align="center">
- <img src="Images/Frogger_game_arcade.png" width="200">
+ <img src="Images/FroggerGameArcade.png" width="200">
 </p>
 
 ##### ➭ Objectives and Loss Conditions
@@ -308,13 +308,13 @@ Pressing the top left switch will start the game.
 
 * *As you can see, some features of the original game are not present. Our Frogger may be minimalist because we are unsure of the limits of the Go_Board, but we will try to make it as accurate as possible:*
 - Using FPGA / Visual Studio.
-- Must work on a Go_Board chip (The Go_Board chip has only 512 MB of RAM).
-
+- Must work on a Go_Board chip
+  
 ### A) Project Objectives
 
 - Create a working Frogger that closely replicates the 1981 version using the Go_Board.
 - Include features that are true to the game while adhering to the VGA display output and the Go_Board's capacity.
-- Utilize most of the Go_Board's features, such as the two-digit LED panel (e.g., to display the level number).
+- Utilize most of the Go_Board's features, such as the two-digit LED panel (If possible, to display the level number).
 - Implement a score counter displayed at the top right of the screen.
 
 ### B) Focus Areas
@@ -350,17 +350,30 @@ Pressing the top left switch will start the game.
 _____________________
 
 ## V) Personas
+
+Personas of the possible audience our game can touch.
 |Name : | Nostalgic Nick 
 -------------------|--------------------------------------------------|
-Full Name: | Nick Thompson
-Age: |35
-Location:| Portland, Oregon
-Occupation:| Graphic Designer
-Background:| Nick grew up in a small town during the 1980s, where he spent countless hours at the local arcade, reveling in the glow of pixelated screens. "Frogger" was one of his all-time favorites, and he has fond memories of racing against friends to see who could get the highest score.
+Full Name: | Nick Thompson, 38 years old
+Occupation:| Computer scientist, he worked on important projects
+Gaming Background:| Nick grew up in a small town during the 1990s, where he spent countless hours at the local arcade, reveling in the glow of pixelated screens. "Frogger" was one of his all-time favorites, and he has fond memories of racing against friends to see who could get the highest score.
+Context:| When walking past a gaming store, Nick unlocked an old memory of him when he was playing the Frogger with his friends on the arcade machine. He decided to search on the internet for an online version of this game and played all day long, just like when he was young.
 <p align="center">
  <img src="Images/NostalgicNick.png" width="100">
 </p>
 
+___________________________
+Name:| Noobiam|
+-------------------|--------------------------------------------------|
+Full Name: |Liam, 20 years old
+Occupation:| College student, majoring in Computer Science
+Gaming Background:| Grew up on modern consoles, PC games, and mobile games. He's never played arcade games, except the digital versions of some classics on his phone.
+Context:| Liam is at a retro gaming night with his friends. They're going through old games when someone mentions Frogger. Liam’s intrigued because he's never heard of it. He’s used to stunning graphics, expansive worlds, and complex narratives, so he can't imagine what a game from the '80s could offer.
+<p align="center">
+ <img src="Images/Liam.png" width="200">
+</p>
+
+-----------------------
 ## VI) Functional Analysis
 
 <p align="center">
