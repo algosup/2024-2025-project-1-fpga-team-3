@@ -128,12 +128,12 @@ module Frogger (
             blue = 3'b111;
         end
 
-        // Draw the grid lines
-        if (is_grid_line) begin
-            red = 3'b111;   // White line
-            green = 3'b111;
-            blue = 3'b111;
-        end
+        // // Draw the grid lines
+        // if (is_grid_line) begin
+        //     red = 3'b111;   // White line
+        //     green = 3'b111;
+        //     blue = 3'b111;
+        // end
     end
 
     // Counters for horizontal and vertical synchronization

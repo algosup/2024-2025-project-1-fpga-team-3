@@ -4,7 +4,7 @@ module car_movement (
     output reg [9:0] car_x,          // Car's x position
     input wire [23:0] speed_divisor, // Speed divisor for this car
     input wire [9:0] initial_position // Initial position for the car
-);
+    );
 
     reg [23:0] speed_counter = 0;  // Counter for speed control
     reg initialized = 0;  // Flag to indicate if initial position is set

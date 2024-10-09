@@ -19,6 +19,12 @@ module frog_movement (
     debounce debounce_2 (.i_Clk(i_Clk), .i_Switch(i_Switch_2), .o_Switch_state(switch_2_debounced));
     debounce debounce_3 (.i_Clk(i_Clk), .i_Switch(i_Switch_3), .o_Switch_state(switch_3_debounced));
     debounce debounce_4 (.i_Clk(i_Clk), .i_Switch(i_Switch_4), .o_Switch_state(switch_4_debounced));
+    // Debounce debounce_inst (
+    //     .clk(i_Clk),
+    //     .reset(i_Reset),
+    //     .btn_in({i_Switch_4, i_Switch_3, i_Switch_2, i_Switch_1}),  // Pass all buttons together
+    //     .btn_out({debounced_switch_4, debounced_switch_3, debounced_switch_2, debounced_switch_1})  // Receive debounced outputs
+    // );
 
     reg switch_state_1 = 0;
     reg switch_state_2 = 0;
