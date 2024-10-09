@@ -21,7 +21,7 @@ Thanks to a google form that I will send to the team at the end of every week, I
 
 
 <p>
-<img src="Images/Week1_Satisfaction.png" width="300"> 
+<img src="Images/Week2_Satisfaction.png" width="300"> 
 
 ### Issues
 
