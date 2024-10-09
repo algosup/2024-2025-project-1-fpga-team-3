@@ -5,6 +5,19 @@ module vga_display(
     output reg [2:0] red,        // Red output (mapped to pins 36, 37, 40)
     output reg [2:0] green,      // Green output (mapped to pins 29, 30, 33)
     output reg [2:0] blue        // Blue output (mapped to pins 28, 41, 42)
+
+);
+
+frog_drawer frog_drawer_inst (
+    .i_Clk(i_Clk),
+    .hsync(hsync),
+    .vsync(vsync),
+    .set_io red[1] 37,
+    .set_io red[2] 40,
+    .set_io green[1] 30,
+    .set_io green[2] 33,
+    .set_io blue[1] 41,
+    .set_io blue[2] 42,
 );
 
 // VGA timing parameters for 640x480 resolution @ 60Hz
@@ -69,5 +82,7 @@ always @(posedge i_Clk) begin
         blue <= 3'b000;
     end
 end
+
+
 
 endmodule
