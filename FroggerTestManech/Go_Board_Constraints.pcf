@@ -26,6 +26,7 @@ set_io i_Switch_1 53
 set_io i_Switch_2 51
 set_io i_Switch_3 54
 set_io i_Switch_4 52
+set_io i_Switch_4 52
 
 ### 7 Segment Outputs
 set_io o_Segment1_A 3
