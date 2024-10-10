@@ -72,7 +72,7 @@ Test: Checking if the frog collides with cars.
 Test: Checking if the frog successfully lands on logs and turtles.  
 - results: 
 
-*Test: Checking if the frog correctly detects when it reaches the top row.  
+Test: Checking if the frog correctly detects when it reaches the top row.  
 - results: 
 
 ### 6. Game Mechanics
