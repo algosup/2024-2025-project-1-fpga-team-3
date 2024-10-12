@@ -104,7 +104,7 @@ The game can be reset to the beginning at any time by pressing all four buttons 
 The VGA display is an RGB display with 3 bits per color channel. This means each channel (Red, Green, and Blue) supports 8 colors (2^3 = 8), and by mixing these, the display can support up to 512 colors (8^3 = 512).
 
 ### 4. Objective
-- The frog should be represented as a sprite that closely resembles a real frog, with detailed colors.
+- The frog should be represented as a sprite that looks like a real frog, with detailed colors.
 
 - Up to 16 cars should be visible on the screen at a time, each capable of moving at different speeds.
 
@@ -112,7 +112,7 @@ The VGA display is an RGB display with 3 bits per color channel. This means each
 
 ### 5. Requirements
 
-- The frog should be displayed as a 1x1 grid on the VGA screen, with each grid cell being 32x32 pixels. The frog must be white in color.
+- The frog should be displayed as a 1x1 grid on the VGA screen, with each grid cell being 32x32 pixels. The frog must be white.
 
 - There should be up to sixteen cars visible on the screen at a time. The car should also be drawn as a 1x1 grid (32x32 pixels) and be white in color.
 
@@ -273,7 +273,7 @@ FPGAs are especially useful for tasks that require real-time processing and high
 
 ![FPGA_Board](images/FPGA_Board.png)
 
-As shown in the image above, there are names surrounding the FPGA board. We will explain in detail their roles in this project, including how, where, and when they will intervene.
+As shown in the image above, there are names surrounding the FPGA board. We will explain in details their roles in this project, including how, where, and when they will intervene.
 
 - **Game structure:**
 
@@ -311,7 +311,7 @@ At the core of any FPGA, all data is processed in binary format. Binary uses onl
 
   - **Car Movement:** Each car on the road can be controlled using binary counters or shift registers, moving the cars from one end of the screen to the other.
 
-  - **Switches and Inputs:** The player’s inputs from the switches (up, down, left, right) are read as binary values (1 for pressed, 0 for unpressed). These binary values drive the game logic, determining how the frog moves.
+  - **Switches and Inputs:** The player's inputs from the switches (up, down, left, right) are read as binary values (1 for pressed, 0 for unpressed). These values control the game logic, determining how the frog moves.
 
 - **Finite State Machines (FSM):**
 In digital systems like the Frogger game, finite state machines (FSMs) are used to control the game's flow, such as starting, playing, pausing, or resetting the game. Each state of the FSM is represented using binary encoding.
@@ -501,6 +501,8 @@ On the image below we can see **D, En, >, and Q**. This simply shows that the fl
 - The top left input **D** is the data input of the flip-flop, ie it is either 1 or 0 in binary format.
 - The bottom left input **>** is the clock input, helps to synchronize the performance of the flip-flop. It triggers and take data from the data input (D), at regular time intervals, then pass it to **Q**, which is the output.
 - The middle left input **En** is the clock enable, when the clock enable is high or 1, the clock triggers the flip-flop to update its output, but when the clock enable is low or 0, the clock doesn't triggers the flip-flop.
+
+![flipflop](images/flipflop.png)
 
 In the Frogger game project, flip-flops are crucial elements used to store and update game state information such as the frog’s position, current game level, and FSM state. They ensure that changes to the game’s state happen synchronously with the clock, providing smooth, real-time gameplay. Flip-flops are also used for timing circuits that control movement speed and debouncing circuits that handle player inputs. Without flip-flops, it would be impossible to implement the sequential logic necessary to make the game function properly on the FPGA.
 
@@ -850,13 +852,13 @@ Each switch controlling the frog’s movement will need to pass through this deb
 
 ### 5. Game States
 #### a. Initialization:
-The initialization of the game state is a critical part of the Frogger game design. It sets the foundation for gameplay by resetting the player's score, the number of lives, and other essential variables before the game begins. This ensures that every time the game starts, either after a reset or when the player loses all lives, the game starts in a known, default state.
+The initialization of the game state is a critical part of the Frogger game design. It sets the foundation for gameplay by resetting the player's level, and other essential variables before the game begins. This ensures that every time the game starts, either after a reset, the game starts in a known, default state.
 
 Here's how the initialization state can be designed and implemented for the technical document.
 
 - **Purpose of Initialization:**
-  - Setting the player's score to their initial values.
-  
+  - Level initialization
+
   - Positioning the frog at the starting position on the screen.
   
   - Setting all game elements, like cars and other obstacles, to their initial positions.
@@ -866,8 +868,8 @@ Here's how the initialization state can be designed and implemented for the tech
   - Setting the game state machine to "start" the game, waiting for the player to press the "PLAY" button.
 
 - **Game Initialization Steps:**
-  - **Resetting Scores:**
-    At the beginning of the game, the player's score will start at zero. The score will only increase as the player successfully moves the frog to the other side of the screen. In the initialization state, you set this register to 0:
+  - **Resetting Level:**
+    At the beginning of the game, the player's level will start at 1. The level will only increase as the player succeed in crossing the road and reaching the opposite pedestrian crossing. In the initialization state, you set the segments to 01:
   - **Positioning the Frog:**
     The frog will be placed at the starting position (bottom center of the screen) every time the game starts or resets.
   - **Initializing Obstacles (Cars):**
@@ -877,7 +879,7 @@ Here's how the initialization state can be designed and implemented for the tech
 
     - Initialize the VGA display module with the correct colors for each game element (frog, cars, road, background) based on their pixel coordinates.
 - **Game State Machine:**
-The game will be controlled by a state machine, with Initialization as the first state. Once everything is initialized (scores, lives, positions), the game transitions to the Waiting for Play state, where the player can press the play button to start.
+The game will be controlled by a state machine, with Initialization as the first state. Once everything is initialized (levels, positions), the game transitions to the Waiting for Play state, where the player can press the play button to start.
 
 
 #### b. Playing:
@@ -891,7 +893,7 @@ The Playing state in your Frogger game defines the core mechanics of the game du
   Cars move automatically across the screen at different speeds, with some moving left to right and others right to left. Each car has an x coordinate that updates according to its speed. When a car moves off the screen, it reappears on the opposite side.
 
   - **Collisions:**
-  Collision detection is essential in the Playing state to determine whether the frog has been hit by a car. If a collision is detected, the player loses a life, and the game resets or restarts depending on the remaining lives.
+  Collision detection is essential in the Playing state to determine whether the frog has been hit by a car. If a collision is detected, the player the game resets or restarts.
 
     - **Collision Detection Logic:**
     Collision detection checks whether the frog's x and y coordinates overlap with any of the cars' x and y coordinates. Since the frog and cars are represented as grid-aligned objects (32x32 pixels), checking collisions involves comparing the positions of the frog and the cars on the screen.
@@ -913,7 +915,7 @@ When a collision is detected, the game transitions to the Game Over state. This 
 After the game enters the Game Over state, the game reset automatically. This action resets all game parameters, including the level and the frog's position.
 
   - **Reset Conditions:**
-  To restart the game, the player presses a reset button or switch. This action resets:
+  To restart the game, the player presses SW1 and SW2. This action resets:
     - **Level:** Reset to Level 1.
     - **Frog Position:** Reset to the starting position at the bottom of the screen.
   - **Transitioning Back to Play:**
@@ -931,7 +933,7 @@ Level completion happens when the player successfully moves the frog across the 
   With each new level, the difficulty increases. The speed of the cars increases slightly, making the game more challenging.
 
   - **Level Limit:**
-  The game can has a finite number of levels (with increasing speed), and the maximum level is 99. 
+  The game can has a finite number of levels (with increasing speed), and the maximum level is 99.
 
 ### 6. Timing and Synchronization
 In this project, timing and synchronization are critical to ensure that both the game logic and the VGA display function correctly and in harmony. The Nandland Go Board provides a 25 MHz clock by default, and this clock will be divided and managed to handle different aspects of the game, including game logic and VGA display.
@@ -1067,6 +1069,7 @@ The compiled binary bitstream file that is loaded onto the FPGA to configure it 
 
 ### 1. Finite State Machines (FSMs)
 In the Frogger game, the FSM is responsible for managing the game’s different states, ensuring smooth transitions between the game's phases. The FSM controls key game stages, such as initialization, gameplay, level progression, and game over.
+
 The FSM will operate based on a combination of player inputs (e.g., frog movement, collisions) and internal game events (e.g., reaching the top of the screen or completing a level). The state machine will also synchronize with the clock to ensure that the state transitions occur at the appropriate time intervals.
 
 FSM States and Transitions
@@ -1105,7 +1108,7 @@ The FSM will have the following states:
 #### e. GAME_OVER
   * **Purpose:** This state is triggered when the frog collides with a car. The game will reset from the beginning.
 
-  * **Conditions to Transition:** The FSM remains in this state until the player chooses to restart by pressing the "Start" button again, at which point it transitions back to INIT.
+  * **Conditions to Transition:** The FSM automatically reset everything and the player restart a new game.
 
   * **Outputs:** Display "Game Over" on the screen, reset all game variables, to restart from the level 1.
 
@@ -1120,7 +1123,7 @@ Each state will trigger specific actions, such as initializing variables, moving
 
   * **LEVEL_COMPLETE**: Increase the level, reset the frog’s position, and adjust car speed.
 
-  * **GAME_OVER**: Reset the game, display "Game Over" on the screen, and wait for player input to restart.
+  * **GAME_OVER**: Reset the game, display "Game Over" on the screen, and restart the game with the frog spawning at it initial position.
 
 #### g.  Clock Synchronization and Timing
 
@@ -1201,4 +1204,30 @@ The expected outcome is a fully playable Frogger game with clear graphics, respo
 
 ## X. Glossary
 
+1. **Binary:** A number system that uses only two digits, 0 and 1. It is the foundation of digital systems, where each digit represents a state (e.g., on or off).
+
+2. **Gate Operations:** Basic logic operations performed by digital circuits, such as AND, OR, NOT, XOR, and NAND. These operations are fundamental to digital logic and are used to build more complex circuits.
+
+3. **Clock:** A signal that oscillates between high and low states at a fixed frequency. It is used to synchronize the operations of digital circuits.
+
+4. **LUT (Look-Up Table):** A small memory block in an FPGA that stores pre-calculated outputs for every possible combination of input values. LUTs are used to implement logic functions efficiently.
+
+5. **Flip-Flop:** A fundamental memory element in digital circuits that stores a single bit of data (either 0 or 1). It is essential for implementing sequential logic in FPGAs.
+
+6. **FPGA (Field-Programmable Gate Array):** A type of integrated circuit that allows users to configure and reconfigure its hardware logic to perform specific tasks after manufacturing.
+
+7. **HDL (Hardware Description Language):** A language used to describe the behavior and structure of electronic systems, such as Verilog or VHDL.
+
+8. **VGA (Video Graphics Array):** A standard for displaying graphics on a monitor. It uses a combination of red, green, and blue signals to control the color of each pixel on the screen.
+
+9. **Sprite:** A small graphic that is part of a larger scene. In this context, the frog and cars are sprites.
+
+10. **Debouncing:** A technique used to ensure that a switch or button press is registered correctly by filtering out unintended signals caused by mechanical bouncing.
+
+11. **Finite State Machine (FSM):** A model of computation used to design digital circuits. It consists of a finite number of states, transitions between those states, and actions.
+
+12. **Testbench:** A non-synthesizable Verilog module used to test another module. It does not represent physical hardware but serves as a simulation environment.
+
+13. **EDAPlayground:** An online platform for simulating and testing Verilog and VHDL designs.
+By making these corrections and adding the glossary, the document should be clearer and more accessible to a broader audience.
 
