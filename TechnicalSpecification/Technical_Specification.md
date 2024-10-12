@@ -51,43 +51,36 @@
     - [3. Display Requirements](#3-display-requirements)
       - [a. VGA Display:](#a-vga-display)
       - [b. Sprite Graphics:](#b-sprite-graphics)
-      - [c. Color Palette:](#c-color-palette)
     - [4. Debouncing Logic:](#4-debouncing-logic)
-    - [5. Game States/ Technical Specifications](#5-game-states-technical-specifications)
+      - [a. Steps for Implementing Debouncing](#a-steps-for-implementing-debouncing)
+      - [b. Applying Debouncing in Frogger Game:](#b-applying-debouncing-in-frogger-game)
+    - [5. Game States](#5-game-states)
       - [a. Initialization:](#a-initialization)
       - [b. Playing:](#b-playing)
-      - [c. Game Over:](#c-game-over)
+      - [c. Game Over or Level Completion](#c-game-over-or-level-completion)
     - [6. Timing and Synchronization](#6-timing-and-synchronization)
     - [7. Folder structure](#7-folder-structure)
-  - [IV. Module Breakdown and Design](#iv-module-breakdown-and-design)
+  - [IV. Module Breakdown](#iv-module-breakdown)
     - [1. Top-Level Module](#1-top-level-module)
-    - [2. Submodules](#2-submodules)
-      - [a. Player Control Module](#a-player-control-module)
-      - [b. Obstacle Generation Module](#b-obstacle-generation-module)
-      - [c. Collision Detection Module](#c-collision-detection-module)
-      - [d. Game Logic Module](#d-game-logic-module)
-      - [e. VGA Controller Module](#e-vga-controller-module)
-      - [f. Clock Divider Module](#f-clock-divider-module)
-  - [V. VGA Timing and Graphics](#v-vga-timing-and-graphics)
-    - [1. VGA Signal Generation](#1-vga-signal-generation)
-    - [2. Rasterization of Game Objects](#2-rasterization-of-game-objects)
-  - [VI. Collision Detection and Game Logic](#vi-collision-detection-and-game-logic)
-    - [1. Collision Detection](#1-collision-detection)
-    - [2. Game Logic Flow](#2-game-logic-flow)
+    - [2. Modules and Submodules files name.](#2-modules-and-submodules-files-name)
   - [VII. Implementation Details](#vii-implementation-details)
-    - [1. Verilog Code Structure](#1-verilog-code-structure)
-    - [2. Finite State Machines (FSMs)](#2-finite-state-machines-fsms)
+    - [1. Finite State Machines (FSMs)](#1-finite-state-machines-fsms)
+      - [a. IDLE](#a-idle)
+      - [b. INIT (Initialization State)](#b-init-initialization-state)
+      - [c. PLAYING](#c-playing)
+      - [d. LEVEL\_COMPLETE](#d-level_complete)
+      - [e. GAME\_OVER](#e-game_over)
+      - [f. Output Signals and Actions in Each State](#f-output-signals-and-actions-in-each-state)
+      - [g.  Clock Synchronization and Timing](#g--clock-synchronization-and-timing)
+      - [h. Conclusion](#h-conclusion)
   - [VIII. Testing and Validation](#viii-testing-and-validation)
     - [1. Testbench Design](#1-testbench-design)
-    - [2. Simulation Tools](#2-simulation-tools)
-    - [3. Hardware Testing](#3-hardware-testing)
-    - [4. Debugging and Optimization](#4-debugging-and-optimization)
+      - [a. **Structure of a Testbench**](#a-structure-of-a-testbench)
+      - [b. **Modular Testing Approach**](#b-modular-testing-approach)
+      - [c. Edge Case Testing](#c-edge-case-testing)
+      - [d. Testbench Execution on EDAPlayground](#d-testbench-execution-on-edaplayground)
   - [IX. Conclusion](#ix-conclusion)
   - [X. Glossary](#x-glossary)
-  - [XI. Appendices](#xi-appendices)
-    - [1. Verilog Code Snippets](#1-verilog-code-snippets)
-    - [2. Block Diagrams and Flowcharts](#2-block-diagrams-and-flowcharts)
-    - [3. References](#3-references)
 
 </details>
 
@@ -588,135 +581,624 @@ Switches can produce noise when pressed (known as bouncing), which may cause mul
 #### b. Obstacle Movement:
 In the Frogger game, the movement of cars is automatic and will alternate between left-to-right and right-to-left across multiple roads (lanes). There are 10 horizontal roads, and on each road, cars will move at different speeds. As the player advances through levels, the speed of the cars will increase. There will always be up to 16 cars on the screen, distributed across the roads, and each car occupies one grid (32x32 pixels). Below, I’ll explain how the movement will be implemented, including speed control, direction, and reset behavior.
 
+- **Screen and Grid Layout:**
+  - The screen resolution is 640x480 pixels.
+  - Each grid is 32x32 pixels, meaning that horizontally there are 20 grids (640 ÷ 32), and vertically there are 15 grids (480 ÷ 32).
+  - Cars will move horizontally, either from left to right or right to left, and will occupy one grid space (32x32 pixels).
+  - A total of 10 roads will have cars moving in alternating directions.
+
+- **Verilog Code Structure**
+The cars' positions will be stored in registers, similar to the frog’s position. Each car will have an x_position (horizontal) and a fixed y_position (vertical) corresponding to the road it's on. The speed of each car will be controlled by a parameter that increases with the game level.
+
+      // Car position registers
+      reg [9:0] car_x_position[15:0];  // 16 cars, each with a 10-bit x-coordinate
+      reg [9:0] car_y_position[15:0];  // Fixed y-coordinate (road lanes)
+
+      parameter CAR_SPEED = 3; // Base speed of cars in pixels per cycle (can increase with levels)
+
+      // Clock signal
+      input wire clk;
+
+- **Cars Moving Automatically:**
+In this section, we will explain how to implement the speed of the cars in the Frogger game. The cars will move at different speeds across the screen, and their speed will increase as the player advances to higher levels. We will go through the following steps:
+
+    - Assigning speed values to cars
+    - Controlling the car speed using the FPGA clock and clock divider
+    - Increasing speed with each level
+    - Resetting and repositioning cars when they move off-screen
+
+  **i. Assign a Speed Value to Each Car:**
+Each car needs its own speed value. We can achieve this by creating a register for each car that holds its speed. The speed will determine how many pixels the car moves per update cycle. For example:
+
+    - Car 1 might move 2 pixels every update.
+    - Car 2 might move 4 pixels every update.
+
+  We store these speed values in an array, where each element corresponds to a car. This allows us to easily refer to each car’s individual speed during movement calculations.
+
+  When a new level starts, these speed values will be initialized to default values, and as the game progresses, they will increase.
+
+  **ii. Controlling Speed Using a Clock Divider (25 MHz Clock):**
+At 25 MHz, each clock cycle takes 40 nanoseconds. To make cars move at a more reasonable speed (e.g., 2–10 pixels per second), we’ll need to divide the clock so that position updates happen much less frequently.
+
+  - **Purpose:** Slow down the clock signal so that car position updates occur at a human-observable pace.
+    - The 25 MHz clock is divided by 1,000,000, meaning the cars' positions will be updated roughly every 40 ms (25 MHz clock has a period of 40 ns, so 1,000,000 * 40 ns = 40 ms).
+    - By adjusting the clock divider threshold (here 1_000_000), we can control how often the cars are moved, effectively changing their speed.
+    - This delay will allow for smooth, human-observable car movements at the required speed.
+
+  **iii. Increasing Speed with Each Level:**
+As the player progresses through levels, the speed of all cars must increase to make the game more difficult. This can be achieved by incrementing the array that contains the speed of all the cars when a level is completed.
+
+  - When the player completes a level, the level_up_signal triggers, and the speed of all cars is incremented by 1.
+  - This ensures that with each new level, cars move faster, increasing the difficulty.
+
+  **iv. Resetting and Repositioning Cars When Off-Screen:**
+When a car moves off the screen (either to the right or left), it should reappear on the opposite side to create a continuous flow of obstacles. This is done by checking the car’s x_position and resetting it if it moves out of bounds.
+  - The car's position is monitored continuously. If a car exceeds the screen boundary (e.g., x_position > 640 for cars moving left to right), it is reset to the opposite side (e.g., x_position = 0).
+  - This ensures that the game always has cars moving across the screen without interruptions.
+
 #### c. Levels of Difficulty:
-//Explain how the game increases in difficulty (faster-moving obstacles, more obstacles, etc.) as the player progresses through levels.
+The difficulty levels in the Frogger game are directly tied to how fast the cars move across the screen. As the player progresses through each level, the speed of the cars increases, making it more challenging for the player to avoid them. Additionally, each time the player successfully reaches the top of the screen, the game advances to the next level.
 
-Each time the player moves the frog from the spawning street way, to the opposite street way on the other side of the road, the level increases by 1, the level number is shown on the 7 segments display, and the cars increases in speed, making the game much more difficult.
-For example for level 1, the 7 segment will display something like this; **01**, and so on.
+- **Tracking the Current Level:**
+A **level counter** will be used to keep track of which level the player is on. This counter is incremented each time the player successfully reaches the other side of the road.
+  - Initialize a register that stores the current level. It gets incremented whenever the level_up_signal is triggered (this signal will be activated when the player successfully reaches the top of the screen).
 
-![Segments](images/SEGMENTS.png)
+- **Increasing Car Speed as Levels Increase:**
+As the player progresses through levels, the speed of the cars will increase, making the game more difficult. This is done by incrementing the speed values in the array each time a level is completed.
+  - When the player advances to a new level (detected by level_up_signal), the speed of all cars is increased.
+  - The new speed for each car is calculated by adding the current_level value to its base speed. This ensures that cars get progressively faster as levels increase.
+  - For example, if Car 1 has a base speed of 2 pixels per update and the player is on Level 3, Car 1 will now move at 2 + 3 = 5 pixels per update.
+
+- **Displaying the Current Level on the Seven-Segment Display:**
+To provide visual feedback to the player, the current level will be displayed on the two seven-segment displays available on the Go Board. This helps the player know which level they’re on.
+  - A seven-segment display module will take the current_level value as input and convert it into the corresponding 7-segment pattern for display.
+  - The two seven-segment displays can show up to two digits, which is sufficient for levels 00 to 99.
+
+    ![Segments](images/SEGMENTS.png)
+
+- **Level Cap**
+To ensure the game doesn’t become too difficult too quickly, implement a cap on the maximum speed, so that when the difficulty reaches a particular level, the game has a constant max speed making it challenging but not unplayable.
 
 ### 3. Display Requirements
 #### a. VGA Display:
-//Detail the screen layout (dividing it into road lanes for cars and river lanes for logs and water).
+The VGA (Video Graphics Array) display is used to visually present the game environment on a monitor. This includes showing the player’s frog, moving cars, the roads, and the game’s user interface (e.g., levels, messages like "PLAY" or "Game Over", "QUIT"). Understanding and implementing the VGA display is crucial for creating the interactive environment of the game. Here’s a detailed breakdown of how the VGA display will be implemented.
+
+- **VGA Signal Basics:**
+
+  The VGA signal operates on five main lines:
+
+  - Red (R), Green (G), Blue (B): These control the intensity of the red, green, and blue colors for each pixel on the screen.
+  - Horizontal Sync (HSYNC): Signals the beginning of a new row of pixels (horizontal refresh).
+  - Vertical Sync (VSYNC): Signals the beginning of a new frame or image (vertical refresh).
+
+  The VGA display in your project will have a resolution of 640 x 480 pixels (also known as VGA standard resolution). Each frame displayed will consist of:
+
+  - 640 horizontal pixels.
+  - 480 vertical pixels.
+
+  **Pixel Grids:**
+    - Each game element (frog, car, road) will be displayed on this 640 x 480 grid.
+    - The frog, cars, and other elements will occupy a space of 32 x 32 pixels per grid cell.
+
+- **VGA Timing and Synchronization:**
+
+  VGA requires precise timing to control the display. The monitor relies on HSYNC and VSYNC signals to know when to start drawing a new row of pixels (horizontal) and when to begin a new frame (vertical).
+
+    - **Horizontal Synchronization (HSYNC):** This indicates when to begin drawing a new row. After drawing 640 pixels in one row, the HSYNC signal triggers the display to move to the next row.
+
+      - **Visible Area:** 640 pixels.
+
+      - **Horizontal Front Porch:** The time between the end of the visible row and the HSYNC signal.
+
+      - **Horizontal Sync Pulse:** The HSYNC signal itself.
+
+      - **Horizontal Back Porch:** Time after the HSYNC signal before the next row begins.
+
+
+  - **Vertical Synchronization (VSYNC):** After all 480 rows are drawn, the VSYNC signal is triggered, which resets the drawing process for the next frame.
+
+    - **Visible Area:** 480 pixels.
+
+    - Vertical Front Porch, Vertical Sync Pulse, and Vertical Back Porch are similar in function to horizontal timing but apply to rows instead of columns.
+- **Displaying Game Elements (Cars, Frog, Roads):**
+
+  The display logic involves determining which pixel on the screen corresponds to which game object (frog, cars, roads, etc.). The screen grid of 640 x 480 pixels will be divided into smaller 32 x 32 pixel cells, representing the frog, cars, and other obstacles.
+
+  - **Displaying the Frog and Cars:**
+
+    - **Frog Position:**
+      - The frog will occupy one 32x32 grid cell on the screen, and its position is updated based on the player’s input (controlled by switches).
+    - **Car Movement:**
+      - Cars will also occupy 32x32 grid cells and will move horizontally across the screen. The speed of the cars will be adjusted dynamically based on the game level.
+
+      - Each time a frame is drawn, the positions of the frog and cars will be updated according to their movement speed.
+  - **Background and Road Display:**
+    The road can be displayed as a continuous black section across the screen, where the cars move.
+
+  The VGA display implementation involves creating a precise timing controller to manage the HSYNC and VSYNC signals and sending pixel data (color values) to the display for each frame. The game elements like the frog, cars, and roads are rendered on the screen by mapping their positions to pixel locations within the 640x480 grid.
 
 #### b. Sprite Graphics:
-//Define the graphical representations of the frog, cars, logs, and other game elements (pixel sizes, colors, etc.).
+- **Cars sprite**
 
-#### c. Color Palette:
-//List the colors for each object on the screen (e.g., green for frog, red for cars, blue for water).
+  The cars represent moving obstacles in the game that the player must avoid. 
+
+  Each grid is 32 x 32, we have a 20 x 15, that is, 20 grid for the x-coordinate and 15 grid for the y-coordinate.
+    - Cars with roads numbers (2, 4, 7, 10, and 12) on the 15 y-coordinate, move from left to right.
+    - Cars with roads numbers (3, 5, 8, 11, and 14) on the 15 y-coordinate, move from right to left.
+    - When a car moves off the screen (past 640 pixels or before 0 pixels), it resets to the opposite side to create a continuous loop.
+    - The width of each car can vary (depending on car type), but the height will always be 32 pixels.
+
+  The cars will be displayed in various colors to create variety:
+    - **Red Car:**
+      - Red (R): 255
+      - Green (G): 0
+      - Blue (B): 0
+![red_car](images/Car%20red%20big.png)
+    - **Blue Car:**
+      - Red (R): 0
+      - Green (G): 0
+      - Blue (B): 255
+ ![red_car](images//Car%20blue%20big.png)
+
+
+- **Frog Sprite**
+
+  The frog is the main player character in the game, and it will be controlled by the player using the switches on the FPGA board.
+
+  - **Pixel Size:**
+    - The frog will be represented as a 32 x 32 pixel square on the 640x480 VGA screen.
+  - **Color:**
+  The frog will be drawn in green to distinguish it from the background and obstacles.
+    - Red (R): 0
+    - Green (G): 255
+    - Blue (B): 0
+  - **Positioning:**
+    - The initial position of the frog will be at the center bottom of the screen (on the road).
+    - The position will be updated based on player input (using switches) to move the frog up, down, left, or right.
+
+  ![Frog](images/frog%20couloured%20wide.png)
+
+- **Road sprite**
+
+  The road is where the cars move, and the frog has to cross it to reach the other side. It will occupy a portion of the screen, specifically in the lower half of the VGA display.
+
+    - **Pixel Size:**
+      - The road will span the entire width of the screen (640 pixels) and will be broken into lanes, and pedestrian crossing.
+      - Each lane will be 2 pixels in height.
+      - On the first, sixth, ninth, fourteenth, and fifteenth row on the screen, will be the pedestrian crossing, these are places where the frog is save from cars traffic.
+    - **Number of Lanes:**
+      - There will be a total of 7 lanes, each 2 pixels tall. Cars will move on these lanes, alternating in direction.
+    - **Color:**
+      The road will be displayed in black to contrast with the cars and the frog.
+      - Red (R): 0
+      - Green (G): 0
+      - Blue (B): 0
+  
+    ![road](images/Background_block.png)
+
+    In the image above, the dark areas represent spaces where cars move and where the frog can also travel. The grey areas are safe zones, where the frog cannot be touched by any car.
+
+- **Lane Dividers**
+  To visually differentiate the lanes where cars move, you may add lane dividers.
+
+    - **Pixel Size:**
+      - The lane dividers will be represented as 2-pixel horizontal lines.
+      - These dividers will be drawn between the lanes on the road.
+    - **Color:**
+      Lane dividers can be drawn in grey to contrast against the black road:
+      - Red (R):128
+      - Green (G): 128
+      - Blue (B): 128
+
+- **Game Background**
+  The background is the general area outside of the road. It can be drawn in a contrasting color like blue or green to differentiate it from the road.
+
+  - **Pixel Size:**
+    - The background will cover the entire screen (640 x 480 pixels), except for the road area.
+  - **Color:**
+    The background is represented in black:
+    - Red (R): 0
+    - Green (G): 0
+    - Blue (B): 0
+
+- **Displaying the Frog, Cars, and Road Together:**
+By managing the VGA timing and the pixel drawing logic, the frog, cars, road, and background will be drawn on the screen. The positions of the frog and cars will be updated continuously to reflect their movements, and the game’s visual elements will be displayed in real-time.
 
 ### 4. Debouncing Logic:
-//Explain the debouncing technique implemented in Verilog to ensure clean button presses.
+The player's movements are controlled by physical switches, debouncing is essential to ensure that the system correctly interprets the player's inputs. Without debouncing, the mechanical nature of switches can cause multiple, unintended signals to be generated from a single press, resulting in erroneous frog movements.
 
-### 5. Game States/ Technical Specifications
+When a mechanical switch is pressed, it does not transition cleanly from an "off" state to an "on" state. Instead, it can make and break contact several times before settling. This phenomenon, known as "bouncing," can last for a few milliseconds and cause the FPGA to detect multiple presses, even though the switch was only pressed once.
+
+In the Frogger game, this would lead to undesired behavior such as the frog moving multiple steps when the player intended to move only once.
+
+To prevent this, debouncing logic is required to filter out these unintended signals. There are different ways to debounce, but the most common method in FPGA is using a counter-based debouncing mechanism. Here’s how it can be done:
+
+#### a. Steps for Implementing Debouncing
+- **Input Sampling:**
+
+  - Continuously monitor the switch inputs and check their states at regular intervals (based on the system clock).
+
+- **Stabilization Period:**
+
+  - Use a counter to wait for the input to remain stable (pressed or unpressed) for a certain period of time. This ensures that the switch is no longer bouncing.
+
+- **Debounced Output:**
+
+  - After the input has remained stable for the specified time, register the input as valid and output it to the game logic.
+
+- **Debouncing Implementation Logic:**
+
+  To debounce the switches, we’ll use a simple counter and flip-flops to store the stable state of each switch.
+
+    - **Clock:** The system clock (25 MHz) will be used to time the debouncing interval.
+
+    - **Stable Duration:** We'll have a debounce time of 20 ms (typical for mechanical switches). At 25 MHz, this equates to 500 clock cycles.
+
+    - **Counter:** Counts up to 500 clock cycles (20 ms) after detecting a change in the switch state.
+
+    - **Stable State:** If the switch input remains stable (either pressed or released) for the full duration of the counter, we register the change.
+
+    - **Output:** Only when the switch is stable for 20 ms, the debounced switch output is updated, ensuring that no false presses are detected.
+
+#### b. Applying Debouncing in Frogger Game:
+Each switch controlling the frog’s movement will need to pass through this debouncing module before being processed by the game logic. This ensures that the frog moves exactly as intended by the player and avoids unintended movements caused by switch bouncing.
+
+- **Switches for Movement:**
+  - SW1 (Move right), SW2 (Move down), SW3 (Move up), and SW4 (Move right) will all go through debouncing before controlling the frog's position on the screen.
+
+  - Once debounced, the stable switch state will trigger the movement logic (e.g., incrementing or decrementing the frog’s x or y coordinates).
+
+### 5. Game States
 #### a. Initialization:
-Define the initial state of the game, including resetting scores and lives.
+The initialization of the game state is a critical part of the Frogger game design. It sets the foundation for gameplay by resetting the player's score, the number of lives, and other essential variables before the game begins. This ensures that every time the game starts, either after a reset or when the player loses all lives, the game starts in a known, default state.
+
+Here's how the initialization state can be designed and implemented for the technical document.
+
+- **Purpose of Initialization:**
+  - Setting the player's score to their initial values.
+  
+  - Positioning the frog at the starting position on the screen.
+  
+  - Setting all game elements, like cars and other obstacles, to their initial positions.
+  
+  - Ensuring that the VGA display starts with the correct graphics.
+  
+  - Setting the game state machine to "start" the game, waiting for the player to press the "PLAY" button.
+
+- **Game Initialization Steps:**
+  - **Resetting Scores:**
+    At the beginning of the game, the player's score will start at zero. The score will only increase as the player successfully moves the frog to the other side of the screen. In the initialization state, you set this register to 0:
+  - **Positioning the Frog:**
+    The frog will be placed at the starting position (bottom center of the screen) every time the game starts or resets.
+  - **Initializing Obstacles (Cars):**
+    Each car will also need to start at a predefined position. Since the cars are moving objects, their initial positions will be reset when the game is initialized. Cars may spawn off-screen and move horizontally in their lanes.
+  - **VGA Display Initialization:**
+    The VGA display must be initialized to show the game background (e.g., roads and lanes). We will also need to display the starting menu ("PLAY" or "QUIT") or show the initial game state.
+
+    - Initialize the VGA display module with the correct colors for each game element (frog, cars, road, background) based on their pixel coordinates.
+- **Game State Machine:**
+The game will be controlled by a state machine, with Initialization as the first state. Once everything is initialized (scores, lives, positions), the game transitions to the Waiting for Play state, where the player can press the play button to start.
+
 
 #### b. Playing:
-Detail the game flow during active play, including movement, collisions, and scoring.
+The Playing state in your Frogger game defines the core mechanics of the game during active gameplay. In this state, the frog moves according to the player's inputs, cars move automatically across the screen, and the game constantly checks for collisions between the frog and cars. It also handles scoring and updating the game level when the frog successfully crosses the road.
 
-#### c. Game Over:
-Explain the conditions for game over (e.g., loss of all lives) and resetting the game.
+- **Movement:**
+  - **Frog Movement:**
+  The player controls the frog using four switches (SW1, SW2, SW3, and SW4) on the FPGA Go Board, which map to movements in four directions: up, down, left, and right. Each switch press moves the frog by one grid space (32x32 pixels).
+
+  -  **Car Movement:**
+  Cars move automatically across the screen at different speeds, with some moving left to right and others right to left. Each car has an x coordinate that updates according to its speed. When a car moves off the screen, it reappears on the opposite side.
+
+  - **Collisions:**
+  Collision detection is essential in the Playing state to determine whether the frog has been hit by a car. If a collision is detected, the player loses a life, and the game resets or restarts depending on the remaining lives.
+
+    - **Collision Detection Logic:**
+    Collision detection checks whether the frog's x and y coordinates overlap with any of the cars' x and y coordinates. Since the frog and cars are represented as grid-aligned objects (32x32 pixels), checking collisions involves comparing the positions of the frog and the cars on the screen.
+
+    - **Bounding Box Collision:** A simple way to check if the frog has collided with a car is to compare the bounding boxes of the frog and the car.
+    - **Reaction to Collision:** When a collision is detected, the game transitions to Game Over state and resets the frog to the starting position.
+
+#### c. Game Over or Level Completion
+The Game Over is triggered by a collision between the frog and a car. Since there are no lives, the game immediately ends when the frog gets hit by a car.
+- **Collision Detection and Reset:**
+  - The game continuously checks for collisions between the frog and the cars. When a collision is detected, the game transitions to the Game Over state.
+
+  - Reset Behavior on Collision: When a collision occurs, the frog’s position remains where the collision happened until the game either restarts or goes to the Game Over screen.
+
+- **Game Over Trigger:**
+When a collision is detected, the game transitions to the Game Over state. This involves displaying a "Game Over" message on the screen and making the frog to spawn back to its initial state.
+
+- **Resetting the Game:**
+After the game enters the Game Over state, the game reset automatically. This action resets all game parameters, including the level and the frog's position.
+
+  - **Reset Conditions:**
+  To restart the game, the player presses a reset button or switch. This action resets:
+    - **Level:** Reset to Level 1.
+    - **Frog Position:** Reset to the starting position at the bottom of the screen.
+  - **Transitioning Back to Play:**
+  Once Game Over, the game transitions back to the Playing state, starting the game from the beginning.
+
+- **Level Completion Conditions:**
+Level completion happens when the player successfully moves the frog across the road to the top of the screen without getting hit by a car.
+
+  - **Reaching the Top:**
+    - When the frog reaches the top of the screen (the y coordinate is 0), the game recognizes that the current level is complete. At this point, the level is incremented by 1.
+
+    - The frog is reset to the starting position for the next level, and the game continues with the new level settings (e.g., faster car speeds).
+
+  - **Difficulty Adjustment:**
+  With each new level, the difficulty increases. The speed of the cars increases slightly, making the game more challenging.
+
+  - **Level Limit:**
+  The game can has a finite number of levels (with increasing speed), and the maximum level is 99. 
 
 ### 6. Timing and Synchronization
-Explain how the FPGA’s clock is divided for game logic and VGA output timing (e.g., 50 MHz system clock divided down to 25 MHz for VGA).
-Define the refresh rate of the VGA display and timing constraints to ensure smooth gameplay.
+In this project, timing and synchronization are critical to ensure that both the game logic and the VGA display function correctly and in harmony. The Nandland Go Board provides a 25 MHz clock by default, and this clock will be divided and managed to handle different aspects of the game, including game logic and VGA display.
+
+- **FPGA Clock Division:**
+The main clock signal from the FPGA is too fast for many of the game’s components, so we need to divide it down to lower frequencies for different purposes. In particular:
+
+  - **VGA Output Timing (25 MHz):**
+
+    - VGA monitors typically require a 25 MHz pixel clock for a resolution of 640 x 480 at a refresh rate of 60 Hz. We will use the 25 MHz system clock directly for VGA output timing.
+
+    - This clock controls the pixel drawing rate, which is necessary for the VGA controller to correctly display each frame on the screen. Each pixel is displayed at a specific time, and the horizontal and vertical synchronization signals ensure that the screen is refreshed at the correct rate.
+
+    - The 60 Hz refresh rate means that the entire screen is redrawn 60 times per second, ensuring smooth gameplay without flickering.
+
+  - **Game Logic (Slower Clock):**
+
+    - Game logic, such as player movement, car movement, and level progression, does not need to operate at 25 MHz. It is generally much slower because human players can't react that fast, and car movements need to be perceptible.
+
+    - For these purposes, we will use a clock divider to generate a slower clock signal.
+
+- **Timing for Game Logic Synchronization:**
+  
+  - Player and Car Movements:
+
+    - Movements in the game (e.g., player movement, car speed) must be synchronized with the game clock. The slower clock derived from the main clock ensures that the game updates at a manageable speed for human input and perception.
+
+    - As the level increases, car speeds also increase, which can be achieved by adjusting the frequency of updates for the car positions.
+
+  - **Collision Detection:**
+
+    - Collision detection between the frog and the cars must be evaluated at each game tick, typically synchronized with the slower game clock. This ensures that collisions are handled in real time during active gameplay.
 
 ### 7. Folder structure
-//Folders: arrangement of files and naming of files
-// 
+The image below illustrates the project folder's structure, The Project root folder is the **main** branch on github. 
 
-## IV. Module Breakdown and Design
+![folderStructure](images/folder_tree.png)
+
+The image above illustrates how all the files, folders, and subfolders will be named.
+
+## IV. Module Breakdown
 
 ### 1. Top-Level Module
-Describe the top-level Verilog module that integrates the entire game (connections between all sub-modules).
+The Top-Level Module is the Verilog module that integrates all the submodules, coordinating their functionality to create the full game. This module acts as the central hub, where all game inputs (switches), outputs (VGA, seven-segment displays), and internal signals (player position, obstacle movement, collision flags) interact.
+* Inputs:
+    * Switches for player control.
+    * Reset signal to restart the game.
+    * 25 MHz clock from the FPGA.
+* Outputs:
+    * VGA signals for displaying the game.
+    * Level number shown on the seven-segment display.
+* Internal Signals:
+    * Player position and movement logic from the Player Control Module.
+    * Obstacle positions from the Obstacle Generation Module.
+    * Collision flags from the Collision Detection Module.
+    * Game states handled by the Game Logic Module.
+    * Clock signals from the Clock Divider Module.
 
-### 2. Submodules
-#### a. Player Control Module
+This module will instantiate and connect all submodules, ensuring smooth communication between them. For example, it connects the player’s movement signals to the collision detection system and updates the VGA output accordingly.
 
-This module handles the player’s input to move the frog. Include input handling, movement logic, and boundary checks.
-#### b. Obstacle Generation Module
+### 2. Modules and Submodules files name.
+Files name of the Frogger project.
 
-Generate moving cars and logs in their respective lanes. Describe how obstacle positions are updated and how speed varies between lanes.
-#### c. Collision Detection Module
+`Frog.v`: **Module**
 
-Define the conditions for collisions between the frog and obstacles. Explain how the collision logic is different for each type of obstacle (e.g., cars vs. logs).
-#### d. Game Logic Module
+ This module defines the frog’s properties, including its size, position, and initial placement on the screen.
 
-Explain the FSM (Finite State Machine) used for managing game states: start screen, active play, level progression, game over, etc.
-Discuss how scoring is handled and how the player progresses to the next level.
-#### e. VGA Controller Module
+`FrogTop.v`: **Module**
 
-This module generates VGA signals and displays the game screen. Include pixel rendering logic for displaying sprites (frog, obstacles) and background.
-Detail how the screen refreshes and updates to reflect changes in gameplay (movement, collisions).
-#### f. Clock Divider Module
-Explain the clock divider that reduces the 50 MHz clock to a manageable frequency for VGA and game logic (e.g., 25 MHz).
+FrogTop.v Top-Level Module This module integrates the submodules related to the frog (such as FrogMovement and FrogCollision), combining them to control the frog’s behavior in the game.
 
+`FrogMovement.v`: **submodule**
 
-## V. VGA Timing and Graphics
+FrogMovement.v Submodule to control the frog’s movements, likely used inside the FrogTop.v (the top-level module that manages the frog). This isolates the movement logic, making it easier to manage.
 
-### 1. VGA Signal Generation
-Explain the VGA signal protocol (horizontal sync, vertical sync, pixel data).
-Define the exact timing parameters for a 640x480 display (front porch, sync pulse, back porch, and display area).
+`FrogCollision.v`: **submodule**
 
-### 2. Rasterization of Game Objects
-Describe how the game objects (frog, cars, logs, water) will be mapped onto the VGA screen.
-Define pixel data mapping and how the game objects’ positions are updated during gameplay.
+FrogCollision.v Submodule to detect collisions between the frog and other game elements like cars. It would be instantiated within FrogTop.v or another overarching module handling game logic.
 
+`Car.v`: **Module**
 
-## VI. Collision Detection and Game Logic
+Car.v Module This module likely defines the behavior and properties of the cars (obstacles) in the game, such as their size, position, and rendering on the VGA display.
 
-### 1. Collision Detection
-Describe the logic for detecting collisions between the frog and obstacles (pixel-by-pixel collision).
-Discuss how different types of collisions result in different outcomes (e.g., frog colliding with a car results in death, while landing on a log allows safe passage across the water).
+`CarMovement.v`: **submodule**
 
-### 2. Game Logic Flow
-Explain the overall game flow (start, play, game over).
-Define how lives, score, and levels are managed.
-Describe what happens when the frog reaches home (score increase, next level).
+These handles the specific task of moving cars across the screen. It would be instantiated inside a top-level car management module (such as Car.v).
+
+`DebounceSwitch.v`: **submodule**
+
+Handles debouncing logic for switch inputs. This would be a helper module that might be used inside the FrogMovement.v module to ensure smooth, error-free control inputs.
+
+`SynToCount.v`: **submodule**
+
+Likely a helper that synchronizes events and handles counting tasks, such as counting frames, levels, or timing, used inside various game-related modules for timing or level progression.
+
+`VGASynPorch.v`: **submodule**
+
+Handles the vertical and horizontal sync porch signals for the VGA output, which defines the timings for the display refresh.
+
+`VGASynPulses.v`: **submodule**
+
+Generates the horizontal and vertical sync pulses necessary for controlling the VGA output and ensuring the image is displayed correctly on the screen.
+
+`RoadMap.v`: **Module**
+
+Defines the visual layout and structure of the road, where the cars move and the frog navigates. It could also map specific areas as "safe zones" or "danger zones."
+
+`Segments.v`: **Module**
+
+Handles the seven-segment display, likely used to show the player’s current level or score.
+
+`SGo-board.pcf`: **Pin Constraint File (Not a module)**
+
+Specifies how the FPGA’s internal logic is connected to the external pins on the Go Board (e.g., VGA, switches, seven-segment display).
+
+`Hardware.asc`: **Configuration File (Not a module)**
+
+Likely an ASCII format file that describes the hardware configuration used in the project.
+
+`apio.ini`: **Configuration File (Not a module)**
+
+Apio configuration file, used for defining the project setup, toolchains, and project environment.
+
+`hardware.json`: **Configuration File (Not a module)**
+
+Contains hardware configuration details in JSON format, describing the board or FPGA setup.
+
+`Hardware.bin`: **Binary File (Not a module)**
+
+The compiled binary bitstream file that is loaded onto the FPGA to configure it based on your Verilog code.
 
 ## VII. Implementation Details
 
-### 1. Verilog Code Structure
-Provide a high-level overview of the directory structure for the Verilog codebase, with subfolders for modules, testbenches, and scripts.
+### 1. Finite State Machines (FSMs)
+In the Frogger game, the FSM is responsible for managing the game’s different states, ensuring smooth transitions between the game's phases. The FSM controls key game stages, such as initialization, gameplay, level progression, and game over.
+The FSM will operate based on a combination of player inputs (e.g., frog movement, collisions) and internal game events (e.g., reaching the top of the screen or completing a level). The state machine will also synchronize with the clock to ensure that the state transitions occur at the appropriate time intervals.
 
-### 2. Finite State Machines (FSMs)
-Describe FSMs used for different aspects of the game (e.g., game states, obstacle movement).
-Include state diagrams to show transitions between different states.
+FSM States and Transitions
+The FSM will have the following states:
 
+#### a. IDLE
+* **Purpose:** This is the default state where the game waits for the player to press "Start" to begin.
+
+* **Conditions to Transition:** The FSM transitions to the INIT state when the player presses the "Start" button or the play switch.
+
+* **Outputs:** The game display will show the start screen, and no game activity occurs in this state.
+
+#### b. INIT (Initialization State)
+* **Purpose:** This state initializes the game variables, such as resetting the score, positioning the frog at the starting position, setting level 1, and resetting the positions of the obstacles (cars).
+
+* **Conditions to Transition:** Once initialization is complete, the FSM transitions to the PLAYING state.
+
+* **Outputs:** Set the score to 0, reset the frog’s position to the bottom of the screen, and display "Level 1" on the seven-segment display.
+
+#### c. PLAYING
+  * **Purpose:** This is the main game state where the player can control the frog, and obstacles (cars) are moving on the screen. In this state, the FSM handles movement, collisions, and scoring.
+
+  * **Conditions to Transition:**
+      * If the frog reaches the top of the screen, the FSM transitions to the LEVEL_COMPLETE state.
+
+      * If the frog collides with a car, the FSM transitions to the GAME_OVER state.
+  * **Outputs:** Enable frog movement using the switches, move obstacles at their respective speeds, check for collisions, and update the score as the frog progresses.
+
+#### d. LEVEL_COMPLETE
+  * **Purpose:** This state occurs when the player successfully moves the frog to the top of the screen. It prepares the next level, where cars move faster.
+
+  * **Conditions to Transition:** After increasing the level number and adjusting the speed of the obstacles, the FSM transitions back to the PLAYING state to start the next level.
+
+  * **Outputs:** Increase the level number on the seven-segment display, reset the frog’s position to the starting point, and increment the speed of the obstacles.
+
+#### e. GAME_OVER
+  * **Purpose:** This state is triggered when the frog collides with a car. The game will reset from the beginning.
+
+  * **Conditions to Transition:** The FSM remains in this state until the player chooses to restart by pressing the "Start" button again, at which point it transitions back to INIT.
+
+  * **Outputs:** Display "Game Over" on the screen, reset all game variables, to restart from the level 1.
+
+#### f. Output Signals and Actions in Each State
+Each state will trigger specific actions, such as initializing variables, moving the frog, or updating the display.
+
+  * **IDLE**: Display the "Start" screen, wait for input.
+
+  * **INIT**: Reset all variables, including score, level, and frog’s position.
+
+  * **PLAYING**: Enable player control of the frog, move obstacles (cars), and check for collisions.
+
+  * **LEVEL_COMPLETE**: Increase the level, reset the frog’s position, and adjust car speed.
+
+  * **GAME_OVER**: Reset the game, display "Game Over" on the screen, and wait for player input to restart.
+
+#### g.  Clock Synchronization and Timing
+
+  * The FSM is clocked by the 25 MHz system clock, ensuring smooth transitions and timing. The state changes occur based on game events (e.g., frog reaching the top, collisions) and are synchronized to the game's clock, ensuring timing consistency across the game.
+
+  * The VGA refresh rate (typically 60 Hz) is also tied into the FSM to ensure the game display updates consistently with the current state.
+
+#### h. Conclusion
+- This FSM design efficiently manages the game’s flow, responding to player inputs and in-game events to transition between states. Each state has clearly defined actions and transitions, ensuring smooth gameplay and a consistent experience across all levels of the game.
+
+- This structure for the FSM can be implemented in Verilog and instantiated in the top-level module of the game to control the overall logic of the Frogger game.
 
 ## VIII. Testing and Validation
 ### 1. Testbench Design
-Explain how Verilog testbenches will be used to simulate individual modules for correctness.
+To ensure each individual module in the Frogger game functions correctly, Verilog testbenches will be created and executed on EDAPlayground. The purpose of these testbenches is to simulate the behavior of each module in isolation, verify its functionality, and identify any potential issues before integrating the modules into the top-level design. 
 
-### 2. Simulation Tools
-Mention the simulation tools (e.g., ModelSim, Vivado) that will be used to validate the design.
+![edaplayground](images/Eda.png)
 
-### 3. Hardware Testing
-Describe the process of deploying the design onto the FPGA and performing real-time testing with actual input devices and VGA output.
+#### a. **Structure of a Testbench**
 
-### 4. Debugging and Optimization
-Explain techniques used for debugging, such as signal monitoring with an Integrated Logic Analyzer (ILA) or chipscope.
+A Verilog testbench is a non-synthesizable module used to test another module. It does not represent physical hardware but serves as a simulation environment. It consists of four key components:
 
+1. **Instantiation of the DUT (Device Under Test):** Each testbench will instantiate the module being tested, such as FrogMovement, CarMovement, or CollisionDetection. This involves connecting the testbench's inputs and outputs to the DUT’s ports.
+
+2. **Clock Generation:** Most of your modules rely on the 25 MHz system clock for proper operation. The testbench will include a clock generator that simulates the system clock by toggling a signal every 20 nanoseconds (to replicate the 25 MHz frequency). This clock drives the game’s logic and the VGA display verilog
+
+3. **Stimulus Definition:** The testbench will apply different input stimuli to simulate real-world conditions. For example:
+    * In the PlayerControl testbench, inputs will simulate switch presses (SW1, SW2, etc.) to move the frog.
+
+    * For the CarMovement testbench, inputs will simulate the initial car positions and update them over time to verify that cars move correctly in both directions.
+
+	Stimulus generation will ensure that all edge cases are tested, such as rapid switch presses, simultaneous button presses, or the frog reaching the screen 		boundary.
+
+4. **Response Monitoring and Assertions:** The testbench will continuously monitor the outputs of the DUT and compare them against the expected results. This involves writing checks to confirm correct output based on given inputs. If the output is incorrect, the testbench will trigger an assertion failure and log an error message. For example:
+
+    * In the CollisionDetection testbench, after simulating a frog's position overlapping with a car, an assertion would check if the collision signal is triggered correctly.
+
+#### b. **Modular Testing Approach**
+
+For each functional unit, a dedicated testbench will be written:
+
+* **Player Control Module:** Test the frog’s movement in all directions (up, down, left, right) and ensure boundary limits are respected.
+
+* **Obstacle Generation Module:** Verify that cars appear at the correct positions, move at different speeds, and reset when they reach the screen edge.
+
+* **Collision Detection Module:** Ensure that collisions between the frog and cars are accurately detected and the appropriate signal is triggered.
+
+* **VGA Controller Module:** Simulate the timing signals for VGA output (sync pulses, pixel rendering) and verify that the screen refreshes properly.
+
+#### c. Edge Case Testing
+Each testbench will include edge cases to ensure robustness. For instance:
+
+* In the FrogMovement testbench, what happens if multiple switches are pressed simultaneously?
+
+* In the CollisionDetection testbench, is the collision detected correctly at all possible points of intersection?
+
+#### d. Testbench Execution on EDAPlayground
+Once a testbench is complete, it will be executed in EDAPlayground, where you can:
+
+* **Simulate Waveforms:** By visualizing signal transitions (e.g., frog’s position, car positions, VGA sync pulses), you can ensure correct timing and synchronization of game elements.
+
+* **Verify Logs and Outputs:** Simulation tools will produce logs that detail whether all assertions passed or failed, providing insight into where corrections may be needed.
+
+This structured approach to designing testbenches will ensure that each module is verified thoroughly before being integrated into the larger system. By detecting and fixing issues early in simulation, you reduce debugging time during hardware testing and improve the reliability of the final design.
 
 ## IX. Conclusion
 
-Summarize the purpose and goals of the design.
-Highlight the expected outcome of the project, including game playability, display quality, and performance.
+The purpose of this design is to implement a Frogger-style game on an FPGA using Verilog. The project aims to integrate player control, game logic, collision detection, and VGA display into a functional system that runs smoothly in real-time on the Nandland Go Board. The primary goals are to:
+
+1. **Gameplay:** Ensure smooth, responsive gameplay where the player controls a frog navigating a series of roads with moving cars, aiming to reach the top of the screen.
+
+2. **Display Quality:** Use a 640x480 VGA display to render the game, ensuring the frog, cars, and road are displayed with accurate pixel representation and proper colors.
+
+3. **Performance:** Maintain smooth game execution and display rendering, with real-time responsiveness to player inputs and obstacles, even as the difficulty increases.
+
+The expected outcome is a fully playable Frogger game with clear graphics, responsive controls, and a seamless increase in difficulty through level progression, all achieved on an FPGA.
 
 
 ## X. Glossary
 
 
-
-## XI. Appendices
-
-### 1. Verilog Code Snippets
-Include relevant portions of the Verilog code (e.g., key modules like VGA controller or collision detection).
-
-### 2. Block Diagrams and Flowcharts
-Add any relevant diagrams to help visualize the system architecture and module interactions.
-
-### 3. References
-List references to FPGA board documentation, VGA signal standards, and any related work.
