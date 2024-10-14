@@ -26,40 +26,39 @@ set_io i_Switch_1 53
 set_io i_Switch_2 51
 set_io i_Switch_3 54
 set_io i_Switch_4 52
-set_io i_Switch_4 52
 
 ### 7 Segment Outputs
-set_io o_Segment1_A 3
-set_io o_Segment1_B 4
-set_io o_Segment1_C 93
-set_io o_Segment1_D 91
-set_io o_Segment1_E 90
-set_io o_Segment1_F 1
-set_io o_Segment1_G 2
-set_io o_Segment2_A 100
-set_io o_Segment2_B 99
-set_io o_Segment2_C 97
-set_io o_Segment2_D 95
-set_io o_Segment2_E 94
-set_io o_Segment2_F 8
-set_io o_Segment2_G 96
+set_io o_Segment1[0] 3
+set_io o_Segment1[1] 4
+set_io o_Segment1[2] 93
+set_io o_Segment1[3] 91
+set_io o_Segment1[4] 90
+set_io o_Segment1[5] 1
+set_io o_Segment1[6] 2
+set_io o_Segment2[0] 100
+set_io o_Segment2[1] 99
+set_io o_Segment2[2] 97
+set_io o_Segment2[3] 95
+set_io o_Segment2[4] 94
+set_io o_Segment2[5] 8
+set_io o_Segment2[6] 96
 
 ## UART Outputs
 set_io i_UART_RX 73
 set_io o_UART_TX 74
 
 ## VGA Outputs
-set_io hsync 26
-set_io vsync 27
-set_io red[0] 36
-set_io red[1] 37
-set_io red[2] 40
-set_io green[0] 29
-set_io green[1] 30
-set_io green[2] 33
-set_io blue[0] 28
-set_io blue[1] 41
-set_io blue[2] 42
+set_io o_VGA_HSync 26
+set_io o_VGA_VSync 27
+set_io o_VGA_Red[0] 36
+set_io o_VGA_Red[1] 37
+set_io o_VGA_Red[2] 40
+set_io o_VGA_Grn[0] 29
+set_io o_VGA_Grn[1] 30
+set_io o_VGA_Grn[2] 33
+set_io o_VGA_Blu[0] 28
+set_io o_VGA_Blu[1] 41
+set_io o_VGA_Blu[2] 42
 
 ## PMOD Signals
 set_io io_PMOD_1 65
