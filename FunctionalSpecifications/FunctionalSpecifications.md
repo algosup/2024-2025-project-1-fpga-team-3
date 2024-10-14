@@ -86,7 +86,7 @@ ______
 | "Map"             | The game environment                             |
 | "User Interface" or "UI" | The visual and interactive elements through which users interact with the game |
 | "Go_Board"       | The chip used in this project                   |
-| "FPGA"           | (Field Programmable Gate Array) A programming language used in the project |
+| "FPGA"           | (Field Programmable Gate Array)  integrated circuit logic who can be programmed after its manufacture.|
 ___________________________
 
 ## II) Project Introduction
@@ -307,7 +307,7 @@ Pressing the top left switch will start the game.
 ## V) Project Overview
 
 * *As you can see, some features of the original game are not present. Our Frogger may be minimalist because we are unsure of the limits of the Go_Board, but we will try to make it as accurate as possible:*
-- Using FPGA / Visual Studio.
+- Using FPGA / Verilog in Visual Studio.
 - Must work on a Go_Board chip
   
 ### A) Project Objectives
@@ -322,7 +322,7 @@ Pressing the top left switch will start the game.
 | Focusing On                                                                                  |
 |---------------------------------------------------------------------------------------------|
 | Delivering a Frogger that works on the Go_Board chip, displayed on VGA output              |
-| Must be programmed with FPGA on the Go_Board                                               |
+| Must be programmed in Verilog with FPGA on the Go_Board                                               |
 | Including features such as death animations and custom models for cars                      |
 
 | Out of Focus                                                                                |
