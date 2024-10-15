@@ -44,13 +44,25 @@ module vga_display (
     localparam V_FRONT_PORCH = 10;
     localparam V_LINE = 525;
 
-    // // Grid parameters (32x32 pixel cells)
+    // Grid parameters (32x32 pixel cells)
     localparam GRID_WIDTH = 32;
     localparam GRID_HEIGHT = 32;
 
     // Horizontal and vertical counters for VGA timing
     reg [9:0] h_count = 0;
     reg [8:0] v_count = 0;
+
+    // Background color signals
+    wire [2:0] bg_r, bg_g, bg_b;
+
+    // Instantiate the background module
+    background bg_inst (
+        .h_count(h_count),
+        .v_count(v_count),
+        .bg_r(bg_r),
+        .bg_g(bg_g),
+        .bg_b(bg_b)
+    );
 
     always @(posedge clk) begin
         // Horizontal counter
@@ -72,17 +84,22 @@ module vga_display (
         // Generate vertical sync pulse
         vga_vs <= (v_count < V_SYNC_CYC) ? 0 : 1;
 
+        // Set default to background color
+        vga_r <= bg_r;
+        vga_g <= bg_g;
+        vga_b <= bg_b;
+
         // Generate VGA signals (simplified example)
         if (h_count >= H_SYNC_CYC + H_BACK_PORCH && h_count < H_SYNC_CYC + H_BACK_PORCH + H_ACTIVE_VIDEO &&
             v_count >= V_SYNC_CYC + V_BACK_PORCH && v_count < V_SYNC_CYC + V_BACK_PORCH + V_ACTIVE_VIDEO) begin
-            // Example: Display frog as a green square
+            // Draw frog on top of background
             if ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == frog_col && 
                 (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == frog_row) begin
-                vga_r <= 3'b000;
-                vga_g <= 3'b111;
-                vga_b <= 3'b000;
+                vga_r <= 3'b111;
+                vga_g <= 3'b111;  // Frog color (green)
+                vga_b <= 3'b111;
             end else begin
-                // Check for cars
+                // Draw cars on top of the background
                 if ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car1_x && 
                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car1_y ||
                     (h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car2_x && 
@@ -107,17 +124,9 @@ module vga_display (
                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car11_y) begin
                     vga_r <= 3'b111;
                     vga_g <= 3'b000;
-                    vga_b <= 3'b000;
-                end else begin
-                    vga_r <= 3'b000;
-                    vga_g <= 3'b000;
-                    vga_b <= 3'b000;
+                    vga_b <= 3'b000;  // Car color (red)
                 end
             end
-        end else begin
-            vga_r <= 3'b000;
-            vga_g <= 3'b000;
-            vga_b <= 3'b000;
         end
     end
 endmodule

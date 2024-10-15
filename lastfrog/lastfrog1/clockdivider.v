@@ -2,7 +2,7 @@ module clock_divider (
     input wire i_Clk,              // Input clock signal
     output reg o_Divided_Clk       // Output slower clock signal
 );
-    parameter DIV_FACTOR = 24'd10;  // Division factor (parameterized)
+    parameter DIV_FACTOR = 24'd99;  // Division factor (parameterized)
     reg [23:0] counter = 0;
 
     always @(posedge i_Clk) begin

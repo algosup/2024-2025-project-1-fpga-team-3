@@ -4,7 +4,10 @@ module top (
     input wire i_Switch_2,      // Button for moving down
     input wire i_Switch_3,      // Button for moving up
     input wire i_Switch_4,      // Button for moving right
-    output wire o_LED_1,        // LED to indicate clock speed
+    output wire o_LED_1,        // LED output for switch 1
+    output wire o_LED_2,        // LED output for switch 2
+    output wire o_LED_3,        // LED output for switch 3
+    output wire o_LED_4,        // LED output for switch 4
     output wire [2:0] o_VGA_Red,  // VGA Red signal
     output wire [2:0] o_VGA_Grn,  // VGA Green signal
     output wire [2:0] o_VGA_Blu,  // VGA Blue signal
@@ -186,5 +189,10 @@ module top (
         .vga_hs(o_VGA_HSync),
         .vga_vs(o_VGA_VSync)
     );
-assign o_LED_1 = slow_clk;
+
+
+assign o_LED_1 = debounced_sw1;
+assign o_LED_2 = debounced_sw2;
+assign o_LED_3 = debounced_sw3;
+assign o_LED_4 = debounced_sw4;
 endmodule

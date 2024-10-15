@@ -1,6 +1,6 @@
 module car #(
     parameter CAR_START = 0,     // Starting X position (default 0)
-    parameter CAR_SPEED = 24'd1,  // Speed control (larger number = slower)
+    parameter CAR_SPEED = 24'd99,  // Speed control (larger number = slower)
     parameter CAR_DIRECTION = 1  // 0 = Left, 1 = Right (default Right)
 ) (
     input wire i_Clk,             // Clock signal
