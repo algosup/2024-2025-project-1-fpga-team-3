@@ -48,10 +48,10 @@ module background (
                     bg_b = 3'b000;
                 end
                 4'd1, 4'd2, 4'd3, 4'd4, 4'd5, 4'd6: begin
-                    // Rows 1-6: River (blue)
+                    // Rows 1-6: Road (black)
                     bg_r = 3'b000;
                     bg_g = 3'b000;
-                    bg_b = 3'b111;
+                    bg_b = 3'b000;
                 end
                 4'd0: begin
                     // Bottom row: Grass (green)

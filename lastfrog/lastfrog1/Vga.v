@@ -100,28 +100,32 @@ module vga_display (
                 vga_b <= 3'b111;
             end else begin
                 // Draw cars on top of the background
-                if ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car1_x && 
-                    (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car1_y ||
-                    (h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car2_x && 
-                    (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car2_y ||
-                    (h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car3_x && 
-                    (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car3_y ||
-                    (h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car4_x && 
-                    (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car4_y ||
-                    (h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car5_x && 
-                    (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car5_y ||
-                    (h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car6_x && 
-                    (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car6_y ||
-                    (h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car7_x && 
-                    (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car7_y ||
-                    (h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car8_x && 
-                    (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car8_y ||
-                    (h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car9_x && 
-                    (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car9_y ||
-                    (h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car10_x && 
-                    (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car10_y ||
-                    (h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car11_x && 
-                    (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car11_y) begin
+                if (((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH >= car1_x && 
+                     (h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH < car1_x + 4 && 
+                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car1_y) ||
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH >= car2_x && 
+                     (h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH < car2_x + 4 && 
+                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car2_y) ||
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH >= car3_x && 
+                     (h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH < car3_x + 4 && 
+                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car3_y) ||
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH >= car4_x && 
+                     (h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH < car4_x + 4 && 
+                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car4_y) ||
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car5_x && 
+                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car5_y) ||
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car6_x && 
+                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car6_y) ||
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car7_x && 
+                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car7_y) ||
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car8_x && 
+                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car8_y) ||
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car9_x && 
+                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car9_y) ||
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car10_x && 
+                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car10_y) ||
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car11_x && 
+                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car11_y)) begin
                     vga_r <= 3'b111;
                     vga_g <= 3'b000;
                     vga_b <= 3'b000;  // Car color (red)

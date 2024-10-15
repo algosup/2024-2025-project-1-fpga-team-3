@@ -82,17 +82,17 @@ module frog_display (
         end
 
         // Check for collision with all 11 cars
-        if ((frog_col == car1_x && frog_row == car1_y) ||
-            (frog_col == car2_x && frog_row == car2_y) ||
-            (frog_col == car3_x && frog_row == car3_y) ||
-            (frog_col == car4_x && frog_row == car4_y) ||
+        if (((frog_col >= car1_x && frog_col < car1_x + 4) && frog_row == car1_y) ||
+            ((frog_col >= car2_x && frog_col < car2_x + 4) && frog_row == car2_y) ||
+            ((frog_col >= car3_x && frog_col < car3_x + 4) && frog_row == car3_y) ||
+            ((frog_col >= car4_x && frog_col < car4_x + 4) && frog_row == car4_y) ||
             (frog_col == car5_x && frog_row == car5_y) ||
             (frog_col == car6_x && frog_row == car6_y) ||
             (frog_col == car7_x && frog_row == car7_y) ||
             (frog_col == car8_x && frog_row == car8_y) ||
             (frog_col == car9_x && frog_row == car9_y) ||
-            (frog_col == car10_x&& frog_row == car10_y) ||
-            (frog_col == car11_x&& frog_row == car11_y)) begin
+            (frog_col == car10_x && frog_row == car10_y) ||
+            (frog_col == car11_x && frog_row == car11_y)) begin
             collision_detected <= 1;   // Set collision flag if frog hits any car
             frog_col <= GRID_COLS / 2; // Reset frog position to the initial state
             frog_row <= GRID_ROWS - 1;
