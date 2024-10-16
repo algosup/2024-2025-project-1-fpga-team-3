@@ -64,6 +64,14 @@ module vga_display (
         .bg_b(bg_b)
     );
 
+    // Instantiate the sprite ROM for the frog
+    wire sprite_pixel;
+    sprite_frog frog_sprite (
+        .x((h_count - (H_SYNC_CYC + H_BACK_PORCH)) % GRID_WIDTH),
+        .y((v_count - (V_SYNC_CYC + V_BACK_PORCH)) % GRID_HEIGHT),
+        .pixel(sprite_pixel)
+    );
+
     always @(posedge clk) begin
         // Horizontal counter
         if (h_count == H_LINE - 1) begin
@@ -89,15 +97,20 @@ module vga_display (
         vga_g <= bg_g;
         vga_b <= bg_b;
 
-        // Generate VGA signals (simplified example)
+        // Check if in the active video area
         if (h_count >= H_SYNC_CYC + H_BACK_PORCH && h_count < H_SYNC_CYC + H_BACK_PORCH + H_ACTIVE_VIDEO &&
             v_count >= V_SYNC_CYC + V_BACK_PORCH && v_count < V_SYNC_CYC + V_BACK_PORCH + V_ACTIVE_VIDEO) begin
-            // Draw frog on top of background
-            if ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == frog_col && 
+            
+            // Draw the frog
+            if ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == frog_col &&
                 (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == frog_row) begin
-                vga_r <= 3'b111;
-                vga_g <= 3'b111;  // Frog color (green)
-                vga_b <= 3'b111;
+
+                // Check if the pixel is part of the frog sprite
+                if (sprite_pixel) begin
+                    vga_r <= 3'b111;  // Frog color (green)
+                    vga_g <= 3'b111;
+                    vga_b <= 3'b111;
+                end
             end else begin
                 // Draw cars on top of the background
                 if (((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH >= car1_x && 
