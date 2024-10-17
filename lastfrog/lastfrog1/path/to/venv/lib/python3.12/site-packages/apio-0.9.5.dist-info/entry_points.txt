@@ -1,0 +1,3 @@
+[console_scripts]
+apio=apio.__main__:cli
+

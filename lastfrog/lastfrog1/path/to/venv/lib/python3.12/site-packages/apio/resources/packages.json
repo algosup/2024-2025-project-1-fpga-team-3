@@ -1,0 +1,75 @@
+{
+  "examples": {
+    "repository": {
+      "name": "apio-examples",
+      "organization": "FPGAwars"
+    },
+    "release": {
+      "tag_name": "%V",
+      "compressed_name": "apio-examples-%V",
+      "uncompressed_name": "apio-examples-%V",
+      "package_name": "examples",
+      "extension": "zip",
+      "url_version": "https://github.com/FPGAwars/apio-examples/raw/master/VERSION"
+    },
+    "description": "Verilog examples"
+  },
+  
+  "oss-cad-suite": {
+    "repository": {
+      "name": "tools-oss-cad-suite",
+      "organization": "FPGAwars"
+    },
+    "release": {
+      "tag_name": "v%V",
+      "compressed_name": "tools-oss-cad-suite-%P-%V",
+      "uncompressed_name": "",
+      "package_name": "tools-oss-cad-suite",
+      "extension": "tar.gz",
+      "url_version": "https://github.com/FPGAwars/tools-oss-cad-suite/raw/main/VERSION"
+    },
+    "description": "YosysHQ/oss-cad-suite"
+  },
+
+  "gtkwave": {
+    "repository": {
+      "name": "tool-gtkwave",
+      "organization": "FPGAwars"
+    },
+    "release": {
+      "tag_name": "v%V",
+      "compressed_name": "tool-gtkwave-%P-%V",
+      "uncompressed_name": "",
+      "package_name": "tool-gtkwave",
+      "extension": "tar.gz",
+      "url_version": "https://github.com/FPGAwars/tool-gtkwave/raw/master/VERSION",
+      "available_platforms": [
+        "windows",
+        "windows_x86",
+        "windows_amd64"
+      ]
+    },
+    "description": "GTKWave tool for Windows"
+  },
+
+  "drivers": {
+    "repository": {
+      "name": "tools-drivers",
+      "organization": "FPGAwars"
+    },
+    "release": {
+      "tag_name": "v%V",
+      "compressed_name": "tools-drivers-%P-%V",
+      "uncompressed_name": "",
+      "package_name": "tools-drivers",
+      "extension": "tar.gz",
+      "url_version": "https://github.com/FPGAwars/tools-drivers/raw/master/VERSION",
+      "available_platforms": [
+        "windows",
+        "windows_x86",
+        "windows_amd64"
+      ]
+    },
+    "description": "Drivers tools for Windows"
+  }
+}

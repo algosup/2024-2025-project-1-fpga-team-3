@@ -1,0 +1,77 @@
+{
+  "iceprog": {
+    "command": "iceprog",
+    "args": "-d i:0x${VID}:0x${PID}:${FTDI_ID}"
+  },
+  
+  "iceprogduino": {
+    "command": "iceprogduino",
+    "args": ""
+  },
+  "icoprog": {
+    "command": "export WIRINGPI_GPIOMEM=1; icoprog",
+    "args": "-p <"
+  },
+  "litterbox": {
+    "command": "sudo litterbox",
+    "args": "-c",
+    "pip_packages": [ "litterbox" ]
+  },
+  "blackiceprog": {
+    "command": "black-iceprog",
+    "args": "${SERIAL_PORT}",
+    "pip_packages": [ "blackiceprog" ]
+  },
+  "icefunprog": {
+    "command": "icefunprog",
+    "args": "${SERIAL_PORT}",
+    "pip_packages": [ "icefunprog" ]
+  },
+
+  "tinyfpgab": {
+    "command": "tinyfpgab",
+    "args": "-c ${SERIAL_PORT} --program",
+    "pip_packages": [ "tinyfpgab" ]
+  },
+  "iCEburn": {
+    "command": "iCEburn",
+    "args": "-ew"
+  },
+  "tinyprog": {
+    "command": "tinyprog",
+    "args": "--pyserial -c ${SERIAL_PORT} --program",
+    "pip_packages": [ "tinyprog" ]
+  },
+  "ujprog": {
+    "command": "ujprog",
+    "args": "-q -j SRAM"
+  },
+  "fujprog": {
+    "command": "fujprog",
+    "args": "-l 2"
+  },
+  "dfu": {
+    "command": "dfu-util",
+    "args": "-d ${VID}:${PID} -a 0 -D"
+  },
+  "icesprog": {
+    "command": "icesprog",
+    "args": ""
+  },
+  "openfpgaloader": {
+    "command": "openFPGALoader",
+    "args": ""
+  },
+ "openfpgaloader_ft2232": {
+    "command": "openFPGALoader",
+    "args": "-c ft2232 -v --file-type bin"
+  },
+  "openfpgaloader_ft232": {
+    "command": "openFPGALoader",
+    "args": "-c ft232 -v --file-type bin"
+  },
+  "openfpgaloader_usb-blaster": {
+    "command": "openFPGALoader",
+    "args": "-c usb-blaster -v --file-type bin"
+  }
+}
