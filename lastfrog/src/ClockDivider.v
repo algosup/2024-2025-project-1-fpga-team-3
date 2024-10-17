@@ -1,16 +1,17 @@
-module clock_divider (
-    input wire i_Clk,              // Input clock signal
-    output reg o_Divided_Clk       // Output slower clock signal
+module clock_divider #(
+    parameter DIV_FACTOR = 23'd2500000
+)(
+    input wire i_Clk,
+    output reg o_Divided_Clk
 );
-    parameter DIV_FACTOR = 24'd99;  // Division factor (parameterized)
-    reg [23:0] counter = 0;
-
+    reg [22:0] counter = 0;
+    
     always @(posedge i_Clk) begin
-        if (counter >= (DIV_FACTOR - 1))
+        if (counter == DIV_FACTOR) begin
             counter <= 0;
-        else
+            o_Divided_Clk <= ~o_Divided_Clk;
+        end else begin
             counter <= counter + 1;
-
-        o_Divided_Clk <= (counter == 0);  // Toggle the divided clock at the end of the count
+        end
     end
 endmodule
