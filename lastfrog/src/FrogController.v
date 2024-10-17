@@ -37,26 +37,11 @@ module frog_display (
     input wire [3:0] car15_y,   // Car 15 Y position
     input wire [4:0] car16_x,   // Car 16 X position
     input wire [3:0] car16_y,   // Car 16 Y position
-    input wire [4:0] car17_x,   // Car 17 X position
-    input wire [3:0] car17_y,   // Car 17 Y position
-    input wire [4:0] car18_x,   // Car 18 X position
-    input wire [3:0] car18_y,   // Car 18 Y position
-    input wire [4:0] car19_x,   // Car 19 X position
-    input wire [3:0] car19_y,   // Car 19 Y position
-    input wire [4:0] car20_x,   // Car 20 X position
-    input wire [3:0] car20_y,   // Car 20 Y position
-    input wire [4:0] car21_x,   // Car 21 X position
-    input wire [3:0] car21_y,   // Car 21 Y position
-    input wire [4:0] car22_x,   // Car 22 X position
-    input wire [3:0] car22_y,   // Car 22 Y position
-    input wire [4:0] car23_x,   // Car 23 X position
-    input wire [3:0] car23_y,   // Car 23 Y position
-    input wire [4:0] car24_x,   // Car 24 X position
-    input wire [3:0] car24_y,   // Car 24 Y position
     output reg [4:0] frog_col,  // Frog X position (in columns, 5 bits)
     output reg [3:0] frog_row,  // Frog Y position (in rows, 4 bits)
     output wire frog_at_top,    // Signal to notify if frog reached the top row
-    output reg collision_detected // Signal for detecting collisions
+    output reg collision_detected,  // Signal for detecting collisions
+    output reg [1:0] lives      // Number of lives left (2 bits, for 3 lives)
 );
 
     // Grid parameters
@@ -66,21 +51,25 @@ module frog_display (
     // Movement blocking state
     reg move_block;
 
-    // Initial frog position (center bottom) and block state
+    // Initialize frog position, move block state, collision detection, and lives
     initial begin
-        frog_col = GRID_COLS / 2;  // Start at the center column (column 10)
-        frog_row = GRID_ROWS - 1;  // Start at the bottom row (row 14)
-        move_block = 0;            // No movement is blocked initially
-        collision_detected = 0;    // No collision initially
+        frog_col = GRID_COLS / 2;   // Start at the center column (column 10)
+        frog_row = GRID_ROWS - 1;   // Start at the bottom row (row 14)
+        move_block = 0;             // No movement is blocked initially
+        collision_detected = 0;     // No collision initially
+        lives = 3;                  // Start with 3 lives
     end
 
     // Move frog based on debounced button presses
     always @(posedge clk) begin
-        // Reset the frog to initial position if reset_frog signal is active or if all buttons are pressed
-        if (reset_frog || (debounced_sw1 && debounced_sw2 && debounced_sw3 && debounced_sw4)) begin
+        // Reset the frog to initial position and reset lives if needed
+        if (reset_frog) begin
             frog_col <= GRID_COLS / 2;  // Reset to the center column (column 10)
             frog_row <= GRID_ROWS - 1;  // Reset to the bottom row (row 14)
             collision_detected <= 0;    // Clear the collision flag
+            if (lives == 0) begin
+                lives <= 3;  // Reset lives only when they are depleted
+            end
         end
         // Reset the move_block when no button is pressed
         else if (!debounced_sw1 && !debounced_sw2 && !debounced_sw3 && !debounced_sw4) begin
@@ -107,7 +96,7 @@ module frog_display (
             end
         end
 
-        // Check for collision with all 24 cars
+        // Check for collision with all 16 cars
         if ((frog_col == car1_x && frog_row == car1_y) ||
             (frog_col == car2_x && frog_row == car2_y) ||
             (frog_col == car3_x && frog_row == car3_y) ||
@@ -123,18 +112,13 @@ module frog_display (
             (frog_col == car13_x && frog_row == car13_y) ||
             (frog_col == car14_x && frog_row == car14_y) ||
             (frog_col == car15_x && frog_row == car15_y) ||
-            (frog_col == car16_x && frog_row == car16_y) ||
-            (frog_col == car17_x && frog_row == car17_y) ||
-            (frog_col == car18_x && frog_row == car18_y) ||
-            (frog_col == car19_x && frog_row == car19_y) ||
-            (frog_col == car20_x && frog_row == car20_y) ||
-            (frog_col == car21_x && frog_row == car21_y) ||
-            (frog_col == car22_x && frog_row == car22_y) ||
-            (frog_col == car23_x && frog_row == car23_y) ||
-            (frog_col == car24_x && frog_row == car24_y)) begin
-            collision_detected <= 1;   // Set collision flag if frog hits any car
-            frog_col <= GRID_COLS / 2; // Reset frog position to the initial state
-            frog_row <= GRID_ROWS - 1;
+            (frog_col == car16_x && frog_row == car16_y)) begin
+            if (lives > 0) begin
+                lives <= lives - 1;  // Decrement lives
+                frog_col <= GRID_COLS / 2;  // Reset frog position
+                frog_row <= GRID_ROWS - 1;
+                collision_detected <= 1;    // Flag the collision
+            end
         end else begin
             collision_detected <= 0;   // Clear the collision flag if no collision
         end
