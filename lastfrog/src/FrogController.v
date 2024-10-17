@@ -27,6 +27,32 @@ module frog_display (
     input wire [3:0] car10_y,   // Car 10 Y position
     input wire [4:0] car11_x,   // Car 11 X position
     input wire [3:0] car11_y,   // Car 11 Y position
+    input wire [4:0] car12_x,   // Car 12 X position
+    input wire [3:0] car12_y,   // Car 12 Y position
+    input wire [4:0] car13_x,   // Car 13 X position
+    input wire [3:0] car13_y,   // Car 13 Y position
+    input wire [4:0] car14_x,   // Car 14 X position
+    input wire [3:0] car14_y,   // Car 14 Y position
+    input wire [4:0] car15_x,   // Car 15 X position
+    input wire [3:0] car15_y,   // Car 15 Y position
+    input wire [4:0] car16_x,   // Car 16 X position
+    input wire [3:0] car16_y,   // Car 16 Y position
+    input wire [4:0] car17_x,   // Car 17 X position
+    input wire [3:0] car17_y,   // Car 17 Y position
+    input wire [4:0] car18_x,   // Car 18 X position
+    input wire [3:0] car18_y,   // Car 18 Y position
+    input wire [4:0] car19_x,   // Car 19 X position
+    input wire [3:0] car19_y,   // Car 19 Y position
+    input wire [4:0] car20_x,   // Car 20 X position
+    input wire [3:0] car20_y,   // Car 20 Y position
+    input wire [4:0] car21_x,   // Car 21 X position
+    input wire [3:0] car21_y,   // Car 21 Y position
+    input wire [4:0] car22_x,   // Car 22 X position
+    input wire [3:0] car22_y,   // Car 22 Y position
+    input wire [4:0] car23_x,   // Car 23 X position
+    input wire [3:0] car23_y,   // Car 23 Y position
+    input wire [4:0] car24_x,   // Car 24 X position
+    input wire [3:0] car24_y,   // Car 24 Y position
     output reg [4:0] frog_col,  // Frog X position (in columns, 5 bits)
     output reg [3:0] frog_row,  // Frog Y position (in rows, 4 bits)
     output wire frog_at_top,    // Signal to notify if frog reached the top row
@@ -81,18 +107,31 @@ module frog_display (
             end
         end
 
-        // Check for collision with all 11 cars
-        if (((frog_col >= car1_x && frog_col < car1_x + 4) && frog_row == car1_y) ||
-            ((frog_col >= car2_x && frog_col < car2_x + 4) && frog_row == car2_y) ||
-            ((frog_col >= car3_x && frog_col < car3_x + 4) && frog_row == car3_y) ||
-            ((frog_col >= car4_x && frog_col < car4_x + 4) && frog_row == car4_y) ||
+        // Check for collision with all 24 cars
+        if ((frog_col == car1_x && frog_row == car1_y) ||
+            (frog_col == car2_x && frog_row == car2_y) ||
+            (frog_col == car3_x && frog_row == car3_y) ||
+            (frog_col == car4_x && frog_row == car4_y) ||
             (frog_col == car5_x && frog_row == car5_y) ||
             (frog_col == car6_x && frog_row == car6_y) ||
             (frog_col == car7_x && frog_row == car7_y) ||
             (frog_col == car8_x && frog_row == car8_y) ||
             (frog_col == car9_x && frog_row == car9_y) ||
             (frog_col == car10_x && frog_row == car10_y) ||
-            (frog_col == car11_x && frog_row == car11_y)) begin
+            (frog_col == car11_x && frog_row == car11_y) ||
+            (frog_col == car12_x && frog_row == car12_y) ||
+            (frog_col == car13_x && frog_row == car13_y) ||
+            (frog_col == car14_x && frog_row == car14_y) ||
+            (frog_col == car15_x && frog_row == car15_y) ||
+            (frog_col == car16_x && frog_row == car16_y) ||
+            (frog_col == car17_x && frog_row == car17_y) ||
+            (frog_col == car18_x && frog_row == car18_y) ||
+            (frog_col == car19_x && frog_row == car19_y) ||
+            (frog_col == car20_x && frog_row == car20_y) ||
+            (frog_col == car21_x && frog_row == car21_y) ||
+            (frog_col == car22_x && frog_row == car22_y) ||
+            (frog_col == car23_x && frog_row == car23_y) ||
+            (frog_col == car24_x && frog_row == car24_y)) begin
             collision_detected <= 1;   // Set collision flag if frog hits any car
             frog_col <= GRID_COLS / 2; // Reset frog position to the initial state
             frog_row <= GRID_ROWS - 1;
