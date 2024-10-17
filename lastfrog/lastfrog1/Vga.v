@@ -24,6 +24,32 @@ module vga_display (
     input wire [3:0] car10_y,   // Car 10 Y position (in grid rows)
     input wire [4:0] car11_x,   // Car 11 X position (in grid columns)
     input wire [3:0] car11_y,   // Car 11 Y position (in grid rows)
+    input wire [4:0] car12_x,   // Car 12 X position (in grid columns)
+    input wire [3:0] car12_y,   // Car 12 Y position (in grid rows)
+    input wire [4:0] car13_x,   // Car 13 X position (in grid columns)
+    input wire [3:0] car13_y,   // Car 13 Y position (in grid rows)
+    input wire [4:0] car14_x,   // Car 14 X position (in grid columns)
+    input wire [3:0] car14_y,   // Car 14 Y position (in grid rows)
+    input wire [4:0] car15_x,   // Car 15 X position (in grid columns)
+    input wire [3:0] car15_y,   // Car 15 Y position (in grid rows)
+    input wire [4:0] car16_x,   // Car 16 X position (in grid columns)
+    input wire [3:0] car16_y,   // Car 16 Y position (in grid rows)
+    input wire [4:0] car17_x,   // Car 17 X position (in grid columns)
+    input wire [3:0] car17_y,   // Car 17 Y position (in grid rows)
+    input wire [4:0] car18_x,   // Car 18 X position (in grid columns)
+    input wire [3:0] car18_y,   // Car 18 Y position (in grid rows)
+    input wire [4:0] car19_x,   // Car 19 X position (in grid columns)
+    input wire [3:0] car19_y,   // Car 19 Y position (in grid rows)
+    input wire [4:0] car20_x,   // Car 20 X position (in grid columns)
+    input wire [3:0] car20_y,   // Car 20 Y position (in grid rows)
+    input wire [4:0] car21_x,   // Car 21 X position (in grid columns)
+    input wire [3:0] car21_y,   // Car 21 Y position (in grid rows)
+    input wire [4:0] car22_x,   // Car 22 X position (in grid columns)
+    input wire [3:0] car22_y,   // Car 22 Y position (in grid rows)
+    input wire [4:0] car23_x,   // Car 23 X position (in grid columns)
+    input wire [3:0] car23_y,   // Car 23 Y position (in grid rows)
+    input wire [4:0] car24_x,   // Car 24 X position (in grid columns)
+    input wire [3:0] car24_y,   // Car 24 Y position (in grid rows)
     output reg [2:0] vga_r,     // VGA Red signal
     output reg [2:0] vga_g,     // VGA Green signal
     output reg [2:0] vga_b,     // VGA Blue signal
@@ -64,12 +90,19 @@ module vga_display (
         .bg_b(bg_b)
     );
 
+    wire [4:0] sprite_x;
+    wire [4:0] sprite_y;
+
+    // Assign calculated sprite_x and sprite_y positions based on h_count and v_count
+    assign sprite_x = (h_count - (H_SYNC_CYC + H_BACK_PORCH)) % GRID_WIDTH;
+    assign sprite_y = (v_count - (V_SYNC_CYC + V_BACK_PORCH)) % GRID_HEIGHT;
+
     // Instantiate the sprite ROM for the frog
     wire sprite_pixel;
     sprite_frog frog_sprite (
-        .x((h_count - (H_SYNC_CYC + H_BACK_PORCH)) % GRID_WIDTH),
-        .y((v_count - (V_SYNC_CYC + V_BACK_PORCH)) % GRID_HEIGHT),
-        .pixel(sprite_pixel)
+        .x(sprite_x),    // Pass the calculated x position
+        .y(sprite_y),    // Pass the calculated y position
+        .pixel(sprite_pixel)  // Pixel output from sprite
     );
 
     always @(posedge clk) begin
@@ -113,17 +146,13 @@ module vga_display (
                 end
             end else begin
                 // Draw cars on top of the background
-                if (((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH >= car1_x && 
-                     (h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH < car1_x + 4 && 
+                if (((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car1_x && 
                      (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car1_y) ||
-                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH >= car2_x && 
-                     (h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH < car2_x + 4 && 
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car2_x && 
                      (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car2_y) ||
-                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH >= car3_x && 
-                     (h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH < car3_x + 4 && 
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car3_x && 
                      (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car3_y) ||
-                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH >= car4_x && 
-                     (h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH < car4_x + 4 && 
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car4_x && 
                      (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car4_y) ||
                     ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car5_x && 
                      (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car5_y) ||
@@ -138,7 +167,33 @@ module vga_display (
                     ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car10_x && 
                      (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car10_y) ||
                     ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car11_x && 
-                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car11_y)) begin
+                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car11_y) ||
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car12_x && 
+                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car12_y) ||
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car13_x && 
+                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car13_y) ||
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car14_x && 
+                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car14_y) ||
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car15_x && 
+                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car15_y) ||
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car16_x && 
+                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car16_y) ||
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car17_x && 
+                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car17_y) ||
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car18_x && 
+                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car18_y) ||
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car19_x && 
+                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car19_y) ||
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car20_x && 
+                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car20_y) ||
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car21_x && 
+                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car21_y) ||
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car22_x && 
+                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car22_y) ||
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car23_x && 
+                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car23_y) ||
+                    ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car24_x && 
+                     (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car24_y)) begin
                     vga_r <= 3'b111;
                     vga_g <= 3'b000;
                     vga_b <= 3'b000;  // Car color (red)

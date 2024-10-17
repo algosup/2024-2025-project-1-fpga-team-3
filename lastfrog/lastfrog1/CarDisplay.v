@@ -11,7 +11,7 @@ module car #(
     reg [4:0] car_x = CAR_START;  // Car's X position
 
     // Larger speed counter to control car movement spe4
-    reg speed_counter = 1;  // Wider counter for larger range
+    reg [1:0] speed_counter = 1;  // Wider counter for larger range
 
 always @(posedge i_Clk) begin
     if (speed_counter == 0) begin
