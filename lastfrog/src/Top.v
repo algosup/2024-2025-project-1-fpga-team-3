@@ -54,7 +54,7 @@ module top (
     wire [3:0] car10_y = 4'd9, car11_y = 4'd9, car12_y = 4'd10;
     wire [3:0] car13_y = 4'd11, car14_y = 4'd11, car15_y = 4'd12;
     wire [3:0] car16_y = 4'd13;
-
+    
 car #(.CAR_START(1), .BASE_SPEED(24'd980), .CAR_DIRECTION(1)) car1_inst (
     .i_Clk(slow_clk),
     .level(current_level),
@@ -150,11 +150,11 @@ car #(.CAR_START(16), .BASE_SPEED(24'd980), .CAR_DIRECTION(0)) car16_inst (
     .level(current_level),
     .o_car_x(car16_x)
 );
-
     wire [4:0] frog_col;
     wire [3:0] frog_row;
     wire frog_at_top;
     wire reset_frog;
+    wire reset_lives;  // Wire to reset lives
     wire collision_detected;
     wire [1:0] lives;  // Number of lives left
     wire [4:0] current_level;
@@ -167,6 +167,7 @@ car #(.CAR_START(16), .BASE_SPEED(24'd980), .CAR_DIRECTION(0)) car16_inst (
         .debounced_sw3(debounced_sw3),
         .debounced_sw4(debounced_sw4),
         .reset_frog(reset_frog),
+        .reset_lives(reset_lives),  // Pass reset_lives to frog_display
         .car1_x(car1_x), .car1_y(car1_y),
         .car2_x(car2_x), .car2_y(car2_y),
         .car3_x(car3_x), .car3_y(car3_y),
@@ -189,6 +190,7 @@ car #(.CAR_START(16), .BASE_SPEED(24'd980), .CAR_DIRECTION(0)) car16_inst (
         .collision_detected(collision_detected),
         .lives(lives)  // Pass lives to the frog display module
     );
+
     wire reset_level = (debounced_sw1 && debounced_sw2 && debounced_sw3 && debounced_sw4) || collision_detected;
 
     // Instantiate the level counter
@@ -203,6 +205,7 @@ car #(.CAR_START(16), .BASE_SPEED(24'd980), .CAR_DIRECTION(0)) car16_inst (
         .debounced_sw4(debounced_sw4),  // Pass the debounced switch 4
         .level(current_level),  // **Connecter current_level ici**
         .reset_frog(reset_frog),
+        .reset_lives(reset_lives),  // Pass reset_lives to the level counter
         .o_Segment1(o_Segment1),
         .o_Segment2(o_Segment2)
     );
