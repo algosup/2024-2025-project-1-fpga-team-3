@@ -54,7 +54,7 @@ module top (
     wire [3:0] car10_y = 4'd9, car11_y = 4'd9, car12_y = 4'd10;
     wire [3:0] car13_y = 4'd11, car14_y = 4'd11, car15_y = 4'd12;
     wire [3:0] car16_y = 4'd13;
-    
+
 car #(.CAR_START(1), .BASE_SPEED(24'd980), .CAR_DIRECTION(1)) car1_inst (
     .i_Clk(slow_clk),
     .level(current_level),
@@ -157,7 +157,7 @@ car #(.CAR_START(16), .BASE_SPEED(24'd980), .CAR_DIRECTION(0)) car16_inst (
     wire reset_lives;  // Wire to reset lives
     wire collision_detected;
     wire [1:0] lives;  // Number of lives left
-    wire [4:0] current_level;
+    wire [3:0] current_level;
 
     // Instantiate the frog display module
     frog_display frog_inst (

@@ -7,7 +7,7 @@ module level_counter (
     input wire reset_level,              // Signal to reset the level
     input wire frog_at_top,              // Signal from frog_display to indicate frog reached the top
     input wire [1:0] lives,              // Number of lives remaining
-    output reg [4:0] level,              // Level value (to be displayed on 7-segment)
+    output reg [3:0] level,              // Level value (to be displayed on 7-segment)
     output reg reset_frog,               // Signal to reset frog to the bottom center
     output reg reset_lives,              // Signal to reset lives to 3
     output wire [6:0] o_Segment1,        // 7-segment display for level (units place)
@@ -15,7 +15,7 @@ module level_counter (
 );
 
     // Internal signal to store current level
-    reg [4:0] level_counter;             // 5 bits to store the level, up to 99
+    reg [3:0] level_counter;             // 5 bits to store the level, up to 99
     reg level_incremented;               // Flag to ensure level is only incremented once per frog reaching top
 
     // Wires to hold the units and tens digits
@@ -45,7 +45,7 @@ module level_counter (
         end 
         // If frog reaches the top and the level has not been incremented yet
         else if (frog_at_top && !level_incremented) begin
-            if (level_counter < 99) begin
+            if (level_counter < 15) begin
                 level_counter <= level_counter + 5'd1;  // Increment level
                 level_incremented <= 1;  // Set the flag to prevent multiple increments
             end
