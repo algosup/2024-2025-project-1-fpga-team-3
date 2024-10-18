@@ -1,17 +1,21 @@
 module level_counter (
-    input wire clk,                  // Clock signal
-    input wire reset_level,          // Signal to reset the level
-    input wire frog_at_top,          // Signal from frog_display to indicate frog reached the top
-    input wire [1:0] lives,          // Number of lives remaining
-    output reg [4:0] level,          // Level value (to be displayed on 7-segment)
-    output reg reset_frog,           // Signal to reset frog to the bottom center
-    output wire [6:0] o_Segment1,    // 7-segment display for level (units place)
-    output wire [6:0] o_Segment2     // 7-segment display for level (tens place)
+    input wire debounced_sw1,            // Debounced switch 1
+    input wire debounced_sw2,            // Debounced switch 2
+    input wire debounced_sw3,            // Debounced switch 3
+    input wire debounced_sw4,            // Debounced switch 4
+    input wire clk,                      // Clock signal
+    input wire reset_level,              // Signal to reset the level
+    input wire frog_at_top,              // Signal from frog_display to indicate frog reached the top
+    input wire [1:0] lives,              // Number of lives remaining
+    output reg [4:0] level,              // Level value (to be displayed on 7-segment)
+    output reg reset_frog,               // Signal to reset frog to the bottom center
+    output wire [6:0] o_Segment1,        // 7-segment display for level (units place)
+    output wire [6:0] o_Segment2         // 7-segment display for level (tens place)
 );
 
     // Internal signal to store current level
-    reg [4:0] level_counter;  // 5 bits to store the level, up to 99
-    reg level_incremented;    // Flag to ensure level is only incremented once per frog reaching top
+    reg [4:0] level_counter;             // 5 bits to store the level, up to 99
+    reg level_incremented;               // Flag to ensure level is only incremented once per frog reaching top
 
     // Wires to hold the units and tens digits
     wire [3:0] units_digit;
@@ -19,25 +23,41 @@ module level_counter (
 
     // Initialize level to 1 and set the flag to 0
     initial begin
-        level_counter = 5'd1;        // Start at level 1
-        level_incremented = 0;       // Flag is initially cleared
+        level_counter = 5'd1;            // Start at level 1
+        level_incremented = 0;           // Flag is initially cleared
     end
 
     // Update the level based on frog reaching the top or reset condition
     always @(posedge clk) begin
-        if (reset_level && lives == 0) begin  // Reset level only if lives are 0
-            level_counter <= 5'd1;  // Reset to level 1
-            level_incremented <= 0; // Clear the flag
-        end else if (frog_at_top && !level_incremented) begin
+        // New condition: Reset to level 1 if all switches are pressed at the same time
+        if (debounced_sw1 && debounced_sw2 && debounced_sw3 && debounced_sw4) begin
+            level_counter <= 5'd1;       // Reset to level 1 when all switches are pressed
+            level_incremented <= 0;      // Clear the flag
+            reset_frog <= 1;             // Also reset the frog to initial position
+        end
+        // Reset level only if all lives are gone
+        else if (reset_level && lives == 0) begin  
+            level_counter <= 5'd1;       // Reset to level 1
+            level_incremented <= 0;      // Clear the flag
+        end 
+        // If frog reaches the top and the level has not been incremented yet
+        else if (frog_at_top && !level_incremented) begin
             if (level_counter < 99) begin
                 level_counter <= level_counter + 5'd1;  // Increment level
                 level_incremented <= 1;  // Set the flag to prevent multiple increments
             end
-        end else if (!frog_at_top) begin
-            level_incremented <= 0;  // Clear the flag when frog leaves the top
+        end 
+        // Clear the flag when frog leaves the top
+        else if (!frog_at_top) begin
+            level_incremented <= 0;  
         end
-        
-        reset_frog <= frog_at_top || (reset_level && lives == 0); // Reset frog either at level reset or top
+
+        // Reset frog when frog reaches the top, all lives are gone, or all switches are pressed
+        if (frog_at_top || (reset_level && lives == 0)) begin
+            reset_frog <= 1;  // Reset frog when necessary
+        end else begin
+            reset_frog <= 0;  // Keep frog where it is otherwise
+        end
     end
 
     // Assign level_counter to the output level
