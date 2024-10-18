@@ -28,15 +28,15 @@ module frog_display (
     input wire [4:0] car11_x,   // Car 11 X position
     input wire [3:0] car11_y,   // Car 11 Y position
     input wire [4:0] car12_x,   // Car 12 X position
-    input wire [3:0] car12_y,   // Car 12 Y position
+    input wire [3:0] car12_y,    // Car 12 Y position
     input wire [4:0] car13_x,   // Car 13 X position
-    input wire [3:0] car13_y,   // Car 13 Y position
+    input wire [3:0] car13_y,    // Car 13 Y position
     input wire [4:0] car14_x,   // Car 14 X position
-    input wire [3:0] car14_y,   // Car 14 Y position
+    input wire [3:0] car14_y,    // Car 14 Y position
     input wire [4:0] car15_x,   // Car 15 X position
-    input wire [3:0] car15_y,   // Car 15 Y position
+    input wire [3:0] car15_y,    // Car 15 Y position
     input wire [4:0] car16_x,   // Car 16 X position
-    input wire [3:0] car16_y,   // Car 16 Y position
+    input wire [3:0] car16_y,    // Car 16 Y position
     output reg [4:0] frog_col,  // Frog X position (in columns, 5 bits)
     output reg [3:0] frog_row,  // Frog Y position (in rows, 4 bits)
     output wire frog_at_top,    // Signal to notify if frog reached the top row
@@ -67,9 +67,7 @@ module frog_display (
             frog_col <= GRID_COLS / 2;  // Reset to the center column (column 10)
             frog_row <= GRID_ROWS - 1;  // Reset to the bottom row (row 14)
             collision_detected <= 0;    // Clear the collision flag
-            if (lives == 0) begin
-                lives <= 3;  // Reset lives only when they are depleted
-            end
+            lives <= 3;  // Always reset lives to 3 when frog is reset due to switch reset or when lives == 0
         end
         // Reset the move_block when no button is pressed
         else if (!debounced_sw1 && !debounced_sw2 && !debounced_sw3 && !debounced_sw4) begin
@@ -124,7 +122,7 @@ module frog_display (
         end
     end
 
-    // Signal if frog has reached the top row (row 0)
+    // Signal if frog has reached the top row (row 0), but lives remain unchanged
     assign frog_at_top = (frog_row == 0);
 
 endmodule

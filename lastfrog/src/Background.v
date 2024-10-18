@@ -31,9 +31,9 @@ module background (
             case (grid_row)
                 4'd14: begin
                     // Top row: Grass (green)
-                    bg_r = 3'b111;
-                    bg_g = 3'b000;
-                    bg_b = 3'b111;
+                    bg_r = 3'b010;
+                    bg_g = 3'b100;
+                    bg_b = 3'b000;
                 end
                 4'd8, 4'd9, 4'd10, 4'd11, 4'd12, 4'd13: begin
                     // Rows 8-13: Road (black)
@@ -43,9 +43,9 @@ module background (
                 end
                 4'd7: begin
                     // Row 7: Grass (green)
-                    bg_r = 3'b111;
-                    bg_g = 3'b000;
-                    bg_b = 3'b111;
+                    bg_r = 3'b010;
+                    bg_g = 3'b100;
+                    bg_b = 3'b000;
                 end
                 4'd1, 4'd2, 4'd3, 4'd4, 4'd5, 4'd6: begin
                     // Rows 1-6: Road (black)
@@ -55,9 +55,9 @@ module background (
                 end
                 4'd0: begin
                     // Bottom row: Grass (green)
-                    bg_r = 3'b111;
-                    bg_g = 3'b000;
-                    bg_b = 3'b111;
+                    bg_r = 3'b010;
+                    bg_g = 3'b100;
+                    bg_b = 3'b000;
                 end
                 default: begin
                     // Default to black (if out of bounds)

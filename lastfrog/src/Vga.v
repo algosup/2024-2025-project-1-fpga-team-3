@@ -138,9 +138,9 @@ module vga_display (
         // Ensuite, afficher la grenouille si elle est dans la zone active
         else if ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == frog_col &&
                  (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == frog_row && sprite_pixel) begin
-            vga_r <= 3'b000;  // Grenouille verte
+            vga_r <= 3'b111;  // Frog color (white)
             vga_g <= 3'b111;
-            vga_b <= 3'b000;
+            vga_b <= 3'b111;
         end
             // Affichage des voitures si pas de grenouille
             else if (((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car1_x && 
