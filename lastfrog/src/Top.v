@@ -39,7 +39,7 @@ module top (
     wire slow_clk;
 
     // Slow down the clock for the car movement
-    clock_divider #(.DIV_FACTOR(23'd190000)) clk_div_inst (
+    clock_divider #(.DIV_FACTOR(23'd900000)) clk_div_inst (
     .i_Clk(i_Clk),
     .o_Divided_Clk(slow_clk)
 );
@@ -55,97 +55,97 @@ module top (
     wire [3:0] car13_y = 4'd11, car14_y = 4'd11, car15_y = 4'd12;
     wire [3:0] car16_y = 4'd13;
 
-car #(.CAR_START(1), .BASE_SPEED(24'd980), .CAR_DIRECTION(1)) car1_inst (
+car #(.CAR_START(1), .BASE_SPEED(24'd10000), .CAR_DIRECTION(1)) car1_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car1_x)
 );
 
-car #(.CAR_START(2), .BASE_SPEED(24'd980), .CAR_DIRECTION(1)) car2_inst (
+car #(.CAR_START(2), .BASE_SPEED(24'd10000), .CAR_DIRECTION(1)) car2_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car2_x)
 );
 
-car #(.CAR_START(3), .BASE_SPEED(24'd980), .CAR_DIRECTION(1)) car3_inst (
+car #(.CAR_START(3), .BASE_SPEED(24'd10000), .CAR_DIRECTION(1)) car3_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car3_x)
 );
 
-car #(.CAR_START(4), .BASE_SPEED(24'd980), .CAR_DIRECTION(1)) car4_inst (
+car #(.CAR_START(4), .BASE_SPEED(24'd10000), .CAR_DIRECTION(1)) car4_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car4_x)
 );
 
-car #(.CAR_START(5), .BASE_SPEED(24'd980), .CAR_DIRECTION(1)) car5_inst (
+car #(.CAR_START(5), .BASE_SPEED(24'd10000), .CAR_DIRECTION(1)) car5_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car5_x)
 );
 
-car #(.CAR_START(6), .BASE_SPEED(24'd980), .CAR_DIRECTION(0)) car6_inst (
+car #(.CAR_START(6), .BASE_SPEED(24'd10000), .CAR_DIRECTION(0)) car6_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car6_x)
 );
 
-car #(.CAR_START(7), .BASE_SPEED(24'd980), .CAR_DIRECTION(0)) car7_inst (
+car #(.CAR_START(7), .BASE_SPEED(24'd10000), .CAR_DIRECTION(0)) car7_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car7_x)
 );
 
-car #(.CAR_START(8), .BASE_SPEED(24'd980), .CAR_DIRECTION(0)) car8_inst (
+car #(.CAR_START(8), .BASE_SPEED(24'd10000), .CAR_DIRECTION(0)) car8_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car8_x)
 );
 
-car #(.CAR_START(9), .BASE_SPEED(24'd980), .CAR_DIRECTION(1)) car9_inst (
+car #(.CAR_START(9), .BASE_SPEED(24'd10000), .CAR_DIRECTION(1)) car9_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car9_x)
 );
 
-car #(.CAR_START(10), .BASE_SPEED(24'd980), .CAR_DIRECTION(1)) car10_inst (
+car #(.CAR_START(10), .BASE_SPEED(24'd10000), .CAR_DIRECTION(1)) car10_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car10_x)
 );
 
-car #(.CAR_START(11), .BASE_SPEED(24'd980), .CAR_DIRECTION(0)) car11_inst (
+car #(.CAR_START(11), .BASE_SPEED(24'd10000), .CAR_DIRECTION(0)) car11_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car11_x)
 );
 
-car #(.CAR_START(12), .BASE_SPEED(24'd980), .CAR_DIRECTION(0)) car12_inst (
+car #(.CAR_START(12), .BASE_SPEED(24'd10000), .CAR_DIRECTION(0)) car12_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car12_x)
 );
 
-car #(.CAR_START(13), .BASE_SPEED(24'd980), .CAR_DIRECTION(1)) car13_inst (
+car #(.CAR_START(13), .BASE_SPEED(24'd10000), .CAR_DIRECTION(1)) car13_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car13_x)
 );
 
-car #(.CAR_START(14), .BASE_SPEED(24'd980), .CAR_DIRECTION(1)) car14_inst (
+car #(.CAR_START(14), .BASE_SPEED(24'd10000), .CAR_DIRECTION(1)) car14_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car14_x)
 );
 
-car #(.CAR_START(15), .BASE_SPEED(24'd980), .CAR_DIRECTION(1)) car15_inst (
+car #(.CAR_START(15), .BASE_SPEED(24'd10000), .CAR_DIRECTION(1)) car15_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car15_x)
 );
 
-car #(.CAR_START(16), .BASE_SPEED(24'd980), .CAR_DIRECTION(0)) car16_inst (
+car #(.CAR_START(16), .BASE_SPEED(24'd10000), .CAR_DIRECTION(0)) car16_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car16_x)
