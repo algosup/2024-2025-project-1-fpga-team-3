@@ -1,47 +1,18 @@
-module vga_display (
-    input wire clk,             // Clock signal
-    input wire [4:0] frog_col,  // Frog X position (in grid columns, 5 bits)
-    input wire [3:0] frog_row,  // Frog Y position (in grid rows, 4 bits)
-    input wire [1:0] lives,     // Number of lives remaining
-    input wire [4:0] car1_x,    // Car 1 X position (in grid columns)
-    input wire [3:0] car1_y,    // Car 1 Y position (in grid rows)
-    input wire [4:0] car2_x,    // Car 2 X position (in grid columns)
-    input wire [3:0] car2_y,    // Car 2 Y position (in grid rows)
-    input wire [4:0] car3_x,    // Car 3 X position (in grid columns)
-    input wire [3:0] car3_y,    // Car 3 Y position (in grid rows)
-    input wire [4:0] car4_x,    // Car 4 X position (in grid columns)
-    input wire [3:0] car4_y,    // Car 4 Y position (in grid rows)
-    input wire [4:0] car5_x,    // Car 5 X position (in grid columns)
-    input wire [3:0] car5_y,    // Car 5 Y position (in grid rows)
-    input wire [4:0] car6_x,    // Car 6 X position (in grid columns)
-    input wire [3:0] car6_y,    // Car 6 Y position (in grid rows)
-    input wire [4:0] car7_x,    // Car 7 X position (in grid columns)
-    input wire [3:0] car7_y,    // Car 7 Y position (in grid rows)
-    input wire [4:0] car8_x,    // Car 8 X position (in grid columns)
-    input wire [3:0] car8_y,    // Car 8 Y position (in grid rows)
-    input wire [4:0] car9_x,    // Car 9 X position (in grid columns)
-    input wire [3:0] car9_y,    // Car 9 Y position (in grid rows)
-    input wire [4:0] car10_x,   // Car 10 X position (in grid columns)
-    input wire [3:0] car10_y,   // Car 10 Y position (in grid rows)
-    input wire [4:0] car11_x,   // Car 11 X position (in grid columns)
-    input wire [3:0] car11_y,   // Car 11 Y position (in grid rows)
-    input wire [4:0] car12_x,   // Car 12 X position (in grid columns)
-    input wire [3:0] car12_y,   // Car 12 Y position (in grid rows)
-    input wire [4:0] car13_x,   // Car 13 X position (in grid columns)
-    input wire [3:0] car13_y,   // Car 13 Y position (in grid rows)
-    input wire [4:0] car14_x,   // Car 14 X position (in grid columns)
-    input wire [3:0] car14_y,   // Car 14 Y position (in grid rows)
-    input wire [4:0] car15_x,   // Car 15 X position (in grid columns)
-    input wire [3:0] car15_y,   // Car 15 Y position (in grid rows)
-    input wire [4:0] car16_x,   // Car 16 X position (in grid columns)
-    input wire [3:0] car16_y,   // Car 16 Y position (in grid rows)
-    output reg [2:0] vga_r,     // VGA Red signal
-    output reg [2:0] vga_g,     // VGA Green signal
-    output reg [2:0] vga_b,     // VGA Blue signal
-    output reg vga_hs,          // VGA Horizontal sync
-    output reg vga_vs           // VGA Vertical sync
-);
 
+module vga_display (
+    input wire clk,
+    input wire [4:0] frog_col,  // Frog X position (in grid columns)
+    input wire [3:0] frog_row,  // Frog Y position (in grid rows)
+    input wire [1:0] lives,     // Number of lives remaining
+    input wire [4:0] car1_x, car2_x, car3_x, car4_x, car5_x,
+    input wire [4:0] car6_x, car7_x, car8_x, car9_x, car10_x,
+    input wire [4:0] car11_x, car12_x, car13_x, car14_x, car15_x, car16_x,
+    input wire [3:0] car1_y, car2_y, car3_y, car4_y, car5_y,
+    input wire [3:0] car6_y, car7_y, car8_y, car9_y, car10_y,
+    input wire [3:0] car11_y, car12_y, car13_y, car14_y, car15_y, car16_y,
+    output reg [2:0] vga_r, vga_g, vga_b,  // VGA RGB color signals
+    output reg vga_hs, vga_vs              // VGA sync signals
+);
 
     // VGA timing parameters for 640x480 resolution
     localparam H_SYNC_CYC = 96;
@@ -61,41 +32,13 @@ module vga_display (
     localparam GRID_HEIGHT = 32;
 
     // Horizontal and vertical counters for VGA timing
-    reg [9:0] h_count = 640;
-    reg [8:0] v_count = 480;
+    reg [9:0] h_count = 0;
+    reg [8:0] v_count = 0;
 
     // Background color signals
     wire [2:0] bg_r, bg_g, bg_b;
 
-    // Signals from live_display for lives
-    wire [2:0] lives_r, lives_g, lives_b;
-
-    // Sprite position within the grid cell
-    wire [4:0] sprite_x;
-    wire [4:0] sprite_y;
-    wire sprite_pixel;
-
-    // Instantiate the background module
-    background bg_inst (
-        .h_count(h_count),
-        .v_count(v_count),
-        .bg_r(bg_r),
-        .bg_g(bg_g),
-        .bg_b(bg_b)
-    );
-
-    // Assign calculated sprite_x and sprite_y positions based on h_count and v_count
-    assign sprite_x = (h_count - (H_SYNC_CYC + H_BACK_PORCH)) % GRID_WIDTH;
-    assign sprite_y = (v_count - (V_SYNC_CYC + V_BACK_PORCH)) % GRID_HEIGHT;
-
-    // Instantiate the sprite ROM for the frog
-    sprite_frog frog_sprite (
-        .x(sprite_x),    // Pass the calculated x position
-        .y(sprite_y),    // Pass the calculated y position
-        .pixel(sprite_pixel)  // Pixel output from sprite
-    );
-
-    // Horizontal sync and vertical sync logic
+    // Sync logic for horizontal and vertical signals
     always @(posedge clk) begin
         if (h_count == H_LINE - 1) begin
             h_count <= 0;
@@ -108,11 +51,56 @@ module vga_display (
             h_count <= h_count + 1;
         end
 
+        // Generate sync signals
         vga_hs <= (h_count < H_SYNC_CYC) ? 0 : 1;
         vga_vs <= (v_count < V_SYNC_CYC) ? 0 : 1;
     end
 
-    // Instancier le module live_display pour afficher les vies
+    // Calculate the adjusted coordinates
+    wire [9:0] active_h = h_count - (H_SYNC_CYC + H_BACK_PORCH); // Adjust for active region
+    wire [9:0] active_v = v_count - (V_SYNC_CYC + V_BACK_PORCH); // Adjust for active region
+
+    // Calculate sprite coordinates for the frog
+    wire [4:0] sprite_x = (active_h - (frog_col * GRID_WIDTH)) % GRID_WIDTH;
+    wire [4:0] sprite_y = (active_v - (frog_row * GRID_HEIGHT)) % GRID_HEIGHT;
+
+    wire [5:0] blue_car_pixel_data;
+    blue_car_sprite_bram blue_car_bram (
+        .clk(clk),
+        .sprite_x(active_h[4:0]),    // Truncate active_h to 5 bits
+        .sprite_y(active_v[4:0]),    // Truncate active_v to 5 bits
+        .pixel_data(blue_car_pixel_data)  // Car's pixel data
+    );
+    wire [5:0] red_car_pixel_data;
+    red_car_sprite_bram red_car_bram (
+        .clk(clk),
+        .sprite_x(active_h[4:0]),    // Truncate active_h to 5 bits
+        .sprite_y(active_v[4:0]),    // Truncate active_v to 5 bits
+        .pixel_data(red_car_pixel_data)  // Car's pixel data
+    );
+
+    // Instantiate the frog sprite BRAM module
+    wire [5:0] frog_pixel_data;
+    frog_sprite_bram frog_bram_inst (
+        .clk(clk),
+        .sprite_x(sprite_x),
+        .sprite_y(sprite_y),
+        .pixel_data(frog_pixel_data)
+    );
+
+    // Instantiate the background module
+    background bg_inst (
+        .h_count(h_count),
+        .v_count(v_count),
+        .bg_r(bg_r),
+        .bg_g(bg_g),
+        .bg_b(bg_b)
+    );
+
+    // Signals from lives_display for lives
+    wire [2:0] lives_r, lives_g, lives_b;
+
+    // Instantiate the lives display module
     live_display lives_inst (
         .lives(lives),
         .h_count(h_count),
@@ -122,62 +110,58 @@ module vga_display (
         .vga_b(lives_b)
     );
 
-    // Logique unifiée pour gérer l'affichage
+    // VGA output logic for frog sprite, cars, and background
     always @(posedge clk) begin
-        // Par défaut, couleur de fond
+        // Default background color
         vga_r <= bg_r;
         vga_g <= bg_g;
         vga_b <= bg_b;
 
-        // Priorité : affichage des vies
-        if (lives_r != 3'b000 || lives_g != 3'b000 || lives_b != 3'b000) begin
+        // Display frog sprite if it’s not transparent (all 0)
+        if ((active_h >= frog_col * GRID_WIDTH) && (active_h < (frog_col + 1) * GRID_WIDTH) &&
+            (active_v >= frog_row * GRID_HEIGHT) && (active_v < (frog_row + 1) * GRID_HEIGHT) && 
+            frog_pixel_data != 6'b000000) begin
+            vga_r <= {frog_pixel_data[5:4], 1'b0};  // Red
+            vga_g <= {frog_pixel_data[3:2], 1'b0};  // Green
+            vga_b <= {frog_pixel_data[1:0], 1'b0};  // Blue
+        end
+        // Display lives if not default background
+        else if (lives_r != 3'b000 || lives_g != 3'b000 || lives_b != 3'b000) begin
             vga_r <= lives_r;
             vga_g <= lives_g;
             vga_b <= lives_b;
         end
-        // Ensuite, afficher la grenouille si elle est dans la zone active
-        else if ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == frog_col &&
-                 (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == frog_row && sprite_pixel) begin
-            vga_r <= 3'b111;  // Frog color (white)
-            vga_g <= 3'b111;
-            vga_b <= 3'b111;
+        // Display blue car sprite if the pixel is non-transparent
+        else if (((active_h / GRID_WIDTH == car1_x && active_v / GRID_HEIGHT == car1_y) ||
+                  (active_h / GRID_WIDTH == car2_x && active_v / GRID_HEIGHT == car2_y) ||
+                  (active_h / GRID_WIDTH == car3_x && active_v / GRID_HEIGHT == car3_y) ||
+                  (active_h / GRID_WIDTH == car4_x && active_v / GRID_HEIGHT == car4_y) ||
+                  (active_h / GRID_WIDTH == car5_x && active_v / GRID_HEIGHT == car5_y) ||
+                  (active_h / GRID_WIDTH == car6_x && active_v / GRID_HEIGHT == car6_y) ||
+                  (active_h / GRID_WIDTH == car7_x && active_v / GRID_HEIGHT == car7_y) ||
+                  (active_h / GRID_WIDTH == car8_x && active_v / GRID_HEIGHT == car8_y) ||
+                  (active_h / GRID_WIDTH == car9_x && active_v / GRID_HEIGHT == car9_y) &&
+                 blue_car_pixel_data != 6'b000000)) begin
+            // Set the VGA output using the car's pixel data (RGB 6-bit to 3-bit VGA output conversion)
+            vga_r <= {blue_car_pixel_data[5:4], 1'b0};  // Red
+            vga_g <= {blue_car_pixel_data[3:2], 1'b0};  // Green
+            vga_b <= {blue_car_pixel_data[1:0], 1'b0};  // Blue
         end
-            // Affichage des voitures si pas de grenouille
-            else if (((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car1_x && 
-                      (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car1_y) ||
-                     ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car2_x && 
-                      (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car2_y) ||
-                     ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car3_x && 
-                      (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car3_y) ||
-                     ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car4_x && 
-                      (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car4_y) ||
-                     ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car5_x && 
-                      (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car5_y) ||
-                     ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car6_x && 
-                      (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car6_y) ||
-                     ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car7_x && 
-                      (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car7_y) ||
-                     ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car8_x && 
-                      (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car8_y) ||
-                     ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car9_x && 
-                      (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car9_y) ||
-                     ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car10_x && 
-                      (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car10_y) ||
-                     ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car11_x && 
-                      (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car11_y) ||
-                     ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car12_x && 
-                      (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car12_y) ||
-                     ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car13_x && 
-                      (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car13_y) ||
-                     ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car14_x && 
-                      (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car14_y) ||
-                     ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car15_x && 
-                      (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car15_y) ||
-                     ((h_count - (H_SYNC_CYC + H_BACK_PORCH)) / GRID_WIDTH == car16_x && 
-                      (v_count - (V_SYNC_CYC + V_BACK_PORCH)) / GRID_HEIGHT == car16_y)) begin
-                vga_r <= 3'b111;  // Car color (red)
-                vga_g <= 3'b000;
-                vga_b <= 3'b000;
-            end
+        // Display red car sprite if the pixel is non-transparent
+        else if(( (active_h / GRID_WIDTH == car10_x && active_v / GRID_HEIGHT == car10_y) ||
+                  (active_h / GRID_WIDTH == car11_x && active_v / GRID_HEIGHT == car11_y) ||
+                  (active_h / GRID_WIDTH == car12_x && active_v / GRID_HEIGHT == car12_y) ||
+                  (active_h / GRID_WIDTH == car13_x && active_v / GRID_HEIGHT == car13_y) ||
+                  (active_h / GRID_WIDTH == car14_x && active_v / GRID_HEIGHT == car14_y) ||
+                  (active_h / GRID_WIDTH == car15_x && active_v / GRID_HEIGHT == car15_y) ||
+                  (active_h / GRID_WIDTH == car16_x && active_v / GRID_HEIGHT == car16_y)) &&
+                 red_car_pixel_data != 6'b000000) begin
+            // Set the VGA output using the car's pixel data (RGB 6-bit to 3-bit VGA output conversion)
+            vga_r <= {red_car_pixel_data[5:4], 1'b0};  // Red
+            vga_g <= {red_car_pixel_data[3:2], 1'b0};  // Green
+            vga_b <= {red_car_pixel_data[1:0], 1'b0};  // Blue
+        
         end
+    end
+
 endmodule

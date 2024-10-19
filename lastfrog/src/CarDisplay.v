@@ -4,7 +4,7 @@ module car #(
     parameter CAR_DIRECTION = 1       // 0 = Left, 1 = Right (default Right)
 ) (
     input wire i_Clk,                 // Slower clock signal from clock divider
-    input wire [4:0] level,           // Current level (speed factor)
+    input wire [3:0] level,           // Current level (speed factor)
     output reg [4:0] o_car_x          // Output car X position (5 bits for grid size)
 );
 
