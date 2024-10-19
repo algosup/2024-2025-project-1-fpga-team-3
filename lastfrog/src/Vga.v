@@ -1,4 +1,3 @@
-
 module vga_display (
     input wire clk,
     input wire [4:0] frog_col,  // Frog X position (in grid columns)
@@ -100,8 +99,9 @@ module vga_display (
     // Signals from lives_display for lives
     wire [2:0] lives_r, lives_g, lives_b;
 
-    // Instantiate the lives display module
+    // Instantiate the lives display module (using heart sprites for lives)
     live_display lives_inst (
+        .clk(clk),
         .lives(lives),
         .h_count(h_count),
         .v_count(v_count),
