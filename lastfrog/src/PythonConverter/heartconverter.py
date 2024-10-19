@@ -2,7 +2,7 @@ from PIL import Image
 
 # Open the image file (Ensure the path is correct)
 img = Image.open("heart.png")  # Change to your actual image path
-img = img.resize((20, 20))  # Resize from original size to 20x20 pixels
+img = img.resize((20, 20))  # Resize from 640x640 to 32x32 pixels
 
 # Define a function to quantize the RGB values to 2-bit per channel
 def rgb_to_6bit(r, g, b):
@@ -14,14 +14,14 @@ def rgb_to_6bit(r, g, b):
 # Convert the image to 6-bit RGB format
 bram_array = []
 
-# Ensure each pixel from 0 to 399 is processed (20x20 = 400 pixels)
+# Ensure each pixel from 0 to 1023 is processed
 for y in range(20):
     for x in range(20):
         r, g, b = img.getpixel((x, y))[:3]  # Get RGB value for each pixel
         pixel_6bit = rgb_to_6bit(r, g, b)
         bram_array.append(pixel_6bit)
 
-# Print the BRAM initialization values for all pixels (0 to 399)
+# Print the BRAM initialization values for all pixels (0 to 1023)
 for i in range(400):
     if i < len(bram_array):
         val = bram_array[i]
