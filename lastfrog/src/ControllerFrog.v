@@ -6,38 +6,12 @@ module FrogController (
     input wire debounced_sw4,   // Debounced Button for moving right
     input wire reset_frog,      // Signal to reset frog to initial position
     input wire reset_lives,     // Signal to reset lives to 3 (triggered by switches or game over)
-    input wire [4:0] car1_x,    // Car 1 X position
-    input wire [3:0] car1_y,    // Car 1 Y position
-    input wire [4:0] car2_x,    // Car 2 X position
-    input wire [3:0] car2_y,    // Car 2 Y position
-    input wire [4:0] car3_x,    // Car 3 X position
-    input wire [3:0] car3_y,    // Car 3 Y position
-    input wire [4:0] car4_x,    // Car 4 X position
-    input wire [3:0] car4_y,    // Car 4 Y position
-    input wire [4:0] car5_x,    // Car 5 X position
-    input wire [3:0] car5_y,    // Car 5 Y position
-    input wire [4:0] car6_x,    // Car 6 X position
-    input wire [3:0] car6_y,    // Car 6 Y position
-    input wire [4:0] car7_x,    // Car 7 X position
-    input wire [3:0] car7_y,    // Car 7 Y position
-    input wire [4:0] car8_x,    // Car 8 X position
-    input wire [3:0] car8_y,    // Car 8 Y position
-    input wire [4:0] car9_x,    // Car 9 X position
-    input wire [3:0] car9_y,    // Car 9 Y position
-    input wire [4:0] car10_x,   // Car 10 X position
-    input wire [3:0] car10_y,   // Car 10 Y position
-    input wire [4:0] car11_x,   // Car 11 X position
-    input wire [3:0] car11_y,   // Car 11 Y position
-    input wire [4:0] car12_x,   // Car 12 X position
-    input wire [3:0] car12_y,   // Car 12 Y position
-    input wire [4:0] car13_x,   // Car 13 X position
-    input wire [3:0] car13_y,   // Car 13 Y position
-    input wire [4:0] car14_x,   // Car 14 X position
-    input wire [3:0] car14_y,   // Car 14 Y position
-    input wire [4:0] car15_x,   // Car 15 X position
-    input wire [3:0] car15_y,   // Car 15 Y position
-    input wire [4:0] car16_x,   // Car 16 X position
-    input wire [3:0] car16_y,   // Car 16 Y position
+    input wire [4:0] car1_x, car2_x, car3_x, car4_x, car5_x,
+    input wire [4:0] car6_x, car7_x, car8_x, car9_x, car10_x,
+    input wire [4:0] car11_x, car12_x, car13_x, car14_x, car15_x, car16_x,
+    input wire [3:0] car1_y, car2_y, car3_y, car4_y, car5_y,
+    input wire [3:0] car6_y, car7_y, car8_y, car9_y, car10_y,
+    input wire [3:0] car11_y, car12_y, car13_y, car14_y, car15_y, car16_y,
     output reg [4:0] frog_col,  // Frog X position (in columns, 5 bits)
     output reg [3:0] frog_row,  // Frog Y position (in rows, 4 bits)
     output wire frog_at_top,    // Signal to notify if frog reached the top row
