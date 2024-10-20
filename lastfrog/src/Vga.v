@@ -63,19 +63,36 @@ module VgaDisplay (
     wire [4:0] sprite_x = (active_h - (frog_col * GRID_WIDTH)) % GRID_WIDTH;
     wire [4:0] sprite_y = (active_v - (frog_row * GRID_HEIGHT)) % GRID_HEIGHT;
 
-    wire [5:0] blue_car_pixel_data;
-    BlueCarSpriteBram blue_car_bram (
+    wire [5:0] blue_car_left_pixel_data;
+    BlueCarLeftSpriteBram blue_car_left_bram (
         .clk(clk),
         .sprite_x(active_h[4:0]),    // Truncate active_h to 5 bits
         .sprite_y(active_v[4:0]),    // Truncate active_v to 5 bits
-        .pixel_data(blue_car_pixel_data)  // Car's pixel data
+        .pixel_data(blue_car_left_pixel_data)  // Car's pixel data
     );
-    wire [5:0] red_car_pixel_data;
-    RedCarSpriteBram red_car_bram (
+
+    wire [5:0] blue_car_right_pixel_data;
+    BlueCarRightSpriteBram blue_car_right_bram (
         .clk(clk),
         .sprite_x(active_h[4:0]),    // Truncate active_h to 5 bits
         .sprite_y(active_v[4:0]),    // Truncate active_v to 5 bits
-        .pixel_data(red_car_pixel_data)  // Car's pixel data
+        .pixel_data(blue_car_right_pixel_data)  // Car's pixel data
+    );
+
+    wire [5:0] red_car_left_pixel_data;
+    RedCarLeftSpriteBram red_car_left_bram (
+        .clk(clk),
+        .sprite_x(active_h[4:0]),    // Truncate active_h to 5 bits
+        .sprite_y(active_v[4:0]),    // Truncate active_v to 5 bits
+        .pixel_data(red_car_left_pixel_data)  // Car's pixel data
+    );
+
+    wire [5:0] red_car_right_pixel_data;
+    RedCarRightSpriteBram red_car_Right_bram (
+        .clk(clk),
+        .sprite_x(active_h[4:0]),    // Truncate active_h to 5 bits
+        .sprite_y(active_v[4:0]),    // Truncate active_v to 5 bits
+        .pixel_data(red_car_right_pixel_data)  // Car's pixel data
     );
 
     // Instantiate the frog sprite BRAM module
@@ -132,35 +149,47 @@ module VgaDisplay (
             vga_g <= lives_g;
             vga_b <= lives_b;
         end
-        // Display blue car sprite if the pixel is non-transparent
-        else if (((active_h / GRID_WIDTH == car1_x && active_v / GRID_HEIGHT == car1_y) ||
-                  (active_h / GRID_WIDTH == car2_x && active_v / GRID_HEIGHT == car2_y) ||
-                  (active_h / GRID_WIDTH == car3_x && active_v / GRID_HEIGHT == car3_y) ||
-                  (active_h / GRID_WIDTH == car4_x && active_v / GRID_HEIGHT == car4_y) ||
-                  (active_h / GRID_WIDTH == car5_x && active_v / GRID_HEIGHT == car5_y) ||
+        // Display blue car 
+        else if (((active_h / GRID_WIDTH == car3_x && active_v / GRID_HEIGHT == car3_y) ||
                   (active_h / GRID_WIDTH == car6_x && active_v / GRID_HEIGHT == car6_y) ||
                   (active_h / GRID_WIDTH == car7_x && active_v / GRID_HEIGHT == car7_y) ||
-                  (active_h / GRID_WIDTH == car8_x && active_v / GRID_HEIGHT == car8_y) ||
-                  (active_h / GRID_WIDTH == car9_x && active_v / GRID_HEIGHT == car9_y)) &&
-                 blue_car_pixel_data != 6'b000000) begin
-            // Set the VGA output using the car's pixel data (RGB 6-bit to 3-bit VGA output conversion)
-            vga_r <= {blue_car_pixel_data[5:4], 1'b0};  // Red
-            vga_g <= {blue_car_pixel_data[3:2], 1'b0};  // Green
-            vga_b <= {blue_car_pixel_data[1:0], 1'b0};  // Blue
+                  (active_h / GRID_WIDTH == car8_x && active_v / GRID_HEIGHT == car8_y)) &&
+                 blue_car_left_pixel_data != 6'b000000) begin
+            // Set the VGA output using the car's pixel data 
+            vga_r <= {blue_car_left_pixel_data[5:4], 1'b0};  // Red
+            vga_g <= {blue_car_left_pixel_data[3:2], 1'b0};  // Green
+            vga_b <= {blue_car_left_pixel_data[1:0], 1'b0};  // Blue
         end
-        // Display red car sprite if the pixel is non-transparent (i.e., not black)
+        else if (((active_h / GRID_WIDTH == car1_x && active_v / GRID_HEIGHT == car1_y) ||
+                  (active_h / GRID_WIDTH == car2_x && active_v / GRID_HEIGHT == car2_y) ||
+                  (active_h / GRID_WIDTH == car4_x && active_v / GRID_HEIGHT == car4_y) ||
+                  (active_h / GRID_WIDTH == car5_x && active_v / GRID_HEIGHT == car5_y) ||
+                  (active_h / GRID_WIDTH == car9_x && active_v / GRID_HEIGHT == car9_y)) &&
+                 blue_car_right_pixel_data != 6'b000000) begin
+            // Set the VGA output using the car's pixel data
+            vga_r <= {blue_car_right_pixel_data[5:4], 1'b0};  // Red
+            vga_g <= {blue_car_right_pixel_data[3:2], 1'b0};  // Green
+            vga_b <= {blue_car_right_pixel_data[1:0], 1'b0};  // Blue
+        end
+        // Display red car
         else if (((active_h / GRID_WIDTH == car10_x && active_v / GRID_HEIGHT == car10_y) ||
                   (active_h / GRID_WIDTH == car11_x && active_v / GRID_HEIGHT == car11_y) ||
                   (active_h / GRID_WIDTH == car12_x && active_v / GRID_HEIGHT == car12_y) ||
-                  (active_h / GRID_WIDTH == car13_x && active_v / GRID_HEIGHT == car13_y) ||
-                  (active_h / GRID_WIDTH == car14_x && active_v / GRID_HEIGHT == car14_y) ||
-                  (active_h / GRID_WIDTH == car15_x && active_v / GRID_HEIGHT == car15_y) ||
                   (active_h / GRID_WIDTH == car16_x && active_v / GRID_HEIGHT == car16_y)) && 
-                 red_car_pixel_data != 6'b000000) begin
-            // Set the VGA output using the car's pixel data, if it's not black
-            vga_r <= {red_car_pixel_data[5:4], 1'b0};  // Red
-            vga_g <= {red_car_pixel_data[3:2], 1'b0};  // Green
-            vga_b <= {red_car_pixel_data[1:0], 1'b0};  // Blue
+                 red_car_left_pixel_data != 6'b000000) begin
+            // Set the VGA output using the car's pixel data
+            vga_r <= {red_car_left_pixel_data[5:4], 1'b0};  // Red
+            vga_g <= {red_car_left_pixel_data[3:2], 1'b0};  // Green
+            vga_b <= {red_car_left_pixel_data[1:0], 1'b0};  // Blue
+        end
+        else if (((active_h / GRID_WIDTH == car13_x && active_v / GRID_HEIGHT == car13_y) ||
+                  (active_h / GRID_WIDTH == car14_x && active_v / GRID_HEIGHT == car14_y) ||
+                  (active_h / GRID_WIDTH == car15_x && active_v / GRID_HEIGHT == car15_y)) && 
+                 red_car_right_pixel_data != 6'b000000) begin
+            // Set the VGA output using the car's pixel data
+            vga_r <= {red_car_right_pixel_data[5:4], 1'b0};  // Red
+            vga_g <= {red_car_right_pixel_data[3:2], 1'b0};  // Green
+            vga_b <= {red_car_right_pixel_data[1:0], 1'b0};  // Blue
         end
     end
 endmodule

@@ -55,7 +55,7 @@ module top (
     wire [3:0] car13_y = 4'd11, car14_y = 4'd11, car15_y = 4'd12;
     wire [3:0] car16_y = 4'd13;
 
-car #(.CAR_START(7), .BASE_SPEED(24'd10004), .CAR_DIRECTION(1)) car1_inst (
+car #(.CAR_START(7), .BASE_SPEED(24'd10003), .CAR_DIRECTION(1)) car1_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car1_x)
