@@ -34,35 +34,35 @@ module Background (
     wire [5:0] sidewalk_pixel_data;
 
     // Load each block (use the correct BRAM module for each block sprite)
-    DoubleSidewalkSpriteBram double_sidewalk_bram (
+    double_sidewalk_sprite_bram double_sidewalk_bram (
         .clk(clk),
         .sprite_x(block_x),
         .sprite_y(block_y),
         .pixel_data(double_sidewalk_pixel_data)
     );
 
-    OneWaySidewalkSpriteBram one_way_sidewalk_bram (
+    one_way_sidewalk_sprite_bram one_way_sidewalk_bram (
         .clk(clk),
         .sprite_x(block_x),
         .sprite_y(block_y),
         .pixel_data(one_way_sidewalk_pixel_data)
     );
     
-    SidewalkMonochromaticBram sidewalk_monochromatic_bram (
+    sidewalk_monochromatic_bram sidewalk_monochromatic_bram (
         .clk(clk),
         .sprite_x(block_x),
         .sprite_y(block_y),
         .pixel_data(sidewalk_pixel_data)
     );
 
-    OneWaySidewalkReversedSpriteBram one_way_sidewalk_reversed_bram (
+    one_way_sidewalk_reversed_sprite_bram one_way_sidewalk_reversed_bram (
         .clk(clk),
         .sprite_x(block_x),
         .sprite_y(block_y),
         .pixel_data(one_way_sidewalk_reversed_pixel_data)
     );
 
-    RoadSpriteBram road_bram (
+    road_sprite_bram road_bram (
         .clk(clk),
         .sprite_x(block_x),
         .sprite_y(block_y),

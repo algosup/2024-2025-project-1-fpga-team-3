@@ -1,4 +1,4 @@
-module HeartSpriteBram (
+module heart_sprite_bram (
     input wire clk,                 // Clock signal
     input wire [3:0] sprite_x,      // X coordinate within the car sprite (0-19)
     input wire [3:0] sprite_y,      // Y coordinate within the car sprite (0-19)
