@@ -1043,7 +1043,7 @@ module RedCarRightSpriteBram (
 
     // Output the pixel data from the BRAM based on the address
     always @(posedge clk) begin
-        pixel_data <=               red_car_right_bram[bram_address];
+        pixel_data <= red_car_right_bram[bram_address];
     end
 
 endmodule

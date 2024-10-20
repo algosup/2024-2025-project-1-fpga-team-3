@@ -12,11 +12,12 @@ module FrogController (
     input wire [3:0] car1_y, car2_y, car3_y, car4_y, car5_y,
     input wire [3:0] car6_y, car7_y, car8_y, car9_y, car10_y,
     input wire [3:0] car11_y, car12_y, car13_y, car14_y, car15_y, car16_y,
-    output reg [4:0] frog_col,  // Frog X position (in columns, 5 bits)
-    output reg [3:0] frog_row,  // Frog Y position (in rows, 4 bits)
-    output wire frog_at_top,    // Signal to notify if frog reached the top row
+    output reg [4:0] frog_col,      // Frog X position (in columns, 5 bits)
+    output reg [3:0] frog_row,      // Frog Y position (in rows, 4 bits)
+    output wire frog_at_top,        // Signal to notify if frog reached the top row
     output reg collision_detected,  // Signal for detecting collisions
-    output reg [1:0] lives      // Number of lives left (2 bits, for 3 lives)
+    output reg [1:0] lives,         // Number of lives left (2 bits, for 3 lives)
+    output reg [1:0] frog_direction // Frog's direction (00 = up, 01 = down, 10 = left, 11 = right)
 );
 
     // Grid parameters
@@ -26,13 +27,14 @@ module FrogController (
     // Movement blocking state
     reg move_block;
 
-    // Initialize frog position, move block state, collision detection, and lives
+    // Initialize frog position, move block state, collision detection, lives, and direction
     initial begin
         frog_col = GRID_COLS / 2;   // Start at the center column (column 10)
         frog_row = GRID_ROWS - 1;   // Start at the bottom row (row 14)
         move_block = 0;             // No movement is blocked initially
         collision_detected = 0;     // No collision initially
         lives = 3;                  // Start with 3 lives
+        frog_direction = 2'b00;     // Start with frog facing up
     end
 
     // Move frog based on debounced button presses
@@ -47,6 +49,7 @@ module FrogController (
             frog_col <= GRID_COLS / 2;  // Reset to the center column (column 10)
             frog_row <= GRID_ROWS - 1;  // Reset to the bottom row (row 14)
             collision_detected <= 0;    // Clear the collision flag
+            frog_direction <= 2'b00;    // Reset direction to up
         end
         // Reset the move_block when no button is pressed
         else if (!debounced_sw1 && !debounced_sw2 && !debounced_sw3 && !debounced_sw4) begin
@@ -57,18 +60,22 @@ module FrogController (
         if (!move_block) begin
             if (debounced_sw1 && frog_col > 0) begin
                 frog_col <= frog_col - 1;
+                frog_direction <= 2'b10;  // Left
                 move_block <= 1;  // Block further movement
             end
             else if (debounced_sw2 && frog_row < GRID_ROWS - 1) begin
                 frog_row <= frog_row + 1;
+                frog_direction <= 2'b01;  // Down
                 move_block <= 1;  // Block further movement
             end
             else if (debounced_sw3 && frog_row > 0) begin
                 frog_row <= frog_row - 1;
+                frog_direction <= 2'b00;  // Up
                 move_block <= 1;  // Block further movement
             end
             else if (debounced_sw4 && frog_col < GRID_COLS - 1) begin
                 frog_col <= frog_col + 1;
+                frog_direction <= 2'b11;  // Right
                 move_block <= 1;  // Block further movement
             end
         end
@@ -95,6 +102,7 @@ module FrogController (
                 frog_col <= GRID_COLS / 2;  // Reset frog position
                 frog_row <= GRID_ROWS - 1;
                 collision_detected <= 1;    // Flag the collision
+                frog_direction <= 2'b00;    // Reset direction to up
             end
         end else begin
             collision_detected <= 0;   // Clear the collision flag if no collision

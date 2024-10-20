@@ -55,19 +55,19 @@ module top (
     wire [3:0] car13_y = 4'd11, car14_y = 4'd11, car15_y = 4'd12;
     wire [3:0] car16_y = 4'd13;
 
-car #(.CAR_START(7), .BASE_SPEED(24'd10003), .CAR_DIRECTION(1)) car1_inst (
+car #(.CAR_START(7), .BASE_SPEED(24'd9998), .CAR_DIRECTION(1)) car1_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car1_x)
 );
 
-car #(.CAR_START(18), .BASE_SPEED(24'd10003), .CAR_DIRECTION(1)) car2_inst (
+car #(.CAR_START(18), .BASE_SPEED(24'd9998), .CAR_DIRECTION(1)) car2_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car2_x)
 );
 
-car #(.CAR_START(3), .BASE_SPEED(24'd10003), .CAR_DIRECTION(0)) car3_inst (
+car #(.CAR_START(3), .BASE_SPEED(24'd9999), .CAR_DIRECTION(0)) car3_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car3_x)
@@ -85,13 +85,13 @@ car #(.CAR_START(15), .BASE_SPEED(24'd9999), .CAR_DIRECTION(1)) car5_inst (
     .o_car_x(car5_x)
 );
 
-car #(.CAR_START(6), .BASE_SPEED(24'd10000), .CAR_DIRECTION(0)) car6_inst (
+car #(.CAR_START(6), .BASE_SPEED(24'd9997), .CAR_DIRECTION(0)) car6_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car6_x)
 );
 
-car #(.CAR_START(19), .BASE_SPEED(24'd10000), .CAR_DIRECTION(0)) car7_inst (
+car #(.CAR_START(19), .BASE_SPEED(24'd9997), .CAR_DIRECTION(0)) car7_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car7_x)
@@ -109,43 +109,43 @@ car #(.CAR_START(9), .BASE_SPEED(24'd9997), .CAR_DIRECTION(1)) car9_inst (
     .o_car_x(car9_x)
 );
 
-car #(.CAR_START(15), .BASE_SPEED(24'd10002), .CAR_DIRECTION(0)) car10_inst (
+car #(.CAR_START(15), .BASE_SPEED(24'd10004), .CAR_DIRECTION(0)) car10_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car10_x)
 );
 
-car #(.CAR_START(7), .BASE_SPEED(24'd10002), .CAR_DIRECTION(0)) car11_inst (
+car #(.CAR_START(7), .BASE_SPEED(24'd10004), .CAR_DIRECTION(0)) car11_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car11_x)
 );
 
-car #(.CAR_START(1), .BASE_SPEED(24'd10002), .CAR_DIRECTION(0)) car12_inst (
+car #(.CAR_START(1), .BASE_SPEED(24'd10004), .CAR_DIRECTION(0)) car12_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car12_x)
 );
 
-car #(.CAR_START(5), .BASE_SPEED(24'd10000), .CAR_DIRECTION(1)) car13_inst (
+car #(.CAR_START(1), .BASE_SPEED(24'd10001), .CAR_DIRECTION(1)) car13_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car13_x)
 );
 
-car #(.CAR_START(13), .BASE_SPEED(24'd10000), .CAR_DIRECTION(1)) car14_inst (
+car #(.CAR_START(11), .BASE_SPEED(24'd10002), .CAR_DIRECTION(1)) car14_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car14_x)
 );
 
-car #(.CAR_START(18), .BASE_SPEED(24'd9997), .CAR_DIRECTION(1)) car15_inst (
+car #(.CAR_START(18), .BASE_SPEED(24'd10002), .CAR_DIRECTION(1)) car15_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car15_x)
 );
 
-car #(.CAR_START(16), .BASE_SPEED(24'd9997), .CAR_DIRECTION(0)) car16_inst (
+car #(.CAR_START(16), .BASE_SPEED(24'd10000), .CAR_DIRECTION(0)) car16_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car16_x)
@@ -154,12 +154,13 @@ car #(.CAR_START(16), .BASE_SPEED(24'd9997), .CAR_DIRECTION(0)) car16_inst (
     wire [3:0] frog_row;
     wire frog_at_top;
     wire reset_frog;
-    wire reset_lives;  // Wire to reset lives
+    wire reset_lives;
     wire collision_detected;
-    wire [1:0] lives;  // Number of lives left
+    wire [1:0] lives;
+    wire [1:0] frog_direction;  // **NEW: Frog's direction**
     wire [3:0] current_level;
 
-    // Instantiate the frog display module
+    // Instantiate the frog display controller (now includes direction handling)
     FrogController frog_inst (
         .clk(i_Clk),
         .debounced_sw1(debounced_sw1),
@@ -167,7 +168,7 @@ car #(.CAR_START(16), .BASE_SPEED(24'd9997), .CAR_DIRECTION(0)) car16_inst (
         .debounced_sw3(debounced_sw3),
         .debounced_sw4(debounced_sw4),
         .reset_frog(reset_frog),
-        .reset_lives(reset_lives),  // Pass reset_lives to frog_display
+        .reset_lives(reset_lives),
         .car1_x(car1_x), .car1_y(car1_y),
         .car2_x(car2_x), .car2_y(car2_y),
         .car3_x(car3_x), .car3_y(car3_y),
@@ -188,7 +189,8 @@ car #(.CAR_START(16), .BASE_SPEED(24'd9997), .CAR_DIRECTION(0)) car16_inst (
         .frog_row(frog_row),
         .frog_at_top(frog_at_top),
         .collision_detected(collision_detected),
-        .lives(lives)  // Pass lives to the frog display module
+        .lives(lives),
+        .frog_direction(frog_direction)  // Pass frog direction to the module
     );
 
     wire reset_level = (debounced_sw1 && debounced_sw2 && debounced_sw3 && debounced_sw4) || collision_detected;
@@ -198,14 +200,14 @@ car #(.CAR_START(16), .BASE_SPEED(24'd9997), .CAR_DIRECTION(0)) car16_inst (
         .clk(i_Clk),
         .reset_level(reset_level),
         .frog_at_top(frog_at_top),
-        .lives(lives),  // Pass lives to the level counter
-        .debounced_sw1(debounced_sw1),  // Pass the debounced switch 1
-        .debounced_sw2(debounced_sw2),  // Pass the debounced switch 2
-        .debounced_sw3(debounced_sw3),  // Pass the debounced switch 3
-        .debounced_sw4(debounced_sw4),  // Pass the debounced switch 4
-        .level(current_level),  // **Connecter current_level ici**
+        .lives(lives),
+        .debounced_sw1(debounced_sw1),
+        .debounced_sw2(debounced_sw2),
+        .debounced_sw3(debounced_sw3),
+        .debounced_sw4(debounced_sw4),
+        .level(current_level),
         .reset_frog(reset_frog),
-        .reset_lives(reset_lives),  // Pass reset_lives to the level counter
+        .reset_lives(reset_lives),
         .o_Segment1(o_Segment1),
         .o_Segment2(o_Segment2)
     );
@@ -215,6 +217,7 @@ car #(.CAR_START(16), .BASE_SPEED(24'd9997), .CAR_DIRECTION(0)) car16_inst (
         .clk(i_Clk),
         .frog_col(frog_col),
         .frog_row(frog_row),
+        .frog_direction(frog_direction), // Pass the frog's direction to VGA
         .car1_x(car1_x),
         .car1_y(car1_y),
         .car2_x(car2_x),
@@ -247,7 +250,7 @@ car #(.CAR_START(16), .BASE_SPEED(24'd9997), .CAR_DIRECTION(0)) car16_inst (
         .car15_y(car15_y),
         .car16_x(car16_x),
         .car16_y(car16_y),
-        .lives(lives),  // Pass lives to the VGA display module
+        .lives(lives),
         .vga_r(o_VGA_Red),
         .vga_g(o_VGA_Grn),
         .vga_b(o_VGA_Blu),
@@ -255,6 +258,7 @@ car #(.CAR_START(16), .BASE_SPEED(24'd9997), .CAR_DIRECTION(0)) car16_inst (
         .vga_vs(o_VGA_VSync)
     );
 
+    // LED outputs for switch status
     assign o_LED_1 = debounced_sw1;
     assign o_LED_2 = debounced_sw2;
     assign o_LED_3 = debounced_sw3;
