@@ -184,8 +184,7 @@ module VgaDisplay (
         end
         else if (((active_h / GRID_WIDTH == car13_x && active_v / GRID_HEIGHT == car13_y) ||
                   (active_h / GRID_WIDTH == car14_x && active_v / GRID_HEIGHT == car14_y) ||
-                  (active_h / GRID_WIDTH == car15_x && active_v / GRID_HEIGHT == car15_y) ||
-                  (active_h / GRID_WIDTH == car16_x && active_v / GRID_HEIGHT == car16_y)) && 
+                  (active_h / GRID_WIDTH == car15_x && active_v / GRID_HEIGHT == car15_y)) && 
                  red_car_right_pixel_data != 6'b000000) begin
             // Set the VGA output using the car's pixel data
             vga_r <= {red_car_right_pixel_data[5:4], 1'b0};  // Red
