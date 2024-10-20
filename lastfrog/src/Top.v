@@ -55,19 +55,19 @@ module top (
     wire [3:0] car13_y = 4'd11, car14_y = 4'd11, car15_y = 4'd12;
     wire [3:0] car16_y = 4'd13;
 
-car #(.CAR_START(7), .BASE_SPEED(24'd10003), .CAR_DIRECTION(1)) car1_inst (
+car #(.CAR_START(7), .BASE_SPEED(24'd9997), .CAR_DIRECTION(1)) car1_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car1_x)
 );
 
-car #(.CAR_START(18), .BASE_SPEED(24'd10003), .CAR_DIRECTION(1)) car2_inst (
+car #(.CAR_START(18), .BASE_SPEED(24'd9997), .CAR_DIRECTION(1)) car2_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car2_x)
 );
 
-car #(.CAR_START(3), .BASE_SPEED(24'd10003), .CAR_DIRECTION(0)) car3_inst (
+car #(.CAR_START(3), .BASE_SPEED(24'd9997), .CAR_DIRECTION(0)) car3_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car3_x)
@@ -79,19 +79,19 @@ car #(.CAR_START(4), .BASE_SPEED(24'd9999), .CAR_DIRECTION(1)) car4_inst (
     .o_car_x(car4_x)
 );
 
-car #(.CAR_START(15), .BASE_SPEED(24'd9999), .CAR_DIRECTION(1)) car5_inst (
+car #(.CAR_START(15), .BASE_SPEED(24'd9998), .CAR_DIRECTION(1)) car5_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car5_x)
 );
 
-car #(.CAR_START(6), .BASE_SPEED(24'd10000), .CAR_DIRECTION(0)) car6_inst (
+car #(.CAR_START(6), .BASE_SPEED(24'd9996), .CAR_DIRECTION(0)) car6_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car6_x)
 );
 
-car #(.CAR_START(19), .BASE_SPEED(24'd10000), .CAR_DIRECTION(0)) car7_inst (
+car #(.CAR_START(19), .BASE_SPEED(24'd9997), .CAR_DIRECTION(0)) car7_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car7_x)
@@ -133,19 +133,19 @@ car #(.CAR_START(5), .BASE_SPEED(24'd10000), .CAR_DIRECTION(1)) car13_inst (
     .o_car_x(car13_x)
 );
 
-car #(.CAR_START(13), .BASE_SPEED(24'd10000), .CAR_DIRECTION(1)) car14_inst (
+car #(.CAR_START(13), .BASE_SPEED(24'd10001), .CAR_DIRECTION(1)) car14_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car14_x)
 );
 
-car #(.CAR_START(18), .BASE_SPEED(24'd9997), .CAR_DIRECTION(1)) car15_inst (
+car #(.CAR_START(18), .BASE_SPEED(24'd10001), .CAR_DIRECTION(1)) car15_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car15_x)
 );
 
-car #(.CAR_START(16), .BASE_SPEED(24'd9997), .CAR_DIRECTION(0)) car16_inst (
+car #(.CAR_START(16), .BASE_SPEED(24'd10000), .CAR_DIRECTION(0)) car16_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car16_x)
