@@ -49,7 +49,7 @@ module LiveDisplay (
     wire [5:0] heart_pixel_data;
 
     // Instantiate heart sprite BRAM
-    heart_sprite_bram heart_bram (
+    HeartSpriteBram heart_bram (
         .clk(clk),
         .sprite_x(heart_sprite_x),
         .sprite_y(heart_sprite_y),

@@ -1,7 +1,7 @@
 from PIL import Image
 
 # Open the image file (Ensure the path is correct)
-img = Image.open("sidewalk_monochromatic.png")  # Change to your actual image path
+img = Image.open("carbluer.png")  # Change to your actual image path
 img = img.resize((32, 32))  # Resize from original size to 20x20 pixels
 
 # Define a function to quantize the RGB values to 2-bit per channel
@@ -25,9 +25,9 @@ for y in range(32):
 for i in range(1024):
     if i < len(bram_array):
         val = bram_array[i]
-        print(f"sidewalk_monochromatic_bram[{i}] = 6'b{val:06b};")
+        print(f"blue_car_right_bram[{i}] = 6'b{val:06b};")
     else:
-        print(f"sidewalk_monochromatic_bram[{i}] = 6'b000000;")  # Fallback for any missing pixels
+        print(f"blue_car_right_bram[{i}] = 6'b000000;")  # Fallback for any missing pixels
 
 # Debugging: check how many pixels were processed
 print(f"Total pixels processed: {len(bram_array)}")
