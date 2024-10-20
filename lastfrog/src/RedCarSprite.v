@@ -1,4 +1,4 @@
-module red_car_sprite_bram (
+module RedCarSpriteBram (
     input wire clk,                 // Clock signal
     input wire [4:0] sprite_x,      // X coordinate within the car sprite (0-31)
     input wire [4:0] sprite_y,      // Y coordinate within the car sprite (0-31)
@@ -10,7 +10,7 @@ module red_car_sprite_bram (
 
     // Initialize the car sprite data in BRAM
     initial begin
-            red_car_bram[0] = 6'b000000;
+red_car_bram[0] = 6'b000000;
 red_car_bram[1] = 6'b000000;
 red_car_bram[2] = 6'b000000;
 red_car_bram[3] = 6'b000000;

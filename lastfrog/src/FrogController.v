@@ -1,4 +1,4 @@
-module frog_display (
+module FrogController (
     input wire clk,             // Clock signal
     input wire debounced_sw1,   // Debounced Button for moving left
     input wire debounced_sw2,   // Debounced Button for moving down

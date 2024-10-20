@@ -24,7 +24,7 @@ module top (
     wire [3:0] debounced_Switches;
 
     // Instantiate the shared debounce module
-    Shared_Debounce debounce_inst (
+    SharedDebounce debounce_inst (
         .i_Clk(i_Clk),
         .i_Switches(i_Switches),
         .o_Switches(debounced_Switches)
@@ -39,7 +39,7 @@ module top (
     wire slow_clk;
 
     // Slow down the clock for the car movement
-    clock_divider #(.DIV_FACTOR(23'd190000)) clk_div_inst (
+    ClockDivider #(.DIV_FACTOR(23'd900000)) clk_div_inst (
     .i_Clk(i_Clk),
     .o_Divided_Clk(slow_clk)
 );
@@ -50,102 +50,102 @@ module top (
     wire [4:0] car12_x, car13_x, car14_x, car15_x, car16_x;
     wire [3:0] car1_y = 4'd2, car2_y = 4'd2, car3_y = 4'd3;
     wire [3:0] car4_y = 4'd4, car5_y = 4'd4, car6_y = 4'd5;
-    wire [3:0] car7_y = 4'd6, car8_y = 4'd6, car9_y = 4'd8;
-    wire [3:0] car10_y = 4'd9, car11_y = 4'd9, car12_y = 4'd10;
+    wire [3:0] car7_y = 4'd5, car8_y = 4'd7, car9_y = 4'd8;
+    wire [3:0] car10_y = 4'd10, car11_y = 4'd10, car12_y = 4'd10;
     wire [3:0] car13_y = 4'd11, car14_y = 4'd11, car15_y = 4'd12;
     wire [3:0] car16_y = 4'd13;
 
-car #(.CAR_START(1), .BASE_SPEED(24'd980), .CAR_DIRECTION(1)) car1_inst (
+car #(.CAR_START(7), .BASE_SPEED(24'd10004), .CAR_DIRECTION(1)) car1_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car1_x)
 );
 
-car #(.CAR_START(2), .BASE_SPEED(24'd980), .CAR_DIRECTION(1)) car2_inst (
+car #(.CAR_START(18), .BASE_SPEED(24'd10003), .CAR_DIRECTION(1)) car2_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car2_x)
 );
 
-car #(.CAR_START(3), .BASE_SPEED(24'd980), .CAR_DIRECTION(1)) car3_inst (
+car #(.CAR_START(3), .BASE_SPEED(24'd10003), .CAR_DIRECTION(0)) car3_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car3_x)
 );
 
-car #(.CAR_START(4), .BASE_SPEED(24'd980), .CAR_DIRECTION(1)) car4_inst (
+car #(.CAR_START(4), .BASE_SPEED(24'd9999), .CAR_DIRECTION(1)) car4_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car4_x)
 );
 
-car #(.CAR_START(5), .BASE_SPEED(24'd980), .CAR_DIRECTION(1)) car5_inst (
+car #(.CAR_START(15), .BASE_SPEED(24'd9999), .CAR_DIRECTION(1)) car5_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car5_x)
 );
 
-car #(.CAR_START(6), .BASE_SPEED(24'd980), .CAR_DIRECTION(0)) car6_inst (
+car #(.CAR_START(6), .BASE_SPEED(24'd10000), .CAR_DIRECTION(0)) car6_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car6_x)
 );
 
-car #(.CAR_START(7), .BASE_SPEED(24'd980), .CAR_DIRECTION(0)) car7_inst (
+car #(.CAR_START(19), .BASE_SPEED(24'd10000), .CAR_DIRECTION(0)) car7_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car7_x)
 );
 
-car #(.CAR_START(8), .BASE_SPEED(24'd980), .CAR_DIRECTION(0)) car8_inst (
+car #(.CAR_START(8), .BASE_SPEED(24'd9997), .CAR_DIRECTION(0)) car8_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car8_x)
 );
 
-car #(.CAR_START(9), .BASE_SPEED(24'd980), .CAR_DIRECTION(1)) car9_inst (
+car #(.CAR_START(9), .BASE_SPEED(24'd9997), .CAR_DIRECTION(1)) car9_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car9_x)
 );
 
-car #(.CAR_START(10), .BASE_SPEED(24'd980), .CAR_DIRECTION(1)) car10_inst (
+car #(.CAR_START(15), .BASE_SPEED(24'd10002), .CAR_DIRECTION(0)) car10_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car10_x)
 );
 
-car #(.CAR_START(11), .BASE_SPEED(24'd980), .CAR_DIRECTION(0)) car11_inst (
+car #(.CAR_START(7), .BASE_SPEED(24'd10002), .CAR_DIRECTION(0)) car11_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car11_x)
 );
 
-car #(.CAR_START(12), .BASE_SPEED(24'd980), .CAR_DIRECTION(0)) car12_inst (
+car #(.CAR_START(1), .BASE_SPEED(24'd10002), .CAR_DIRECTION(0)) car12_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car12_x)
 );
 
-car #(.CAR_START(13), .BASE_SPEED(24'd980), .CAR_DIRECTION(1)) car13_inst (
+car #(.CAR_START(5), .BASE_SPEED(24'd10000), .CAR_DIRECTION(1)) car13_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car13_x)
 );
 
-car #(.CAR_START(14), .BASE_SPEED(24'd980), .CAR_DIRECTION(1)) car14_inst (
+car #(.CAR_START(13), .BASE_SPEED(24'd10000), .CAR_DIRECTION(1)) car14_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car14_x)
 );
 
-car #(.CAR_START(15), .BASE_SPEED(24'd980), .CAR_DIRECTION(1)) car15_inst (
+car #(.CAR_START(18), .BASE_SPEED(24'd9997), .CAR_DIRECTION(1)) car15_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car15_x)
 );
 
-car #(.CAR_START(16), .BASE_SPEED(24'd980), .CAR_DIRECTION(0)) car16_inst (
+car #(.CAR_START(16), .BASE_SPEED(24'd9997), .CAR_DIRECTION(0)) car16_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car16_x)
@@ -160,7 +160,7 @@ car #(.CAR_START(16), .BASE_SPEED(24'd980), .CAR_DIRECTION(0)) car16_inst (
     wire [3:0] current_level;
 
     // Instantiate the frog display module
-    frog_display frog_inst (
+    FrogController frog_inst (
         .clk(i_Clk),
         .debounced_sw1(debounced_sw1),
         .debounced_sw2(debounced_sw2),
@@ -194,7 +194,7 @@ car #(.CAR_START(16), .BASE_SPEED(24'd980), .CAR_DIRECTION(0)) car16_inst (
     wire reset_level = (debounced_sw1 && debounced_sw2 && debounced_sw3 && debounced_sw4) || collision_detected;
 
     // Instantiate the level counter
-    level_counter level_inst (
+    LevelCounter level_inst (
         .clk(i_Clk),
         .reset_level(reset_level),
         .frog_at_top(frog_at_top),
@@ -211,7 +211,7 @@ car #(.CAR_START(16), .BASE_SPEED(24'd980), .CAR_DIRECTION(0)) car16_inst (
     );
 
     // Instantiate the VGA display module
-    vga_display vga_inst (
+    VgaDisplay vga_inst (
         .clk(i_Clk),
         .frog_col(frog_col),
         .frog_row(frog_row),
