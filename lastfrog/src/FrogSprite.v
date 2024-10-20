@@ -1,4 +1,4 @@
-module frog_sprite_bram (
+module FrogSpriteBram (
     input wire clk,                 // Clock signal
     input wire [4:0] sprite_x,      // X coordinate within the frog sprite (0-31)
     input wire [4:0] sprite_y,      // Y coordinate within the frog sprite (0-31)

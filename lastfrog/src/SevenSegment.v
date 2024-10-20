@@ -1,4 +1,4 @@
-module segment_display (
+module SegmentDisplay (
     input wire [3:0] digit,   // 4-bit input for the digit (0-9)
     output reg [6:0] o_Segment
 );

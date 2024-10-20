@@ -1,4 +1,4 @@
-module Shared_Debounce (
+module SharedDebounce (
     input wire i_Clk,
     input wire [3:0] i_Switches,  // 4 switch inputs packed into a single wire
     output reg [3:0] o_Switches   // 4 debounced outputs

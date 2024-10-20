@@ -1,4 +1,4 @@
-module blue_car_sprite_bram (
+module BlueCarSpriteBram (
     input wire clk,                 // Clock signal
     input wire [4:0] sprite_x,      // X coordinate within the car sprite (0-31)
     input wire [4:0] sprite_y,      // Y coordinate within the car sprite (0-31)

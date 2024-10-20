@@ -1,4 +1,4 @@
-module level_counter (
+module LevelCounter (
     input wire debounced_sw1,            // Debounced switch 1
     input wire debounced_sw2,            // Debounced switch 2
     input wire debounced_sw3,            // Debounced switch 3
@@ -74,12 +74,12 @@ module level_counter (
     assign tens_digit = level_counter % 10;    // Tens digit
 
     // Connect the digits to the 7-segment display
-    segment_display seg1 (
+    SegmentDisplay seg1 (
         .digit(units_digit),  // Units digit
         .o_Segment(o_Segment1)
     );
 
-    segment_display seg2 (
+    SegmentDisplay seg2 (
         .digit(tens_digit),   // Tens digit
         .o_Segment(o_Segment2)
     );
