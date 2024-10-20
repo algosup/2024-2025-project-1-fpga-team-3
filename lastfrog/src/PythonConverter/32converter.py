@@ -1,8 +1,13 @@
 from PIL import Image
 
 # Open the image file (Ensure the path is correct)
-img = Image.open("frogcoulouredwide.png")  # Change to your actual image path
-img = img.resize((32, 32))  # Resize from original size to 20x20 pixels
+img = Image.open("right.png")  # Change to your actual image path
+
+# Convert the image to RGB mode if it's not already
+img = img.convert("RGB")
+
+# Resize the image to 32x32 pixels
+img = img.resize((32, 32))
 
 # Define a function to quantize the RGB values to 2-bit per channel
 def rgb_to_6bit(r, g, b):
@@ -14,20 +19,18 @@ def rgb_to_6bit(r, g, b):
 # Convert the image to 6-bit RGB format
 bram_array = []
 
-# Ensure each pixel from 0 to 399 is processed (20x20 = 400 pixels)
+# Process each pixel from the 32x32 image
 for y in range(32):
     for x in range(32):
-        r, g, b = img.getpixel((x, y))[:3]  # Get RGB value for each pixel
+        r, g, b = img.getpixel((x, y))  # Get RGB value for each pixel
         pixel_6bit = rgb_to_6bit(r, g, b)
         bram_array.append(pixel_6bit)
 
-# Print the BRAM initialization values for all pixels (0 to 399)
+# Print the BRAM initialization values for all pixels, starting from index 2048 to 3072
+start_index = 3072
 for i in range(1024):
-    if i < len(bram_array):
-        val = bram_array[i]
-        print(f"frog_bram[{i}] = 6'b{val:06b};")
-    else:
-        print(f"frog_bram[{i}] = 6'b000000;")  # Fallback for any missing pixels
+    val = bram_array[i] if i < len(bram_array) else 0  # Default to 0 if no pixel data
+    print(f"frog_bram[{start_index + i}] = 6'b{val:06b};")
 
 # Debugging: check how many pixels were processed
 print(f"Total pixels processed: {len(bram_array)}")
