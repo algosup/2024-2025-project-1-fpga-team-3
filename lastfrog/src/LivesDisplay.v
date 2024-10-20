@@ -1,4 +1,4 @@
-module live_display (
+module LiveDisplay (
     input wire clk,                  // Clock signal
     input wire [1:0] lives,          // Number of remaining lives (0 to 3)
     input wire [9:0] h_count,        // Horizontal counter (column)

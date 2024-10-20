@@ -1,4 +1,4 @@
-module clock_divider #(
+module ClockDivider #(
     parameter DIV_FACTOR = 23'd2500000
 )(
     input wire i_Clk,
