@@ -127,7 +127,7 @@ car #(.CAR_START(1), .BASE_SPEED(24'd10004), .CAR_DIRECTION(0)) car12_inst (
     .o_car_x(car12_x)
 );
 
-car #(.CAR_START(1), .BASE_SPEED(24'd10001), .CAR_DIRECTION(1)) car13_inst (
+car #(.CAR_START(1), .BASE_SPEED(24'd10002), .CAR_DIRECTION(1)) car13_inst (
     .i_Clk(slow_clk),
     .level(current_level),
     .o_car_x(car13_x)
