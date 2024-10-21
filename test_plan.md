@@ -1,15 +1,21 @@
 # Test-Plan
+
+|Author|CHIOCCHI Raphaël|
+|---|---|
+|Created|23/09/2024|
+|Last modified|21/10/2024|
+
 ## Test-Plan-Approval
 
 | Role | Name | Signature | Date |
 |---|---|---|---|
-| Project Manager | Lucas AUBARD    |----------|--/10/2024|
-| Program Manager | Julian	REINE   |----------|--/10/2024|
-| Technical Lead | Vivien Bistrel	TSANGUE CHOUNGOU |----------|--/10/2024|
-| Software Developer | Manech	LAGUENS |----------|--/10/2024|
-| Software Developer | Mariem	ZAIANE |----------|--/10/2024|
-| Technical Writer | Abderrazaq	MAKRAN    |----------|--/10/2024|
-| Quality Assurance | Raphaël	CHIOCCHI |----------|--/10/2024|
+| Project Manager | Lucas AUBARD    |----------|21/10/2024|
+| Program Manager | Julian	REINE   |----------|21/10/2024|
+| Technical Lead | Vivien Bistrel	TSANGUE CHOUNGOU |----------|21/10/2024|
+| Software Developer | Manech	LAGUENS |----------|21/10/2024|
+| Software Developer | Mariem	ZAIANE |----------|21/10/2024|
+| Technical Writer | Abderrazaq	MAKRAN    |----------|21/10/2024|
+| Quality Assurance | Raphaël	CHIOCCHI |----------|21/10/2024|
 
 ---
 <details open>
@@ -18,63 +24,63 @@
 
 - [Test-Plan](#test-plan)
   - [Test-Plan-Approval](#test-plan-approval)
-  - [1-Introduction](#1-introduction)
-    - [a-Overview](#a-overview)
-    - [b-Targetted-Audience](#b-targetted-audience)
-      - [Old-Player](#old-player)
-      - [Newer-Player](#newer-player)
-    - [c-Softwares-Hardwares](#c-softwares-hardwares)
-      - [Verilog](#verilog)
-        - [FPGAs (Go-Board)](#fpgas-go-board)
-  - [2-Test-Criteria](#2-test-criteria)
-      - [Critical-Bugs](#critical-bugs)
-    - [b-Entry-Criteria](#b-entry-criteria)
-    - [c-Exit-Criteria](#c-exit-criteria)
-  - [3-Test-Strategy](#3-test-strategy)
-    - [a-Testing-Scope](#a-testing-scope)
-    - [b-Testing-Type](#b-testing-type)
-      - [Unit-Tests](#unit-tests)
-      - [Functional-Tests](#functional-tests)
-    - [c-Define-Priorities](#c-define-priorities)
-    - [d-Test-Tool](#d-test-tool)
-      - [Github](#github)
-      - [Excel](#excel)
-    - [e-Test-Cases](#e-test-cases)
-    - [f-Test-Reports](#f-test-reports)
-  - [4-Test-Deliverables](#4-test-deliverables)
-  - [5-Glossary](#5-glossary)
+  - [I. Introduction](#i-introduction)
+    - [1. Overview](#1-overview)
+    - [2. Targetted Audience](#2-targetted-audience)
+      - [a. Old Player](#a-old-player)
+      - [b. Newer Player](#b-newer-player)
+    - [3. Softwares Hardwares](#3-softwares-hardwares)
+      - [a. Verilog](#a-verilog)
+      - [b. FPGAs (Go-Board)](#b-fpgas-go-board)
+  - [II. Test Criteria](#ii-test-criteria)
+      - [a. Critical-Bugs](#a-critical-bugs)
+    - [1. Entry Criteria](#1-entry-criteria)
+    - [2. Exit Criteria](#2-exit-criteria)
+  - [III. Test Strategy](#iii-test-strategy)
+    - [1. Testing Scope](#1-testing-scope)
+    - [2. Testing Type](#2-testing-type)
+      - [a. Unit Tests](#a-unit-tests)
+      - [b. Functional Tests](#b-functional-tests)
+    - [3. Define Priorities](#3-define-priorities)
+    - [4. Test Tool](#4-test-tool)
+      - [a. Github](#a-github)
+      - [b. Excel](#b-excel)
+    - [5. Test Cases](#5-test-cases)
+    - [6. Test Reports](#6-test-reports)
+  - [IV. Test Deliverables](#iv-test-deliverables)
+  - [V. Glossary](#v-glossary)
 
 </details>
 
-## 1-Introduction
+## I. Introduction
 
-### a-Overview
+### 1. Overview
 
 Our team was tasked with creating a Frogger-style game, with the additional challenge that it had to be coded in assembly and run on an FPGA chip called the "Go-board". This Frogger clone will serve as a nostalgic trip back to the arcade's golden age, offering a classic experience of dodging traffic and navigating obstacles. The game provides a simple yet engaging gameplay loop that highlights the essence of retro gaming, making it both fun and challenging. It’s a great way to introduce newer generations to the charm of vintage arcade titles, fostering a deeper appreciation for the early days of video game design. Overall, this project aims to deliver a timeless experience that connects the past with the present, offering entertainment that resonates across generations.
 
-### b-Targetted-Audience
-#### Old-Player
+### 2. Targetted Audience
+#### a. Old Player
 
 The old players are nostalgic gamers who have a deep appreciation for classic arcade experiences. This is for those who remember the thrill of Frogger from the 1980s and want to revisit the excitement of dodging traffic.
 
-#### Newer-Player
+#### b. Newer Player
 
 Newer players are those who may have never played the original Frogger or experienced the arcade era firsthand. Since Frogger was especially popular during the 80s and 90s but has since faded from the spotlight, these new players will have the opportunity to discover the charm of the game and explore the rich history of retro gaming. This game is an introduction to a bygone era, offering both nostalgia and a fresh perspective for younger audiences.
 
-### c-Softwares-Hardwares
+### 3. Softwares Hardwares
 
 Here are the software and hardware elements used in this project :
 
-#### Verilog
+#### a. Verilog
 Verilog is the hardware description language we'll use to develop the game. This low-level language allows us to design the game’s logic directly on the FPGA, ensuring optimal speed and performance. Since the Go-board has limited resources compared to modern computers, efficient code is essential to achieve smooth gameplay.
 
-##### FPGAs (Go-Board)
+#### b. FPGAs (Go-Board)
 The Go-board is the hardware that will run the game. Unlike a traditional CPU, the FPGA provides parallel processing capabilities, making it suitable for implementing the game’s logic and real-time processing. This board is where the game’s core functionality such as handling player input, rendering graphics, and managing obstacles will be executed.
 
-## 2-Test-Criteria
-#### Critical-Bugs
+## II. Test Criteria
+#### a. Critical-Bugs
 Critical bugs are issues that prevent the game from functioning properly or block the implementation of new features until they are resolved. If we encounter a critical bug, we will immediately suspend the testing cycle and focus on resolving the issue before continuing. These bugs could involve game crashes, unresponsive controls, or major functionality failures, and must be addressed promptly to ensure the game runs smoothly on the Go-board
-### b-Entry-Criteria
+### 1. Entry Criteria
 
 Entry criteria define the conditions that must be met before the testing process can begin. These criteria ensure that the testing environment is properly prepared and that the software is in a state where meaningful tests can be performed. The entry criteria for this project are as follows:
 
@@ -84,7 +90,7 @@ Entry criteria define the conditions that must be met before the testing process
 * The test environment must be fully set up and operational, including the Go-board, necessary simulation tools, and testing frameworks. If any issues arise in the test environment, such as problems with simulation software, they must be resolved first.
 * The test cases must be written and cover the functional requirements, ensuring that all aspects of the game are tested.
 
-### c-Exit-Criteria
+### 2. Exit Criteria
 
 Exit criteria define the conditions that must be satisfied to conclude the testing phase and confirm the game is ready for deployment. For this project, the exit criteria include:
 
@@ -97,11 +103,11 @@ Exit criteria define the conditions that must be satisfied to conclude the testi
 * All medium and low-severity bugs have been reported through the issue tracker, such as GitHub Issues or an alternative system (like a spreadsheet) if GitHub is unavailable.
 * By adhering to these criteria, we ensure that the game meets quality standards and is ready for release.
 
-## 3-Test-Strategy
+## III. Test Strategy
 
 The testing will be in charge of Team 3's QA, CHIOCCHI Raphaël, and with help of Abderrazaq Makran, Team 3's QA.
 
-### a-Testing-Scope
+### 1. Testing Scope
 
 The two main aspects to test during this project will be the documentation and the game itself.
 
@@ -109,8 +115,8 @@ Ensuring the quality of the documents is crucial for aligning the entire team on
 
 When it comes to the game, we will be rigorously testing all the features outlined in the functional specifications to ensure they align with the original design intent. Additionally, since the game will run on the Go-board, we will test its functionality directly on the hardware to confirm performance and playability. The goal is to verify that the game runs smoothly and that all elements, like graphics, input handling, and obstacle logic, work as expected. While the game is not intended to run on traditional operating systems like Windows or macOS, testing on simulation platforms or using software tools that replicate FPGA environments may be necessary for debugging or verifying design.
 
-### b-Testing-Type
-#### Unit-Tests
+### 2. Testing Type
+#### a. Unit Tests
 A unit test focuses on testing individual components or small pieces of the game’s logic in isolation to ensure they work as expected. Each unit test will verify the correctness of a single function or module within the game, such as input handling, movement logic, or collision detection. Since the game is being developed on an FPGA platform (Go-board), we will primarily be testing the Verilog modules and their interactions to make sure they behave as intended.
 
 Some key areas we will focus on for unit testing include:
@@ -119,31 +125,31 @@ Some key areas we will focus on for unit testing include:
 
 * Collision Detection: Verifying that the player’s interactions with obstacles are correctly detected. We will test scenarios where the player should be hit or where movement should be blocked.
 
-* Object Spawning and Behavior: Ensuring that game objects spawn at the correct locations and move as expected, according to game rules. This will involve testing how these objects behave in terms of speed, direction, and interaction with the player.
+* Object Spawning and Behavior: Ensuring that game objects, like vehicles or logs, spawn at the correct locations and move as expected, according to game rules. This will involve testing how these objects behave in terms of speed, direction, and interaction with the player.
 
 * Input Handling: Verifying that the user’s controls (button presses or other input methods) are processed correctly and result in the intended actions within the game.
 
 Unit tests will be automated and run frequently to ensure new code changes do not introduce regressions.
 
-#### Functional-Tests
+#### b. Functional Tests
 
 Functional testing focuses on validating the overall functionality of the game and ensuring it meets the user requirements outlined in the functional specifications. This type of test checks whether the game behaves as expected from a user’s perspective and ensures that all the integrated components work together seamlessly to provide the intended gameplay experience.
 
 Functional tests will cover entire game sequences and user interactions, such as:
 
-* Gameplay Flow: Verifying the game’s core functionality, such as starting the game, navigating the levels, and completing objectives. We will ensure that all game features work in harmony to provide a seamless experience.
+* Gameplay Flow: Verifying the game’s core functionality, such as starting the game, navigating the levels, and completing objectives. We will ensure that all game features (like earning points, crossing roads, and avoiding obstacles) work in harmony to provide a seamless experience.
 
-* Game Controls: Testing the responsiveness of the game’s control and ensuring they match the design expectations. This will also include testing the player’s ability to pause, restart, or quit the game.
+* Game Controls: Testing the responsiveness of the game’s controls (e.g., the player’s ability to move, jump, and avoid hazards) and ensuring they match the design expectations. This will also include testing the player’s ability to pause, restart, or quit the game.
 
-* Game Win/Loss Conditions: Checking if the game correctly handles the win and loss conditions.
+* Game Win/Loss Conditions: Checking if the game correctly handles the win and loss conditions. For example, does the game display the appropriate message when the player successfully crosses all lanes or loses all lives? Does the scoring system reflect correct gameplay actions?
 
-* Game Features: Testing any secondary features. We will check that these features are fully functional and integrated into the gameplay loop.
+* Game Features: Testing any secondary features, such as score tracking, high-score saving, or special power-ups. We will check that these features are fully functional and integrated into the gameplay loop.
 
-* Performance: Although not a formal requirement, we will also ensure that the game runs smoothly on the Go-board without lag or performance degradation. This will include testing for frame rate consistency and responsiveness to user input.
+* Performance: Although not a formal requirement, we will also ensure that the game runs smoothly on the Go-board FPGA without lag or performance degradation. This will include testing for frame rate consistency and responsiveness to user input.
 
-Functional tests will be carried on the actual Go-board hardware to ensure the game performs as expected.
+Functional tests will be carried out both in a simulated environment and on the actual Go-board hardware to ensure the game performs as expected in the final deployed system.
 
-### c-Define-Priorities
+### 3. Define Priorities
 
 Prioritizing tests is essential for ensuring that the most critical issues are addressed first. Test priorities will be directly correlated with the functional specifications, which will define the key features and functionalities of the game. We will establish four levels of priority for testing:
 
@@ -155,16 +161,16 @@ Prioritizing tests is essential for ensuring that the most critical issues are a
   
 Priorities are not fixed and can change during the development process. For example, a high-priority feature that initially seems essential may be downgraded to medium or low priority if it proves to be more complex than expected or if development challenges arise. This dynamic approach will allow us to remain flexible and responsive to project needs as they evolve.
 
-### d-Test-Tool
-#### Github
+### 4. Test Tool
+#### a. Github
 
 Github will be used to report bugs with its included "Issue" tab, where we can create templates of tickets to use in different situations.
 
-#### Excel
+#### b. Excel
 
 Excel will be used to list down every test cases that the testing team will have to operate.
 
-### e-Test-Cases
+### 5. Test Cases
 The Excel document will provide an easy way for the QA team to keep track of which tests have been run, which features are covered, and which ones still need to be validated. Using Excel allows for clear, structured, and easily shareable test cases.
 
 The Excel document will contain the following key sections:
@@ -179,7 +185,7 @@ We will also include a Priority field (Critical, High, Medium, Low) to help orga
 
 Since we are using Excel, the whole team (including developers, testers, and project managers) will be able to track progress in real time. The Excel file will be regularly updated, and we’ll use it to ensure all critical functionality is covered, as well as to highlight any features that are still being tested or have not been implemented yet.
 
-### f-Test-Reports
+### 6. Test Reports
 
 For bug reports, we will use GitHub Issues to document and manage any bugs discovered during testing. Each bug report will be created as an Issue and will follow a consistent format to ensure clarity and effective communication.
 
@@ -199,7 +205,7 @@ Each bug report will be labeled with the "Bug" tag, and the relevant person will
 
 This system will ensure that all bugs are tracked transparently, and the team can stay on top of fixes and improvements. Additionally, it allows for a streamlined process in terms of bug reporting, prioritization, and resolution.
 
-## 4-Test-Deliverables
+## IV. Test Deliverables
 
 The **Test Plan** or **Test Strategy** defines the overall approach to testing, outlining how the game will be tested, what types of tests will be conducted, and the process for reporting results.   
 
@@ -209,7 +215,7 @@ A **Bug Report** details all the issues discovered during testing, ensuring they
 
 The **Bug Data Report** provides an aggregated, high-level view of all the bugs found during testing. This report will help stakeholders understand the overall health of the game and the progress being made to address issues.
 
-## 5-Glossary
+## V. Glossary
 
 | **Term**                     | **Description**                                                                                                                                                               |
 |------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -227,4 +233,3 @@ The **Bug Data Report** provides an aggregated, high-level view of all the bugs 
 | **Test Plan / Test Strategy** | The overall approach to testing, including scope, types of tests, methodologies, and reporting. This document ensures all aspects of the game are tested and quality is maintained. |
 | **Bug Report**                | A detailed report of a bug discovered during testing, including how to reproduce it, severity, and the impact on gameplay. Bug reports will be logged as GitHub Issues.               |
 | **Go-board**                  | The FPGA hardware used to run the game. The Go-board Has been created by Russell Merrick.               |
-||
