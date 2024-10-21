@@ -119,7 +119,7 @@ Some key areas we will focus on for unit testing include:
 
 * Collision Detection: Verifying that the player’s interactions with obstacles are correctly detected. We will test scenarios where the player should be hit or where movement should be blocked.
 
-* Object Spawning and Behavior: Ensuring that game objects, like vehicles or logs, spawn at the correct locations and move as expected, according to game rules. This will involve testing how these objects behave in terms of speed, direction, and interaction with the player.
+* Object Spawning and Behavior: Ensuring that game objects spawn at the correct locations and move as expected, according to game rules. This will involve testing how these objects behave in terms of speed, direction, and interaction with the player.
 
 * Input Handling: Verifying that the user’s controls (button presses or other input methods) are processed correctly and result in the intended actions within the game.
 
@@ -131,17 +131,17 @@ Functional testing focuses on validating the overall functionality of the game a
 
 Functional tests will cover entire game sequences and user interactions, such as:
 
-* Gameplay Flow: Verifying the game’s core functionality, such as starting the game, navigating the levels, and completing objectives. We will ensure that all game features (like earning points, crossing roads, and avoiding obstacles) work in harmony to provide a seamless experience.
+* Gameplay Flow: Verifying the game’s core functionality, such as starting the game, navigating the levels, and completing objectives. We will ensure that all game features work in harmony to provide a seamless experience.
 
-* Game Controls: Testing the responsiveness of the game’s controls (e.g., the player’s ability to move, jump, and avoid hazards) and ensuring they match the design expectations. This will also include testing the player’s ability to pause, restart, or quit the game.
+* Game Controls: Testing the responsiveness of the game’s control and ensuring they match the design expectations. This will also include testing the player’s ability to pause, restart, or quit the game.
 
-* Game Win/Loss Conditions: Checking if the game correctly handles the win and loss conditions. For example, does the game display the appropriate message when the player successfully crosses all lanes or loses all lives? Does the scoring system reflect correct gameplay actions?
+* Game Win/Loss Conditions: Checking if the game correctly handles the win and loss conditions.
 
-* Game Features: Testing any secondary features, such as score tracking, high-score saving, or special power-ups. We will check that these features are fully functional and integrated into the gameplay loop.
+* Game Features: Testing any secondary features. We will check that these features are fully functional and integrated into the gameplay loop.
 
-* Performance: Although not a formal requirement, we will also ensure that the game runs smoothly on the Go-board FPGA without lag or performance degradation. This will include testing for frame rate consistency and responsiveness to user input.
+* Performance: Although not a formal requirement, we will also ensure that the game runs smoothly on the Go-board without lag or performance degradation. This will include testing for frame rate consistency and responsiveness to user input.
 
-Functional tests will be carried out both in a simulated environment and on the actual Go-board hardware to ensure the game performs as expected in the final deployed system.
+Functional tests will be carried on the actual Go-board hardware to ensure the game performs as expected.
 
 ### c-Define-Priorities
 
