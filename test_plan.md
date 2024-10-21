@@ -9,13 +9,13 @@
 
 | Role | Name | Signature | Date |
 |---|---|---|---|
-| Project Manager | Lucas AUBARD    |----------|21/10/2024|
-| Program Manager | Julian	REINE   |----------|21/10/2024|
-| Technical Lead | Vivien Bistrel	TSANGUE CHOUNGOU |----------|21/10/2024|
-| Software Developer | Manech	LAGUENS |----------|21/10/2024|
-| Software Developer | Mariem	ZAIANE |----------|21/10/2024|
-| Technical Writer | Abderrazaq	MAKRAN    |----------|21/10/2024|
-| Quality Assurance | Raphaël	CHIOCCHI |----------|21/10/2024|
+| Project Manager | Lucas AUBARD    |✅|21/10/2024|
+| Program Manager | Julian	REINE   |✅|21/10/2024|
+| Technical Lead | Vivien Bistrel	TSANGUE CHOUNGOU |✅|21/10/2024|
+| Software Developer | Manech	LAGUENS |✅|21/10/2024|
+| Software Developer | Mariem	ZAIANE |✅|21/10/2024|
+| Technical Writer | Abderrazaq	MAKRAN    |✅|21/10/2024|
+| Quality Assurance | Raphaël	CHIOCCHI |✅|21/10/2024|
 
 ---
 <details open>
