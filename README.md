@@ -43,7 +43,7 @@ The game has been tested on the following devices:
 | **[Lucas Aubard](https://www.linkedin.com/in/lucas-aubard-596b37251/)**              | Project Manager   | <img src="https://avatars.githubusercontent.com/u/114394236?v=4" width="100" height="100">              |
 | **[Julian Reine](https://www.linkedin.com/in/julian-reine-b2952632a/)**              | Program Manager   | <img src="https://ca.slack-edge.com/T07NXPZNFCH-U07NMKQKNDA-78b901af5edb-512" width="100">              |
 | **[Vivien Bistrel Tsangue]()**                                                       | Technical Leader  | <img src="https://ca.slack-edge.com/T07NXPZNFCH-U07NGJY1BQV-g034e0d2085c-512" width="100" height="100"> |
-| **[Abderrazaq Makran](https://www.linkedin.com/in/abderrazaq-makran/)**              | Technical Writer  | <img src="https://ca.slack-edge.com/T07NXPZNFCH-U07N4J2J19V-gfef8c5bc507-512" width="100" height="100"> |
+| **[Abderrazaq Makran](https://www.linkedin.com/in/abderrazaq-makran/)**              | Technical Writer  | <img src="https://avatars.githubusercontent.com/u/145991267?v=4" width="100" height="100"> |
 | **[Mariem Zaiane](https://www.linkedin.com/in/mariem-zaiane-2b2165225/)**            | Software Engineer | <img src="https://ca.slack-edge.com/T07NXPZNFCH-U07N7RJH5B9-g47ace13daf9-512" width="100" height="100"> |
 | **[Manech Laguens](https://www.linkedin.com/in/manech-laguens-020127293/)**          | Software Engineer | <img src="https://ca.slack-edge.com/T07NXPZNFCH-U07NK3K58Q3-gc3ee79f9544-512" width="100" height="100"> |
 | **[Raphael Chiocchi](https://www.linkedin.com/in/rapha%C3%ABl-chiocchi-50169632a/)** | Quality Assurance | <img src="https://ca.slack-edge.com/T07NXPZNFCH-U07NK8E0SP4-g54b4036c235-512" width="100" height="100"> |
